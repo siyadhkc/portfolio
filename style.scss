@@ -2,6 +2,11 @@
     --main-color:rgb(13, 13, 14);
     --text-color:rgb(236, 233, 233);
 }
+html{
+  overflow-x: hidden;
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+}
 nav{
     background-color:var(--main-color);
      a{
