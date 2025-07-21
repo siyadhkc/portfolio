@@ -105,6 +105,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 100vh;
 
     .heading{
     text-align: center;
@@ -125,7 +126,7 @@ span{
 .name{
     font-size: 60px;
     transition: .5s ease;
-     font-style: italic;
+    //  font-style: italic;
     font-family:cursive;
     //  box-shadow: inset 0 0 0 0 #54b3d6;
        color: #e6e8e9;
@@ -165,8 +166,11 @@ button:hover{
     img:hover{
         transform: scale(0.9);
         // transition: 5s linear;
-
     }
+    height: 90vh;
+}
+.about{
+    height: 100vh;
 }
 .aboutmetag{
     display: flex;
@@ -195,6 +199,7 @@ button:hover{
     display: flex;
     justify-content: space-between;
     border-radius: 50px;
+    height: 80vh;
     background-color: rgba(11, 11, 11, 0.911);
     // border: 2px solid white;
     .aboutp{
@@ -203,8 +208,8 @@ button:hover{
         text-align: center;
     }
     img{
-        width: 300px;
-        height: 300px;
+        width: 400px;
+        height: 400px;
     }
     .abouth{
         font-size: 45px;
@@ -215,17 +220,36 @@ button:hover{
     .aboutph{
         padding: 50px;
         line-height: 1.5;
+        // width: 750px;
+        text-align: center;
+        justify-content: center;
         // width: 500px;
     }
-    h3{
-        margin-top: 100px;
-        margin-left: 10px;
+}
+.coreskill{
+height: 60vh;
+//   background-color: rgba(11, 11, 11, 0.911);
+//   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+//   flex-direction: column;
+  border-radius: 20px;
+  padding: 50px;
+}
+.coreskillinner{
+      background-color: rgba(11, 11, 11, 0.911);
+      padding: 100px;
+      border-radius: 20px;
+      h3{
+         font-size: 45px;
+         background: linear-gradient(to right bottom ,rgb(137, 131, 224),rgb(229, 216, 230),rgb(139, 130, 237)) ;  
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+      h4{
         color: var(--text-color);
-    }
-    h4{
-        color: rgb(135, 135, 135);
-        margin-left: 10px;
-    }
+      }
 }
 .anmskills{
     display: flex;
@@ -233,16 +257,24 @@ button:hover{
     padding: 20px;
     // border-radius:20px;
     overflow: hidden;
-    white-space: nowrap;
+    // white-space: nowrap;
     //   background-color: rgba(11, 11, 11, 0.911);
     .skill{
             animation: moveicon 12s linear infinite;
             display: inline-block;
+            background-color: #090a0f;
+            border-radius: 20px;
+            padding: 10px;
+             white-space: nowrap;
+            //  overflow: hidden;
     }
     span{
         color: var(--text-color);
         display: inline-block;
     }
+}
+.skills{
+    border-top: 2px solid white;
 }
    @keyframes moveicon {
         0% {
@@ -255,23 +287,33 @@ button:hover{
     .contact{
         display: flex;
         justify-content: space-between;
+        height: 70vh;
         padding: 50px;
          background-color: rgba(11, 11, 11, 0.911);
         backdrop-filter: blur(50px);
          border-top: 2px solid var(--text-color);
+         h5{
+            color:var(--text-color);
+         }
          h2{
             color: var(--text-color);
          }
          p{
             color: var(--text-color);
-         }
-         span{
-            color: var(--text-color);
+            line-height: 1;
          }
          a{
             text-decoration: none;
             color: var(--text-color);
             text-decoration:underline ;
+         }
+         .fotleft{
+            span{
+                 background: linear-gradient(to right bottom ,rgb(137, 131, 224),rgb(229, 216, 230),rgb(139, 130, 237)) ;  
+                 -webkit-background-clip: text;
+                  color: transparent;
+                  font-size: 18px;
+            }
          }
 
     }
@@ -283,10 +325,10 @@ button:hover{
         padding: 20px;
     }
     .row{
-        padding: 0px !important;
+        padding: 10px !important;
     }
     .about{
-        padding: 0px !important; 
+        padding: 10px !important; 
     }
     .aboutph{
         padding: 10px !important;
@@ -298,6 +340,7 @@ button:hover{
     .bio{
         flex-direction: column;
         align-items: center;
+        justify-content: center;
     }
    .bio .abouth{
         font-size: 20px;
@@ -306,12 +349,27 @@ button:hover{
         font-size: 10px;
     }
    .bio h3{
-        margin-top: 10px;
+        // margin-top: 10px;
         width: 100%;
+    }
+    .coreskillinner{
+        padding: 15px;
+        h3{
+            font-size: 25px;
+        }
+        h4{
+            font-size: 18px;
+        }
+    }
+    .coreskill{
+        padding: 5px;
+        // height: 80vh;
+
     }
     .contact{
         flex-direction: column;
         padding: 10px;
+        height: 70vh;
     }
    
 
