@@ -290,8 +290,9 @@ body {
     padding: 20px;
   }
   .row {
-    padding: 10px !important;
+    padding: 20px !important;
   }
+  .card{height: 70vh;}
   .about {
     padding: 10px !important;
   }
