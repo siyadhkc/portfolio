@@ -86,6 +86,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 100vh;
 }
 .main .heading {
   text-align: center;
@@ -101,7 +102,6 @@ body {
 .main .name {
   font-size: 60px;
   transition: 0.5s ease;
-  font-style: italic;
   font-family: cursive;
   color: #e6e8e9;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -129,12 +129,17 @@ body {
 
 .card {
   border: none;
+  height: 90vh;
 }
 .card img {
   transition: 5s linear;
 }
 .card img:hover {
   transform: scale(0.9);
+}
+
+.about {
+  height: 100vh;
 }
 
 .aboutmetag {
@@ -165,6 +170,7 @@ body {
   display: flex;
   justify-content: space-between;
   border-radius: 50px;
+  height: 80vh;
   background-color: rgba(11, 11, 11, 0.911);
 }
 .bio .aboutp {
@@ -173,8 +179,8 @@ body {
   text-align: center;
 }
 .bio img {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
 }
 .bio .abouth {
   font-size: 45px;
@@ -185,15 +191,32 @@ body {
 .bio .aboutph {
   padding: 50px;
   line-height: 1.5;
+  text-align: center;
+  justify-content: center;
 }
-.bio h3 {
-  margin-top: 100px;
-  margin-left: 10px;
+
+.coreskill {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 50px;
+}
+
+.coreskillinner {
+  background-color: rgba(11, 11, 11, 0.911);
+  padding: 100px;
+  border-radius: 20px;
+}
+.coreskillinner h3 {
+  font-size: 45px;
+  background: linear-gradient(to right bottom, rgb(137, 131, 224), rgb(229, 216, 230), rgb(139, 130, 237));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.coreskillinner h4 {
   color: var(--text-color);
-}
-.bio h4 {
-  color: rgb(135, 135, 135);
-  margin-left: 10px;
 }
 
 .anmskills {
@@ -201,15 +224,22 @@ body {
   gap: 50px;
   padding: 20px;
   overflow: hidden;
-  white-space: nowrap;
 }
 .anmskills .skill {
   animation: moveicon 12s linear infinite;
   display: inline-block;
+  background-color: #090a0f;
+  border-radius: 20px;
+  padding: 10px;
+  white-space: nowrap;
 }
 .anmskills span {
   color: var(--text-color);
   display: inline-block;
+}
+
+.skills {
+  border-top: 2px solid white;
 }
 
 @keyframes moveicon {
@@ -223,25 +253,33 @@ body {
 .contact {
   display: flex;
   justify-content: space-between;
+  height: 70vh;
   padding: 50px;
   background-color: rgba(11, 11, 11, 0.911);
   -webkit-backdrop-filter: blur(50px);
           backdrop-filter: blur(50px);
   border-top: 2px solid var(--text-color);
 }
+.contact h5 {
+  color: var(--text-color);
+}
 .contact h2 {
   color: var(--text-color);
 }
 .contact p {
   color: var(--text-color);
-}
-.contact span {
-  color: var(--text-color);
+  line-height: 1;
 }
 .contact a {
   text-decoration: none;
   color: var(--text-color);
   text-decoration: underline;
+}
+.contact .fotleft span {
+  background: linear-gradient(to right bottom, rgb(137, 131, 224), rgb(229, 216, 230), rgb(139, 130, 237));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 18px;
 }
 
 @media (max-width: 767px) {
@@ -252,10 +290,10 @@ body {
     padding: 20px;
   }
   .row {
-    padding: 0px !important;
+    padding: 10px !important;
   }
   .about {
-    padding: 0px !important;
+    padding: 10px !important;
   }
   .aboutph {
     padding: 10px !important;
@@ -267,6 +305,7 @@ body {
   .bio {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
   .bio .abouth {
     font-size: 20px;
@@ -275,11 +314,23 @@ body {
     font-size: 10px;
   }
   .bio h3 {
-    margin-top: 10px;
     width: 100%;
+  }
+  .coreskillinner {
+    padding: 15px;
+  }
+  .coreskillinner h3 {
+    font-size: 25px;
+  }
+  .coreskillinner h4 {
+    font-size: 18px;
+  }
+  .coreskill {
+    padding: 5px;
   }
   .contact {
     flex-direction: column;
     padding: 10px;
+    height: 70vh;
   }
 }/*# sourceMappingURL=style.css.map */
