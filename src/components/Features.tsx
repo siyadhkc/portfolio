@@ -1,0 +1,201 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Database, ShieldCheck, Lock, ArrowUpRight } from 'lucide-react';
+
+interface StackCellProps {
+  label: string;
+  value: string;
+  index: number;
+  borderClasses: string;
+}
+
+interface FeatureCardProps {
+  title: string;
+  subtitle: string;
+  variant: string;
+  children?: React.ReactNode;
+  tags: string[];
+  link: string;
+  className?: string;
+}
+
+const StackCell = ({ label, value, index, borderClasses }: StackCellProps) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+    whileHover={{ backgroundColor: "rgba(255,255,255,0.95)", transition: { duration: 0.3 } }}
+    className={`group p-6 md:p-8 flex flex-col justify-center bg-white/40 cursor-default relative overflow-hidden ${borderClasses}`}
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.08em] uppercase text-[#8A8A85] group-hover:text-[#1D91A1] transition-colors duration-300 block mb-1.5 md:mb-2">{label}</span>
+    <span className="text-[#131313] text-[14px] md:text-[15px] leading-relaxed font-medium block">{value}</span>
+  </motion.div>
+);
+
+const FeatureCard = ({ title, subtitle, variant, children, tags, link, className }: FeatureCardProps) => {
+  return (
+    <motion.a
+      href={link}
+      target="_blank"
+      rel="noreferrer"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      aria-label={`View project: ${title}`}
+      className={`group rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 relative overflow-hidden flex flex-col h-auto sm:h-[320px] md:h-[480px] min-h-[240px] shadow-sm hover:shadow-md transition-shadow duration-500 border border-black/[0.03] cursor-pointer 
+        ${variant === 'teal' ? 'bg-gradient-to-br from-[#E1EFEB] to-[#CBDFDA]' : 
+          variant === 'indigo' ? 'bg-gradient-to-br from-[#E9E9FC] to-[#D5D5F2]' : 
+          variant === 'sand' ? 'bg-gradient-to-br from-[#F7F3E9] to-[#EBE4D5]' : 
+          variant === 'coral' ? 'bg-gradient-to-br from-[#FCF9F7] to-[#F7EBE8]' : 
+          'bg-[#EFEEE7]'} ${className}`}
+    >
+      <div className="flex justify-between items-start z-20 shrink-0 mb-4 sm:mb-0">
+        <h3 className="font-sans text-[24px] md:text-[26px] text-[#1A1A1A] tracking-tight font-bold md:font-medium group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
+        <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:bg-[#1D91A1] group-hover:text-white group-hover:border-[#1D91A1] transition-all duration-300">
+          <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+        </div>
+      </div>
+
+      <div className="flex-1 w-full relative z-0 min-h-[180px] sm:min-h-0">
+        {children}
+      </div>
+
+      <div className="relative sm:absolute sm:inset-x-4 md:inset-x-5 sm:bottom-4 md:bottom-5 bg-white/60 sm:bg-[#FDFDFC]/90 backdrop-blur-xl p-5 md:p-6 rounded-[1.25rem] md:rounded-[1.5rem] z-20 border border-white/40 sm:border-white shadow-sm sm:shadow-[0_10px_40px_rgba(0,0,0,0.06)] flex flex-col gap-3 md:gap-4 mt-auto sm:mt-0">
+        <p className="text-[#3E4240] text-sm md:text-[15px] font-medium leading-relaxed">{subtitle}</p>
+        <div className="flex flex-wrap gap-1.5 md:gap-2">
+          {tags.map((tag: string) => (
+            <span key={tag} className="font-mono text-[9px] md:text-[10px] text-[#2B302F] bg-[#E8E8E3]/50 border border-[#E8E8E3] px-2 py-1 rounded-[4px] tracking-wide uppercase">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.a>
+  );
+};
+
+export const Features = () => {
+  return (
+    <div className="w-full relative z-10 bg-[#F7F7F2]">
+
+      {/* STACK SECTION */}
+      <section id="stack" className="pt-20 pb-16 md:pt-24 md:pb-20 px-4 md:px-8 w-full max-w-[1000px] mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="mb-8 md:mb-12 text-center">
+            <h2 className="font-serif text-[2.5rem] md:text-[4rem] text-[#131313] tracking-tight leading-tight">Technical Stack</h2>
+            <p className="text-[#6C6C6C] font-sans text-base md:text-lg mt-2">Tools I use to build robust architectures.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 border border-[#E8E8E3] rounded-xl md:rounded-2xl overflow-hidden shadow-sm">
+            <StackCell index={0} label="Backend" value="Django · DRF · Django Channels · Celery · Redis · PostgreSQL · JWT" borderClasses="border-b border-[#E8E8E3] sm:border-r" />
+            <StackCell index={1} label="Frontend" value="React · TailwindCSS · JavaScript · Vite" borderClasses="border-b border-[#E8E8E3]" />
+            <StackCell index={2} label="DevOps" value="Docker · Docker Compose · Nginx · Gunicorn · Linux · Git" borderClasses="border-b border-[#E8E8E3] sm:border-r" />
+            <StackCell index={3} label="Testing" value="Pytest · pytest-django · Factory Boy · Coverage" borderClasses="border-b border-[#E8E8E3]" />
+            <StackCell index={4} label="Security" value="OWASP API Top 10 · Web Pentesting · API Vulnerability Research" borderClasses="border-b border-[#E8E8E3] sm:border-b-0 sm:border-r" />
+            <StackCell index={5} label="Networking" value="TCP/IP · Network Infrastructure · Enterprise Hardware · CCTV Systems" borderClasses="" />
+          </div>
+        </motion.div>
+      </section>
+
+      <div className="max-w-[1200px] mx-auto px-8"><hr className="border-[#E8E8E3]" /></div>
+
+      {/* PROJECTS SECTION ALIGNED TO COMET */}
+      <section id="projects" className="py-16 md:py-24 px-4 md:px-8 w-full max-w-[1200px] mx-auto">
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="font-serif text-[2.5rem] md:text-[5rem] text-[#131313] tracking-tight leading-tight">Selected Projects</h2>
+          <p className="text-[#6C6C6C] font-sans text-lg md:text-xl mt-3 md:mt-4">Open source and private engineering work.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Card 1: MockAPI Pro */}
+          <FeatureCard
+            title="MockAPI Pro"
+            subtitle="Self-hostable mock API server with team workspaces, rule engine, and OpenAPI import."
+            tags={['Django', 'React', 'Docker']}
+            variant="teal"
+            link="https://github.com/siyadhkc"
+          >
+            {/* Mockup for Dashboard/API */}
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center pl-6 pr-6 md:pl-10 sm:-mt-24">
+              <div className="w-full bg-white/70 backdrop-blur-md rounded-xl shadow-lg border border-black/5 p-4 flex flex-col overflow-hidden relative group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-shadow">
+                <Database className="w-6 h-6 text-[#1D91A1] mb-4 opacity-50" />
+                <div className="w-[85%] h-4 bg-black/5 rounded-full mb-3"></div>
+                <div className="w-[60%] h-4 bg-[#E1EFEB] rounded-full mb-6"></div>
+                <div className="flex gap-2 mb-2">
+                  <div className="w-12 h-6 bg-[#27C93F]/20 rounded text-[10px] font-mono text-[#1AAB29] flex items-center justify-center">GET</div>
+                  <div className="flex-1 h-6 bg-black/5 rounded"></div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-12 h-6 bg-[#FFBD2E]/20 rounded text-[10px] font-mono text-[#DEA123] flex items-center justify-center">POST</div>
+                  <div className="flex-1 h-6 bg-black/5 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </FeatureCard>
+
+          {/* Card 2: VulnAPI */}
+          <FeatureCard
+            title="VulnAPI"
+            subtitle="Python-native REST API DAST scanner covering OWASP API Top 10 with interactive report."
+            tags={['Django', 'React', 'OWASP']}
+            variant="coral"
+            link="https://github.com/siyadhkc"
+          >
+            {/* Mockup for Scanner */}
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center sm:-mt-24">
+              <div className="w-[75%] bg-white rounded-2xl shadow-sm border border-[#E8E8E3] p-6 flex flex-col relative group-hover:shadow-md transition-shadow">
+                <ShieldCheck className="w-8 h-8 text-[#FF5F56] absolute top-6 right-6 opacity-30 group-hover:opacity-60 transition-opacity" />
+                <h4 className="font-mono text-[11px] text-[#A1A1A1] uppercase tracking-widest mb-6">Scan Progress</h4>
+
+                {/* Progress Bar */}
+                <div className="w-full h-2 bg-black/5 rounded-full mb-4 overflow-hidden">
+                  <div className="w-[65%] h-full bg-[#1D91A1]"></div>
+                </div>
+
+                <div className="flex justify-between items-center text-[12px] font-mono text-[#6C6C6C]">
+                  <span>Injecting Payloads...</span>
+                  <span>65%</span>
+                </div>
+              </div>
+            </div>
+          </FeatureCard>
+
+          {/* Card 3: django-secure */}
+          <FeatureCard
+            title="django-secure"
+            subtitle="Drop-in DRF security hardening package for passive protection and audit logging."
+            tags={['Django', 'DRF', 'Security']}
+            variant="sand"
+            link="https://github.com/siyadhkc"
+            className="md:col-span-2 md:h-[350px]"
+          >
+            {/* Horizontal Mockup */}
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center px-4 md:px-10 sm:-mt-20">
+              <div className="w-[90%] md:w-full max-w-[600px] bg-white rounded-xl shadow-sm border border-black/5 p-4 flex items-center gap-3 md:gap-4 group-hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] transition-shadow">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#F2F2EC] flex items-center justify-center shrink-0">
+                  <Lock className="w-4 h-4 md:w-5 md:h-5 text-[#2B302F]" />
+                </div>
+                <div className="flex-1 flex flex-col gap-2">
+                  <div className="w-[40%] h-2.5 md:h-3 bg-black/10 rounded-full"></div>
+                  <div className="w-[70%] h-2.5 md:h-3 bg-black/5 rounded-full"></div>
+                </div>
+                <div className="hidden sm:block w-16 md:w-20 h-6 md:h-8 rounded-full bg-[#E0DFD8] opacity-50"></div>
+              </div>
+            </div>
+          </FeatureCard>
+
+        </div>
+      </section>
+
+    </div>
+  );
+};
