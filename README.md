@@ -16,11 +16,11 @@ Personal portfolio — built with React.
 
 ## Sections
 
-- Hero
-- About
-- Stack
-- Projects
-- Contact
+- Hero.
+- About.
+- Stack.
+- Projects.
+- Contact.
 
 ## Run Locally
 
