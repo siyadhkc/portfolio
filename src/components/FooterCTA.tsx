@@ -158,7 +158,7 @@ export const FooterCTA = () => {
                 </button>
               </div>
 
-              <a href="https://github.com/siyadhkc" target="_blank" rel="noreferrer"
+              <a href="https://github.com/siyadhkc" target="_blank" rel="me noreferrer"
                 className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover:border-[#1D91A1]/40 group-hover:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -171,7 +171,7 @@ export const FooterCTA = () => {
                 <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Explore core projects and open source.</p>
               </a>
 
-              <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="noreferrer"
+              <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="me noreferrer"
                 className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover:border-[#1D91A1]/40 group-hover:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -215,10 +215,10 @@ export const FooterCTA = () => {
                 <a href="mailto:siyadhkc@gmail.com" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
                   EMAIL <span className="text-[14px] opacity-40">↗</span>
                 </a>
-                <a href="https://github.com/siyadhkc" target="_blank" rel="noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
+                <a href="https://github.com/siyadhkc" target="_blank" rel="me noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
                   GITHUB <span className="text-[14px] opacity-40">↗</span>
                 </a>
-                <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
+                <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="me noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
                   LINKEDIN <span className="text-[14px] opacity-40">↗</span>
                 </a>
                 <a href="https://x.com/siyadhkc" target="_blank" rel="noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">

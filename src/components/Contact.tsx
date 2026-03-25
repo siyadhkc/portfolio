@@ -2,22 +2,26 @@ const links = [
   {
     label: "Email",
     value: "siyadhkc@gmail.com",
-    href: "mailto:siyadhkc@gmail.com"
+    href: "mailto:siyadhkc@gmail.com",
+    rel: undefined
   },
   {
     label: "GitHub",
     value: "github.com/siyadhkc",
-    href: "https://github.com/siyadhkc"
+    href: "https://github.com/siyadhkc",
+    rel: "me"
   },
   {
     label: "LinkedIn",
     value: "linkedin.com/in/siyadhkc",
-    href: "https://linkedin.com/in/siyadhkc"
+    href: "https://linkedin.com/in/siyadhkc",
+    rel: "me"
   },
   {
     label: "Location",
     value: "Kerala, India",
-    href: "#"
+    href: "#",
+    rel: undefined
   }
 ];
 
@@ -35,6 +39,7 @@ const Contact = () => {
           <a
             key={item.label}
             href={item.href}
+            rel={item.rel ? item.rel : (item.href.startsWith("http") ? "noreferrer noopener" : undefined)}
             target={item.href.startsWith("http") ? "_blank" : undefined}
             className="group flex flex-col gap-1 bg-slate-900/60 px-4 py-3.5 backdrop-blur-sm transition-colors hover:bg-slate-900 sm:px-5"
           >

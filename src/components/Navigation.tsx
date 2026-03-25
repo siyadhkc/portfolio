@@ -31,6 +31,7 @@ export const Navigation = () => {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 md:pt-6 pointer-events-none">
       <motion.nav 
+        aria-label="Main navigation"
         style={{ 
           backgroundColor: topBg, 
           backdropFilter: blurValue, 
@@ -42,22 +43,23 @@ export const Navigation = () => {
         }}
         className="pointer-events-auto relative flex items-center justify-between px-5 sm:px-6 w-full max-w-[900px] rounded-full transition-all duration-300"
       >
-        <div 
+        <button 
           onClick={() => scrollTo('hero')}
-          className="cursor-pointer font-serif text-xl lg:text-2xl font-bold text-black tracking-tight shrink-0"
+          aria-label="Go to home"
+          className="cursor-pointer font-serif text-xl lg:text-2xl font-bold text-black tracking-tight shrink-0 bg-transparent border-none p-0 hover:opacity-80 transition-opacity"
         >
           siyadhkc
-        </div>
+        </button>
         
         <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-          <button onClick={() => scrollTo('stack')} className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Stack</button>
-          <button onClick={() => scrollTo('projects')} className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Projects</button>
-          <button onClick={() => scrollTo('contact')} className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Contact</button>
+          <button onClick={() => scrollTo('stack')} aria-label="Go to technical stack section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Stack</button>
+          <button onClick={() => scrollTo('projects')} aria-label="Go to projects section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Projects</button>
+          <button onClick={() => scrollTo('contact')} aria-label="Go to contact section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Contact</button>
         </div>
         
         <div className="flex items-center gap-2 lg:gap-3 shrink-0">
           <a 
-            href="/cv.pdf" 
+            href="src/assets/Siyadhkc_Resume.pdf" 
             download="SiyadhKc_CV.pdf"
             className="flex items-center justify-center bg-[#E1EFEB]/80 hover:bg-[#D1E6E4] text-[#1D91A1] transition-colors w-9 h-9 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full font-sans text-[13px] lg:text-[14px] font-medium shadow-sm border border-[#1D91A1]/10 shrink-0"
           >
@@ -67,6 +69,8 @@ export const Navigation = () => {
           
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close contact menu" : "Open contact menu"}
+            aria-expanded={isMenuOpen}
             className="flex items-center justify-center bg-[#2B302F] hover:bg-black transition-colors text-white w-9 h-9 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full font-sans text-[13px] lg:text-[14px] font-medium shadow-md shrink-0 focus:outline-none"
           >
             {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4 lg:hidden" />}
@@ -85,24 +89,29 @@ export const Navigation = () => {
               transition={{ duration: 0.2, ease: "easeOut" }}
               className="absolute right-0 top-full mt-4 w-56 bg-white/90 backdrop-blur-2xl border border-black/5 rounded-3xl p-3 shadow-2xl flex flex-col gap-1 z-50 pointer-events-auto"
             >
-              {contactLinks.map((link, i) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.label === 'Email' ? undefined : "_blank"}
-                  rel={link.label === 'Email' ? undefined : "noreferrer"}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[#1D91A1]/10 text-[#606060] hover:text-[#1D91A1] transition-all group"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span className="transition-transform group-hover:scale-110">
-                    {link.icon}
-                  </span>
-                  <span className="text-[14px] font-medium tracking-wide">{link.label}</span>
-                </motion.a>
-              ))}
+              {contactLinks.map((link, i) => {
+                const isExternalLink = link.label !== 'Email';
+                const relValue = link.label === 'GitHub' || link.label === 'LinkedIn' ? 'me noreferrer' : isExternalLink ? 'noreferrer' : undefined;
+                return (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    target={isExternalLink ? "_blank" : undefined}
+                    rel={relValue}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    aria-label={link.label}
+                    className="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[#1D91A1]/10 text-[#606060] hover:text-[#1D91A1] transition-all group"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="transition-transform group-hover:scale-110">
+                      {link.icon}
+                    </span>
+                    <span className="text-[14px] font-medium tracking-wide">{link.label}</span>
+                  </motion.a>
+                );
+              })}
             </motion.div>
           )}
         </AnimatePresence>
