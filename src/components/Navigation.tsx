@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Download, Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import resumeFile from '../assets/Siyadhkc_Resume.pdf';
 
 export const Navigation = () => {
   const { scrollY } = useScroll();
@@ -59,7 +60,7 @@ export const Navigation = () => {
         
         <div className="flex items-center gap-2 lg:gap-3 shrink-0">
           <a 
-            href="src/assets/Siyadhkc_Resume.pdf" 
+            href={resumeFile}
             download="SiyadhKc_CV.pdf"
             className="flex items-center justify-center bg-[#E1EFEB]/80 hover:bg-[#D1E6E4] text-[#1D91A1] transition-colors w-9 h-9 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full font-sans text-[13px] lg:text-[14px] font-medium shadow-sm border border-[#1D91A1]/10 shrink-0"
           >
