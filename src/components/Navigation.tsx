@@ -6,14 +6,14 @@ import resumeFile from '../assets/Siyadhkc_Resume.pdf';
 export const Navigation = () => {
   const { scrollY } = useScroll();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   // Modern floating pill effect calculations
   const topBg = useTransform(scrollY, [0, 50], ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.8)']);
   const blurValue = useTransform(scrollY, [0, 50], ['blur(0px)', 'blur(16px)']);
   const borderOp = useTransform(scrollY, [0, 50], ['rgba(255,255,255,0)', 'rgba(0,0,0,0.06)']);
   const shadowValue = useTransform(scrollY, [0, 50], ['none', '0 10px 40px -10px rgba(0,0,0,0.08)']);
   const paddingY = useTransform(scrollY, [0, 50], ['16px', '10px']);
-  
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -28,15 +28,15 @@ export const Navigation = () => {
     { icon: <Linkedin className="w-4 h-4" />, label: 'LinkedIn', href: 'https://linkedin.com/in/siyadhkc' },
     { icon: <Twitter className="w-4 h-4" />, label: 'Twitter', href: 'https://x.com/siyadhkc' },
   ];
-  
+
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 md:pt-6 pointer-events-none">
-      <motion.nav 
+      <motion.nav
         aria-label="Main navigation"
-        style={{ 
-          backgroundColor: topBg, 
-          backdropFilter: blurValue, 
-          borderWidth: 1, 
+        style={{
+          backgroundColor: topBg,
+          backdropFilter: blurValue,
+          borderWidth: 1,
           borderColor: borderOp,
           boxShadow: shadowValue,
           paddingTop: paddingY,
@@ -44,22 +44,22 @@ export const Navigation = () => {
         }}
         className="pointer-events-auto relative flex items-center justify-between px-5 sm:px-6 w-full max-w-[900px] rounded-full transition-all duration-300"
       >
-        <button 
+        <button
           onClick={() => scrollTo('hero')}
           aria-label="Go to home"
           className="cursor-pointer font-serif text-xl lg:text-2xl font-bold text-black tracking-tight shrink-0 bg-transparent border-none p-0 hover:opacity-80 transition-opacity"
         >
           siyadhkc
         </button>
-        
+
         <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           <button onClick={() => scrollTo('stack')} aria-label="Go to technical stack section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Stack</button>
           <button onClick={() => scrollTo('projects')} aria-label="Go to projects section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Projects</button>
           <button onClick={() => scrollTo('contact')} aria-label="Go to contact section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Contact</button>
         </div>
-        
+
         <div className="flex items-center gap-2 lg:gap-3 shrink-0">
-          <a 
+          <a
             href={resumeFile}
             download="SiyadhKc_CV.pdf"
             className="flex items-center justify-center bg-[#E1EFEB]/80 hover:bg-[#D1E6E4] text-[#1D91A1] transition-colors w-9 h-9 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full font-sans text-[13px] lg:text-[14px] font-medium shadow-sm border border-[#1D91A1]/10 shrink-0"
@@ -67,8 +67,8 @@ export const Navigation = () => {
             <Download className="w-4 h-4" />
             <span className="hidden lg:inline lg:ml-2">Download CV</span>
           </a>
-          
-          <button 
+
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close contact menu" : "Open contact menu"}
             aria-expanded={isMenuOpen}

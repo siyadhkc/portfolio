@@ -7,17 +7,17 @@ export const Hero = () => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
-  
+
   return (
     <div id="hero" className="relative pt-[140px] pb-24 lg:pt-[180px] lg:pb-32 overflow-hidden flex flex-col items-center min-h-[90vh]">
-      
+
       {/* Background Setup from Perplexity */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#F7F7F2]">
         {/* Teal orb */}
         <div className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[#1D91A1]/10 blur-[120px] mix-blend-multiply"></div>
         {/* Orange orb */}
         <div className="absolute top-[10%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-[#E57A44]/15 blur-[120px] mix-blend-multiply"></div>
-        
+
         {/* Vector lines */}
         <svg className="absolute inset-0 w-full h-[150%] opacity-40 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path d="M-50,60 Q50,40 150,80" fill="none" stroke="#2B302F" strokeWidth="0.05" />
@@ -28,10 +28,10 @@ export const Hero = () => {
         {/* Noise overlay */}
         <div className="absolute inset-0 opacity-[0.35] mix-blend-color-burn pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
       </div>
-      
+
       {/* Content */}
       <div className="relative z-10 w-full max-w-[900px] mx-auto px-6 text-center flex flex-col items-center mt-10 md:mt-20">
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -39,8 +39,8 @@ export const Hero = () => {
         >
           Backend Engineer
         </motion.p>
-        
-        <motion.h1 
+
+        <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -49,8 +49,8 @@ export const Hero = () => {
           siyadhkc<br />
           <span className="italic font-light text-[#2B302F]">Systems thinker.</span>
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -58,21 +58,21 @@ export const Hero = () => {
         >
           Building secure, scalable backend architectures. I bridge the gap between enterprise hardware infrastructure and offensive security research to ensure code is hardened from the ground up.
         </motion.p>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto px-4 sm:px-0"
         >
-          <button 
+          <button
             onClick={() => scrollTo('projects')}
             className="flex items-center gap-3 bg-[#0A0E17] hover:bg-[#1A1F2B] transition-colors text-white px-6 sm:px-8 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_10px_30px_rgba(0,0,0,0.15)] ring-1 ring-white/10 w-full sm:w-auto justify-center"
           >
             View Projects <ArrowRight className="w-4 h-4" />
           </button>
-          
-          <a 
+
+          <a
             href="https://github.com/siyadhkc"
             target="_blank"
             rel="noreferrer"

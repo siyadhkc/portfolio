@@ -46,11 +46,11 @@ const FeatureCard = ({ title, subtitle, variant, children, tags, link, className
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       aria-label={`View project: ${title}`}
       className={`group rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 relative overflow-hidden flex flex-col h-auto sm:h-[320px] md:h-[480px] min-h-[240px] shadow-sm hover:shadow-md transition-shadow duration-500 border border-black/[0.03] cursor-pointer 
-        ${variant === 'teal' ? 'bg-gradient-to-br from-[#E1EFEB] to-[#CBDFDA]' : 
-          variant === 'indigo' ? 'bg-gradient-to-br from-[#E9E9FC] to-[#D5D5F2]' : 
-          variant === 'sand' ? 'bg-gradient-to-br from-[#F7F3E9] to-[#EBE4D5]' : 
-          variant === 'coral' ? 'bg-gradient-to-br from-[#FCF9F7] to-[#F7EBE8]' : 
-          'bg-[#EFEEE7]'} ${className}`}
+        ${variant === 'teal' ? 'bg-gradient-to-br from-[#E1EFEB] to-[#CBDFDA]' :
+          variant === 'indigo' ? 'bg-gradient-to-br from-[#E9E9FC] to-[#D5D5F2]' :
+            variant === 'sand' ? 'bg-gradient-to-br from-[#F7F3E9] to-[#EBE4D5]' :
+              variant === 'coral' ? 'bg-gradient-to-br from-[#FCF9F7] to-[#F7EBE8]' :
+                'bg-[#EFEEE7]'} ${className}`}
     >
       <div className="flex justify-between items-start z-20 shrink-0 mb-4 sm:mb-0">
         <h3 className="font-sans text-[24px] md:text-[26px] text-[#1A1A1A] tracking-tight font-bold md:font-medium group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
