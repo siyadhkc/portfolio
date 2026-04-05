@@ -11,15 +11,21 @@ export const Hero = () => {
   return (
     <div id="hero" className="relative pt-[140px] pb-24 lg:pt-[180px] lg:pb-32 overflow-hidden flex flex-col items-center min-h-[90vh]">
 
-      {/* Background Setup from Perplexity */}
+      {/* Detailed Responsive Background Setup */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#F7F7F2]">
-        {/* Teal orb */}
-        <div className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[#1D91A1]/10 blur-[120px] mix-blend-multiply"></div>
-        {/* Orange orb */}
-        <div className="absolute top-[10%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-[#E57A44]/15 blur-[120px] mix-blend-multiply"></div>
+        
+        {/* Teal orb - Scaled up on mobile so it doesn't become a tiny dot */}
+        <div className="absolute -top-[10%] -left-[30%] md:-top-[20%] md:-left-[10%] w-[150vw] h-[150vw] md:w-[70vw] md:h-[70vw] rounded-full bg-[#1D91A1]/10 blur-[80px] md:blur-[120px] mix-blend-multiply"></div>
+        
+        {/* Orange orb - Scaled up on mobile */}
+        <div className="absolute top-[20%] -right-[40%] md:top-[10%] md:-right-[10%] w-[120vw] h-[120vw] md:w-[60vw] md:h-[60vw] rounded-full bg-[#E57A44]/15 blur-[80px] md:blur-[120px] mix-blend-multiply"></div>
 
-        {/* Vector lines */}
-        <svg className="absolute inset-0 w-full h-[150%] opacity-40 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+        {/* Vector lines - Responsive sizing prevents horizontal squish on narrow mobile screens */}
+        <svg 
+          className="absolute inset-0 w-[250%] sm:w-[150%] md:w-full h-full md:h-[150%] left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 opacity-40 pointer-events-none" 
+          viewBox="0 0 100 100" 
+          preserveAspectRatio="none"
+        >
           <path d="M-50,60 Q50,40 150,80" fill="none" stroke="#2B302F" strokeWidth="0.05" />
           <path d="M-20,40 Q40,100 120,20" fill="none" stroke="#1D91A1" strokeWidth="0.05" />
           <path d="M-10,20 Q60,-10 100,50" fill="none" stroke="#E57A44" strokeWidth="0.05" />

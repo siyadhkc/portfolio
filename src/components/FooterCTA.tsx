@@ -9,102 +9,67 @@ export const FooterCTA = () => {
       {/* The main cinematic dark container */}
       <div className="relative w-full rounded-2xl md:rounded-[3rem] overflow-hidden bg-[#0A0D14] py-16 md:py-32 flex flex-col items-center justify-center shadow-[0_30px_100px_rgba(0,0,0,0.5)] border border-white/10">
 
-        {/* High-End Cosmic Background (Elite Layered CSS) */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#020408]">
-          {/* Base Cinematic Gradient */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_#0D1B3E_0%,_#020408_100%)] opacity-90"></div>
+        {/* Modern Pixel Grain Dreamy Space Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#02040A]">
 
-          {/* Central CSS Glass Sphere (Comet Anchor) focal point */}
-          <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none">
-            <motion.div
-              animate={{
-                scale: [1, 1.05, 1],
-                opacity: [0.1, 0.15, 0.1]
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 rounded-full bg-[radial-gradient(circle,_#1D91A144_0%,_transparent_70%)] blur-[40px]"
-            ></motion.div>
-            <div className="absolute inset-[25%] rounded-full border border-white/5 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-[2px] shadow-[inset_0_0_40px_rgba(255,255,255,0.02)]"></div>
-          </div>
+          {/* Base Minimal Deep Void */}
+          <div className="absolute inset-0 bg-[#02040A]"></div>
 
-          {/* Dynamic Vibrant Nebulas */}
+          {/* Dreamy Aurora / Nebula Gradients - WIDE SPREAD & LOW LIGHT */}
+          {/* Teal Aurora Band */}
           <motion.div
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.4, 0.6, 0.4],
-              rotate: [0, 10, 0]
-            }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute -top-[10%] -left-[20%] w-[120vw] h-[120vw] rounded-full bg-[radial-gradient(circle,_#1D91A122_0%,_transparent_70%)] blur-[100px]"
-          ></motion.div>
-
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
               opacity: [0.2, 0.4, 0.2],
-              rotate: [0, -15, 0]
+              rotate: [-3, 3, -3],
+              y: ["-5%", "5%", "-5%"]
             }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            className="absolute -bottom-[20%] -right-[10%] w-[100vw] h-[100vw] rounded-full bg-[radial-gradient(circle,_#E57A4411_0%,_transparent_70%)] blur-[120px]"
-          ></motion.div>
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[-10%] left-[-20%] w-[140%] h-[70%] bg-[radial-gradient(ellipse_at_center,_rgba(29,145,161,0.2)_0%,_rgba(29,145,161,0.05)_40%,_transparent_80%)] z-0"
+            style={{ willChange: 'transform, opacity' }}
+          />
 
+          {/* Copper Aurora Band */}
           <motion.div
             animate={{
-              opacity: [0.1, 0.3, 0.1],
-              x: [-50, 50, -50]
+              opacity: [0.15, 0.35, 0.15],
+              rotate: [3, -3, 3],
+              x: ["5%", "-5%", "5%"]
             }}
+            transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-[-10%] right-[-20%] w-[150%] h-[80%] bg-[radial-gradient(ellipse_at_center,_rgba(229,122,68,0.15)_0%,_rgba(229,122,68,0.05)_40%,_transparent_80%)] z-0"
+            style={{ willChange: 'transform, opacity' }}
+          />
+
+          {/* Deep Purple Core Sweep */}
+          <motion.div
+            animate={{ opacity: [0.1, 0.3, 0.1], scaleY: [1, 1.2, 1] }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/4 left-0 w-full h-[400px] bg-[radial-gradient(ellipse_at_center,_#7C4DFF08_0%,_transparent_70%)] blur-[80px]"
+            className="absolute top-[10%] left-[10%] w-[80%] h-[120%] bg-[radial-gradient(ellipse_at_center,_rgba(124,77,255,0.15)_0%,_rgba(124,77,255,0.05)_40%,_transparent_70%)] z-0"
+            style={{ willChange: 'transform, opacity' }}
+          />
+
+          {/* Abstract Starfield (More prominent) */}
+          <motion.div
+            animate={{ y: ["0%", "-30%"] }}
+            transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 left-0 w-full h-[200%] z-0 opacity-80"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='50' r='1.5' fill='%23ffffff' opacity='0.3'/%3E%3Ccircle cx='180' cy='120' r='1' fill='%23ffffff' opacity='0.4'/%3E%3Ccircle cx='320' cy='80' r='2' fill='%23ffffff' opacity='0.3'/%3E%3Ccircle cx='100' cy='250' r='1.5' fill='%231D91A1' opacity='0.5'/%3E%3Ccircle cx='250' cy='320' r='1' fill='%23ffffff' opacity='0.3'/%3E%3Ccircle cx='50' cy='380' r='2' fill='%23E57A44' opacity='0.4'/%3E%3C/svg%3E")`,
+              backgroundSize: '400px 400px'
+            }}
           ></motion.div>
 
-          {/* Architectural Volumetric Light Leaks */}
-          <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_bottom,rgba(29,145,161,0.05)_0%,transparent_50%,rgba(229,122,68,0.03)_100%)]"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-[#1D91A1]/10 to-transparent blur-sm"></div>
+          {/* Edge Fades - Pulled back so colors can shine vividly */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_60%,#02040A_100%)] z-10 pointer-events-none opacity-80"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_#02040A_100%)] z-10 pointer-events-none opacity-60"></div>
 
-          {/* Elite Twinkling Starfield (CSS Particles) */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="stars-container absolute inset-0 opacity-60">
-              <div className="absolute inset-0"
-                style={{
-                  backgroundImage: `
-                    radial-gradient(1.5px 1.5px at 10% 10%, #fff, rgba(0,0,0,0)),
-                    radial-gradient(1px 1px at 20% 35%, #fff, rgba(0,0,0,0)),
-                    radial-gradient(2px 2px at 30% 20%, #B0E0E6, rgba(0,0,0,0)),
-                    radial-gradient(1.2px 1.2px at 45% 70%, #fff, rgba(0,0,0,0)),
-                    radial-gradient(1px 1px at 55% 40%, #E57A44, rgba(0,0,0,0)),
-                    radial-gradient(1.5px 1.5px at 70% 30%, #fff, rgba(0,0,0,0)),
-                    radial-gradient(2px 2px at 85% 65%, #1D91A1, rgba(0,0,0,0)),
-                    radial-gradient(1px 1px at 95% 15%, #fff, rgba(0,0,0,0))
-                  `,
-                  backgroundSize: '500px 500px',
-                  animation: 'twinkle 4s infinite ease-in-out'
-                }}
-              ></div>
-              <div className="absolute inset-0 opacity-40 scale-150 rotate-45"
-                style={{
-                  backgroundImage: `
-                    radial-gradient(1px 1px at 15% 15%, #fff, rgba(0,0,0,0)),
-                    radial-gradient(2px 2px at 40% 40%, #B0E0E6, rgba(0,0,0,0)),
-                    radial-gradient(1.5px 1.5px at 60% 80%, #fff, rgba(0,0,0,0)),
-                    radial-gradient(1px 1px at 85% 25%, #E57A44, rgba(0,0,0,0))
-                  `,
-                  backgroundSize: '400px 400px',
-                  animation: 'twinkle 7s infinite ease-in-out reverse'
-                }}
-              ></div>
-            </div>
+          {/* Modern Noise / Pixel Grain Texture */}
+          {/* Base Grain (Soft, blended texture) */}
+          <div className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-[0.35]" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
 
-            <style dangerouslySetInnerHTML={{
-              __html: `
-              @keyframes twinkle {
-                0%, 100% { opacity: 0.3; transform: translateY(0); }
-                50% { opacity: 1; transform: translateY(-5px); }
-              }
-            `}} />
-          </div>
+          {/* High-frequency Crisp Grain (Visible over dark zones) */}
+          <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.1]" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"1.5\" numOctaves=\"2\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
 
-          {/* Luxury Film Grain Overlay */}
-          <div className="absolute inset-0 opacity-[0.12] mix-blend-overlay pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"4\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
         </div>
 
         {/* Content overlapping space background */}
