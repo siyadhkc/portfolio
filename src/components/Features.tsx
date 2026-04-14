@@ -25,12 +25,12 @@ const StackCell = ({ label, value, index, borderClasses }: StackCellProps) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-    whileHover={{ backgroundColor: "rgba(255,255,255,0.95)", transition: { duration: 0.3 } }}
-    className={`group p-6 md:p-8 flex flex-col justify-center bg-white/40 cursor-default relative overflow-hidden ${borderClasses}`}
+    whileHover={{ backgroundColor: "rgba(255,255,255,0.8)", transition: { duration: 0.3 } }}
+    className={`group p-8 md:p-10 flex flex-col justify-center bg-white/30 cursor-default relative overflow-hidden transition-all duration-300 ${borderClasses}`}
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.08em] uppercase text-[#8A8A85] group-hover:text-[#1D91A1] transition-colors duration-300 block mb-1.5 md:mb-2">{label}</span>
-    <span className="text-[#131313] text-[14px] md:text-[15px] leading-relaxed font-medium block">{value}</span>
+    <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#8A8A85] group-hover:text-[#1D91A1] transition-colors duration-300 block mb-3">{label}</span>
+    <span className="text-[#131313] text-base md:text-[17px] leading-relaxed font-medium block opacity-90 group-hover:opacity-100 transition-opacity">{value}</span>
   </motion.div>
 );
 
@@ -53,9 +53,9 @@ const FeatureCard = ({ title, subtitle, variant, children, tags, link, className
                 'bg-[#EFEEE7]'} ${className}`}
     >
       <div className="flex justify-between items-start z-20 shrink-0 mb-4 sm:mb-0">
-        <h3 className="font-sans text-[24px] md:text-[26px] text-[#1A1A1A] tracking-tight font-bold md:font-medium group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
-        <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:bg-[#1D91A1] group-hover:text-white group-hover:border-[#1D91A1] transition-all duration-300">
-          <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+        <h3 className="font-serif text-[28px] md:text-[32px] text-[#1A1A1A] tracking-tight group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
+        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:bg-[#1D91A1] group-hover:text-white group-hover:border-[#1D91A1] transition-all duration-500">
+          <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>
 
@@ -63,11 +63,11 @@ const FeatureCard = ({ title, subtitle, variant, children, tags, link, className
         {children}
       </div>
 
-      <div className="relative sm:absolute sm:inset-x-4 md:inset-x-5 sm:bottom-4 md:bottom-5 bg-white/60 sm:bg-[#FDFDFC]/90 backdrop-blur-xl p-5 md:p-6 rounded-[1.25rem] md:rounded-[1.5rem] z-20 border border-white/40 sm:border-white shadow-sm sm:shadow-[0_10px_40px_rgba(0,0,0,0.06)] flex flex-col gap-3 md:gap-4 mt-auto sm:mt-0">
-        <p className="text-[#3E4240] text-sm md:text-[15px] font-medium leading-relaxed">{subtitle}</p>
-        <div className="flex flex-wrap gap-1.5 md:gap-2">
+      <div className="relative sm:absolute sm:inset-x-6 md:inset-x-8 sm:bottom-6 md:bottom-8 bg-[#FDFDFC]/80 backdrop-blur-xl p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] z-20 border border-white/50 shadow-sm transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex flex-col gap-4 mt-auto sm:mt-0">
+        <p className="text-[#3E4240] text-sm md:text-[16px] font-medium leading-relaxed opacity-90">{subtitle}</p>
+        <div className="flex flex-wrap gap-2">
           {tags.map((tag: string) => (
-            <span key={tag} className="font-mono text-[9px] md:text-[10px] text-[#2B302F] bg-[#E8E8E3]/50 border border-[#E8E8E3] px-2 py-1 rounded-[4px] tracking-wide uppercase">
+            <span key={tag} className="font-mono text-[9px] md:text-[10px] text-[#8A8A85] bg-black/[0.03] border border-black/[0.05] px-2.5 py-1 rounded-full tracking-widest uppercase">
               {tag}
             </span>
           ))}

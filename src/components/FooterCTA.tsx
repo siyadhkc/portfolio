@@ -203,14 +203,14 @@ export const FooterCTA = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-[#1D91A1] animate-pulse"></span>
             @2026 SIYADHKC
           </span>
-          <span className="hidden md:block w-px h-3 bg-[#00000015]"></span>
-          <span className="text-[#5B5F5D]/60 tracking-[0.2em]">Systems Architect</span>
+          <span className="hidden md:block w-px h-3 bg-black/10"></span>
+          <span className="text-[#5B5F5D] tracking-[0.25em]">Senior Backend Architect</span>
         </div>
 
         <div className="flex items-center gap-10 text-[#8A8A85] font-mono text-[10px] tracking-[0.4em] uppercase">
-          <span className="text-[#5B5F5D]/60 tracking-[0.2em]">Kerala, IN</span>
-          <span className="hidden md:block w-px h-3 bg-[#00000015]"></span>
-          <a href="#" className="hover:text-[#1D91A1] transition-colors">Back to top ↑</a>
+          <span className="text-[#5B5F5D]/60 tracking-[0.2em]">Kerala, India</span>
+          <span className="hidden md:block w-px h-3 bg-black/10"></span>
+          <a href="#" className="hover:text-[#1D91A1] transition-all hover:-translate-y-0.5">Back to top ↑</a>
         </div>
       </footer>
     </div>

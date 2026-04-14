@@ -41,48 +41,51 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="font-mono text-[13px] tracking-[0.1em] text-[#6C6C6C] uppercase mb-8"
+          className="font-mono text-[11px] md:text-[13px] tracking-[0.3em] text-[#8A8A85] uppercase mb-6"
         >
-          Backend Engineer
+          Senior Backend Architect
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-serif text-[3.5rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7rem] tracking-tight leading-[1] text-[#131313] mb-6 md:mb-8"
+          className="font-serif text-[3.5rem] sm:text-[4.5rem] md:text-[6.5rem] lg:text-[7.5rem] tracking-tight leading-[0.9] text-[#131313] mb-8"
         >
           siyadhkc<br />
-          <span className="italic font-light text-[#2B302F]">Systems thinker.</span>
+          <span className="italic font-light opacity-60">Architecting scale.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[#5B5F5D] font-sans text-base sm:text-lg md:text-[20px] mb-10 md:mb-12 max-w-[650px] leading-relaxed mx-auto text-balance px-4"
+          className="text-[#5B5F5D] font-sans text-base sm:text-lg md:text-[22px] mb-12 md:mb-16 max-w-[700px] leading-relaxed mx-auto text-balance px-4 opacity-80"
         >
-          Building secure, scalable backend architectures. I bridge the gap between enterprise hardware infrastructure and offensive security research to ensure code is hardened from the ground up.
+          Building secure, high-performance backends. I bridge enterprise infrastructure with offensive security research to harden systems from the core.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto px-4 sm:px-0"
+          className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto px-4 sm:px-0"
         >
           <button
             onClick={() => scrollTo('projects')}
-            className="flex items-center gap-3 bg-[#0A0E17] hover:bg-[#1A1F2B] transition-colors text-white px-6 sm:px-8 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_10px_30px_rgba(0,0,0,0.15)] ring-1 ring-white/10 w-full sm:w-auto justify-center"
+            className="group flex items-center gap-4 bg-[#0A0E17] hover:bg-black transition-all text-white px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_15px_40px_rgba(0,0,0,0.15)] ring-1 ring-white/10 w-full sm:w-auto justify-center"
           >
-            View Projects <ArrowRight className="w-4 h-4" />
+            View Work 
+            <motion.div whileHover={{ x: 5 }} className="transition-transform">
+              <ArrowRight className="w-4 h-4" />
+            </motion.div>
           </button>
 
           <a
             href="https://github.com/siyadhkc"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-3 bg-white hover:bg-white/80 transition-colors text-[#131313] px-6 sm:px-8 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-sm border border-black/5 w-full sm:w-auto justify-center"
+            className="flex items-center gap-4 bg-white/50 backdrop-blur-md hover:bg-white transition-all text-[#131313] px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-sm border border-black/[0.04] w-full sm:w-auto justify-center"
           >
             <Github className="w-4 h-4" /> GitHub
           </a>

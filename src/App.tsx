@@ -1,17 +1,19 @@
-import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Navigation } from './components/Navigation'
-import { Hero } from './components/Hero'
-import { Features } from './components/Features'
-import { FooterCTA } from './components/FooterCTA'
+import { Home } from './pages/Home'
+import { ArticlesPage } from './pages/ArticlesPage'
 
 function App() {
   return (
-    <div className="min-h-screen font-sans bg-comet-cream text-comet-text">
-      <Navigation />
-      <Hero />
-      <Features />
-      <FooterCTA />
-    </div>
+    <Router>
+      <div className="min-h-screen font-sans bg-comet-cream text-comet-text selection:bg-[#1D91A1]/30 selection:text-[#1D91A1]">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/articles" element={<ArticlesPage />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 

@@ -1,26 +1,68 @@
-import React, { useState } from 'react';
-import { Mail, Download, Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mail, Download, Menu, X, Github, Linkedin, Twitter, BookOpen, ExternalLink, Briefcase, FileText } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import resumeFile from '../assets/Siyadhkc_Resume.pdf';
+
+const Logo = () => (
+  <Link
+    to="/"
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    className="group relative flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-black/[0.03] transition-all duration-300"
+  >
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="relative z-10"
+    >
+      <span className="font-serif text-lg md:text-xl font-bold text-black tracking-tighter">
+        <span className="hidden sm:inline">siyadhkc</span>
+        <span className="sm:hidden">s</span>
+      </span>
+    </motion.div>
+    <div className="w-1 h-1 rounded-full bg-[#1D91A1] group-hover:scale-150 transition-transform"></div>
+  </Link>
+);
 
 export const Navigation = () => {
   const { scrollY } = useScroll();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Modern floating pill effect calculations
-  const topBg = useTransform(scrollY, [0, 50], ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.8)']);
-  const blurValue = useTransform(scrollY, [0, 50], ['blur(0px)', 'blur(16px)']);
-  const borderOp = useTransform(scrollY, [0, 50], ['rgba(255,255,255,0)', 'rgba(0,0,0,0.06)']);
-  const shadowValue = useTransform(scrollY, [0, 50], ['none', '0 10px 40px -10px rgba(0,0,0,0.08)']);
-  const paddingY = useTransform(scrollY, [0, 50], ['16px', '10px']);
+  const topBg = useTransform(scrollY, [0, 50], ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.7)']);
+  const blurValue = useTransform(scrollY, [0, 50], ['blur(0px)', 'blur(20px)']);
+  const borderOp = useTransform(scrollY, [0, 50], ['rgba(255,255,255,0)', 'rgba(0,0,0,0.04)']);
+  const shadowValue = useTransform(scrollY, [0, 50], ['none', '0 10px 40px -10px rgba(0,0,0,0.05)']);
+  const navWidth = useTransform(scrollY, [0, 100], ['100%', '98%']);
+  const navY = useTransform(scrollY, [0, 50], ['0px', '4px']);
 
-  const scrollTo = (id: string) => {
+  const handleNavClick = (id: string) => {
+    setIsMenuOpen(false);
+    if (location.pathname !== '/') {
+      navigate(`/#${id}`);
+      return;
+    }
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
     }
   };
+
+  useEffect(() => {
+    if (location.hash && location.pathname === '/') {
+      const id = location.hash.replace('#', '');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [location]);
+
+  const menuItems = [
+    { label: 'Projects', id: 'projects', type: 'scroll', icon: <Briefcase className="w-4 h-4" /> },
+    { label: 'Articles', id: '/articles', type: 'link', icon: <BookOpen className="w-4 h-4" /> },
+  ];
 
   const contactLinks = [
     { icon: <Mail className="w-4 h-4" />, label: 'Email', href: 'mailto:siyadhkc@gmail.com' },
@@ -30,89 +72,133 @@ export const Navigation = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 md:pt-6 pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-1 sm:px-4 pt-4 md:pt-6 pointer-events-none">
       <motion.nav
         aria-label="Main navigation"
         style={{
           backgroundColor: topBg,
           backdropFilter: blurValue,
-          borderWidth: 1,
           borderColor: borderOp,
           boxShadow: shadowValue,
-          paddingTop: paddingY,
-          paddingBottom: paddingY
+          width: navWidth,
+          y: navY,
         }}
-        className="pointer-events-auto relative flex items-center justify-between px-5 sm:px-6 w-full max-w-[900px] rounded-full transition-all duration-300"
+        className="pointer-events-auto relative flex items-center justify-between px-2 sm:px-4 py-1.5 w-full max-w-[1000px] rounded-full border border-transparent transition-all duration-300"
       >
-        <button
-          onClick={() => scrollTo('hero')}
-          aria-label="Go to home"
-          className="cursor-pointer font-serif text-xl lg:text-2xl font-bold text-black tracking-tight shrink-0 bg-transparent border-none p-0 hover:opacity-80 transition-opacity"
-        >
-          siyadhkc
-        </button>
-
-        <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-          <button onClick={() => scrollTo('stack')} aria-label="Go to technical stack section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Stack</button>
-          <button onClick={() => scrollTo('projects')} aria-label="Go to projects section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Projects</button>
-          <button onClick={() => scrollTo('contact')} aria-label="Go to contact section" className="text-[#606060] hover:text-[#1D91A1] transition-colors text-[14px] font-medium tracking-wide">Contact</button>
+        <div className="flex items-center gap-1 sm:gap-2">
+          <Logo />
         </div>
 
-        <div className="flex items-center gap-2 lg:gap-3 shrink-0">
+        {/* Global Menu - Shown on all screens */}
+        <div className="flex items-center gap-0.5 sm:gap-1 bg-black/[0.03] p-1 rounded-full border border-black/[0.03]">
+          {menuItems.map((item) => (
+            item.type === 'scroll' ? (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className="flex items-center gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[13px] font-medium text-[#606060] hover:text-black hover:bg-white transition-all duration-200"
+              >
+                <span className="md:hidden">{item.icon}</span>
+                <span className="hidden md:inline">{item.label}</span>
+                <span className="md:hidden sr-only">{item.label}</span>
+              </button>
+            ) : (
+              <Link
+                key={item.id}
+                to={item.id}
+                className={`flex items-center gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[13px] font-medium transition-all duration-200 ${
+                  location.pathname === item.id 
+                    ? 'bg-white text-black shadow-sm' 
+                    : 'text-[#606060] hover:text-black hover:bg-white'
+                }`}
+              >
+                <span className="md:hidden">{item.icon}</span>
+                <span className="hidden md:inline">{item.label}</span>
+                <span className="md:hidden sr-only">{item.label}</span>
+              </Link>
+            )
+          ))}
+        </div>
+
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          {/* Resume Icon/Button */}
           <a
             href={resumeFile}
             download="SiyadhKc_CV.pdf"
-            className="flex items-center justify-center bg-[#E1EFEB]/80 hover:bg-[#D1E6E4] text-[#1D91A1] transition-colors w-9 h-9 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full font-sans text-[13px] lg:text-[14px] font-medium shadow-sm border border-[#1D91A1]/10 shrink-0"
+            title="Download Resume"
+            className="flex items-center justify-center bg-[#E1EFEB]/80 hover:bg-[#D1E6E4] text-[#1D91A1] p-2 sm:px-4 sm:py-2.5 rounded-full font-sans text-[13px] font-medium transition-all hover:scale-[1.05]"
           >
-            <Download className="w-4 h-4" />
-            <span className="hidden lg:inline lg:ml-2">Download CV</span>
+            <Download className="w-4 h-4 sm:mr-2" />
+            <span className="hidden lg:inline text-[12px]">CV</span>
           </a>
 
-          <button
+          <div className="h-4 w-px bg-black/10 mx-0.5 hidden sm:block"></div>
+
+          {/* Contact Menu Trigger */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close contact menu" : "Open contact menu"}
-            aria-expanded={isMenuOpen}
-            className="flex items-center justify-center bg-[#2B302F] hover:bg-black transition-colors text-white w-9 h-9 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full font-sans text-[13px] lg:text-[14px] font-medium shadow-md shrink-0 focus:outline-none"
+            className={`relative flex items-center justify-center p-2 sm:px-4 sm:py-2.5 rounded-full font-sans text-[13px] font-medium shadow-md transition-all ${
+              isMenuOpen ? 'bg-black text-white' : 'bg-[#2B302F] hover:bg-black text-white'
+            }`}
           >
-            {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4 lg:hidden" />}
-            {!isMenuOpen && <Mail className="hidden lg:block w-4 h-4" />}
-            <span className="hidden lg:inline lg:ml-2">{isMenuOpen ? 'Close' : 'Get in touch'}</span>
-          </button>
+            <AnimatePresence mode="popLayout" initial={false}>
+              {isMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className="flex items-center"
+                >
+                  <X className="w-4 h-4" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className="flex items-center"
+                >
+                   <Mail className="w-4 h-4 sm:mr-2" />
+                   <span className="hidden lg:inline text-[12px]">Reach Out</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
 
-        {/* Floating Contact List Dropdown */}
+        {/* Contact Dropdown Only */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: 15, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 15, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute right-0 top-full mt-4 w-56 bg-white/90 backdrop-blur-2xl border border-black/5 rounded-3xl p-3 shadow-2xl flex flex-col gap-1 z-50 pointer-events-auto"
+              initial={{ opacity: 0, scale: 0.97, y: 10, rotateX: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: 10, rotateX: -10 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              style={{ transformOrigin: "top right" }}
+              className="absolute right-0 top-full mt-4 w-64 bg-white/95 backdrop-blur-3xl border border-black/[0.05] rounded-[2rem] p-4 shadow-2xl z-50 overflow-hidden perspective-[1000px]"
             >
-              {contactLinks.map((link, i) => {
-                const isExternalLink = link.label !== 'Email';
-                const relValue = link.label === 'GitHub' || link.label === 'LinkedIn' ? 'me noreferrer' : isExternalLink ? 'noreferrer' : undefined;
-                return (
+              <div className="grid grid-cols-2 gap-2">
+                {contactLinks.map((link, i) => (
                   <motion.a
                     key={link.label}
                     href={link.href}
-                    target={isExternalLink ? "_blank" : undefined}
-                    rel={relValue}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    aria-label={link.label}
-                    className="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[#1D91A1]/10 text-[#606060] hover:text-[#1D91A1] transition-all group"
+                    className="flex flex-col items-center gap-2 p-3 rounded-2xl bg-black/[0.02] hover:bg-[#1D91A1]/10 text-[#606060] hover:text-[#1D91A1] transition-all group"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <span className="transition-transform group-hover:scale-110">
+                    <div className="p-2 rounded-lg bg-white shadow-sm transition-colors">
                       {link.icon}
-                    </span>
-                    <span className="text-[14px] font-medium tracking-wide">{link.label}</span>
+                    </div>
+                    <span className="text-[10px] font-medium tracking-wide font-mono uppercase opacity-60 group-hover:opacity-100">{link.label}</span>
                   </motion.a>
-                );
-              })}
+                ))}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
