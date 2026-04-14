@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://siyadhkc.com/sitemap.xml
+Sitemap: https://siyadhkc.vercel.app/sitemap.xml

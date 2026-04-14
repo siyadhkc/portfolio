@@ -9,7 +9,7 @@ export const Hero = () => {
   };
 
   return (
-    <div id="hero" className="relative pt-[140px] pb-24 lg:pt-[180px] lg:pb-32 overflow-hidden flex flex-col items-center min-h-[90vh]">
+    <div id="hero" role="banner" aria-label="Hero Section" className="relative pt-[140px] pb-24 lg:pt-[180px] lg:pb-32 overflow-hidden flex flex-col items-center min-h-[90vh]">
 
       {/* Detailed Responsive Background Setup */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#F7F7F2]">
@@ -43,7 +43,7 @@ export const Hero = () => {
           transition={{ duration: 0.6 }}
           className="font-mono text-[11px] md:text-[13px] tracking-[0.3em] text-[#8A8A85] uppercase mb-6"
         >
-          Senior Backend Architect
+          Full-Stack Developer | Web & API Security Specialist
         </motion.p>
 
         <motion.h1
