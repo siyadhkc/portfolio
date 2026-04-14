@@ -13,7 +13,7 @@
 <!-- GIF PLACEHOLDER - Replace with your actual GIF -->
 
 <div align="center">
-  <video src="./public/project.mp4" width="100%" autoplay loop muted playsinline>
+  <video src="./public/project.gif" width="100%" autoplay loop muted playsinline>
     Your browser does not support the video tag.
   </video>
 </div>
