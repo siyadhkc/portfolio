@@ -12,7 +12,11 @@
 
 <!-- GIF PLACEHOLDER - Replace with your actual GIF -->
 
-![Portfolio Preview](./preview.gif)
+<div align="center">
+  <video src="./public/project.mp4" width="100%" autoplay loop muted playsinline>
+    Your browser does not support the video tag.
+  </video>
+</div>
 
 ## ✨ Features
 
@@ -124,6 +128,7 @@ portfolio/
 │   ├── _redirects          # Vercel SPA redirects
 │   ├── robots.txt          # Search engine crawling rules
 │   ├── sitemap.xml         # Site structure for search engines
+│   ├── project.mp4         # Project demo video
 │   ├── og-image.png        # Social media preview image
 │   └── favicon.svg         # Site favicon
 ├── src/

@@ -17,6 +17,12 @@
     "jsx": "react-jsx",
     "types": ["vite/client"]
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "tailwind.config.js",
+    "postcss.config.js",
+    "eslint.config.js",
+    "vite.config.ts"
+  ]
 }
 
