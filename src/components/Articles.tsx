@@ -12,7 +12,7 @@ interface ArticleCardProps {
   likes?: string;
 }
 
-const ArticleCard = ({ title, excerpt, platform, url, date, readTime, likes }: ArticleCardProps) => {
+const ArticleCard = ({ title, excerpt, platform, url, readTime, likes }: ArticleCardProps) => {
   return (
     <motion.a
       href={url}
