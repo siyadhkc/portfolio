@@ -13,9 +13,7 @@
 <!-- GIF PLACEHOLDER - Replace with your actual GIF -->
 
 <div align="center">
-  <video src="./public/project.gif" width="100%" autoplay loop muted playsinline>
-    Your browser does not support the video tag.
-  </video>
+  <img src="./public/project.gif" width="100%" alt="Portfolio Preview" />
 </div>
 
 ## ✨ Features

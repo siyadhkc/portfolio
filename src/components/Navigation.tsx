@@ -258,66 +258,40 @@ export const Navigation = () => {
           <div className="h-4 w-px bg-black/10 mx-0.5 hidden sm:block"></div>
 
           <motion.button
-            whileHover={{ 
-              scale: 1.02, 
-              y: -3,
-              boxShadow: "0 20px 40px -10px rgba(0,0,0,0.3)"
-            }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.97 }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`relative flex items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-all min-w-[48px] lg:min-w-[145px] overflow-hidden group/reach ${
+            className={`relative flex items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-colors duration-300 min-w-[48px] lg:min-w-[145px] overflow-hidden ${
               isMenuOpen ? 'bg-black text-white' : 'bg-[#2B302F] hover:bg-[#1A1F1E] text-white'
             }`}
           >
-            {/* Liquid Glow Background Element */}
-            <motion.div 
-              initial={{ x: "-100%", opacity: 0 }}
-              whileHover={{ x: "100%", opacity: 0.15 }}
-              transition={{ duration: 1, ease: "easeInOut" }}
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent -skew-x-12 z-0"
-            />
-            
-            <motion.div 
-              className="absolute inset-0 bg-[#1D91A1]/0 group-hover/reach:bg-[#1D91A1]/10 transition-colors duration-500"
-            />
-
-            <AnimatePresence mode="popLayout" initial={false}>
+            <AnimatePresence mode="wait" initial={false}>
               {isMenuOpen ? (
-                <motion.div
+                <motion.span
                   key="close"
-                  initial={{ opacity: 0, y: 15, rotate: -15, scale: 0.8 }}
-                  animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -15, rotate: 15, scale: 0.8 }}
-                  transition={{ type: "spring", stiffness: 600, damping: 40 }}
-                  className="flex items-center justify-center w-full relative z-10"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                  className="flex items-center justify-center gap-2 w-full"
                 >
-                  <X className="w-5 h-5 sm:w-4 sm:h-4 lg:mr-2" />
+                  <X className="w-4 h-4" />
                   <span className="hidden lg:inline tracking-wide font-mono uppercase text-[11px]">Close</span>
-                </motion.div>
+                </motion.span>
               ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ opacity: 0, y: 15, rotate: 15, scale: 0.8 }}
-                  animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -15, rotate: -15, scale: 0.8 }}
-                  transition={{ type: "spring", stiffness: 600, damping: 40 }}
-                  className="flex items-center justify-center w-full relative z-10"
+                <motion.span
+                  key="contact"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                  className="flex items-center justify-center gap-2 w-full"
                 >
-                   <motion.div
-                     animate={isMenuOpen ? {} : {
-                       y: [0, -2, 0],
-                       transition: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                     }}
-                   >
-                    <Mail className="w-5 h-5 sm:w-4 sm:h-4 lg:mr-2 group-hover/reach:text-[#1D91A1] transition-colors" />
-                   </motion.div>
-                   <span className="hidden lg:inline tracking-wide font-mono uppercase text-[11px]">Contact</span>
-                </motion.div>
+                  <Mail className="w-4 h-4" />
+                  <span className="hidden lg:inline tracking-wide font-mono uppercase text-[11px]">Contact</span>
+                </motion.span>
               )}
             </AnimatePresence>
-            
-            {/* Sublte Border Glow */}
-            <div className="absolute inset-0 rounded-full border border-white/0 group-hover/reach:border-white/10 transition-all duration-500 shadow-inner pointer-events-none"></div>
           </motion.button>
         </div>
 
