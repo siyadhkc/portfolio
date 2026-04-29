@@ -206,7 +206,7 @@ export const Navigation = () => {
                 <motion.button
                   key={item.id}
                   whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => handleNavClick(item.id)}
                   className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2 rounded-full text-[13px] sm:text-[13px] font-medium transition-all duration-200 ${
                     isActive 
@@ -217,7 +217,7 @@ export const Navigation = () => {
                   {LinkContent}
                 </motion.button>
               ) : (
-                <motion.div key={item.id} whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }}>
+                <motion.div key={item.id} whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }}>
                   <Link
                     to={item.id}
                     className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2 rounded-full text-[13px] sm:text-[13px] font-medium transition-all duration-200 ${
@@ -259,7 +259,7 @@ export const Navigation = () => {
 
           <motion.button
             whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.97 }}
+            whileTap={{ scale: 0.96 }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`relative flex items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-colors duration-300 min-w-[48px] lg:min-w-[145px] overflow-hidden ${
               isMenuOpen ? 'bg-black text-white' : 'bg-[#2B302F] hover:bg-[#1A1F1E] text-white'

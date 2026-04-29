@@ -71,24 +71,28 @@ export const Hero = () => {
           transition={{ duration: 0.4, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto px-4 sm:px-0"
         >
-          <button
+          <motion.button
             onClick={() => scrollTo('projects')}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
             className="group flex items-center gap-4 bg-[#0A0E17] hover:bg-black transition-all text-white px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_15px_40px_rgba(0,0,0,0.15)] ring-1 ring-white/10 w-full sm:w-auto justify-center"
           >
             View Work 
             <motion.div whileHover={{ x: 5 }} className="transition-transform">
               <ArrowRight className="w-4 h-4" />
             </motion.div>
-          </button>
+          </motion.button>
 
-          <a
+          <motion.a
             href="https://github.com/siyadhkc"
             target="_blank"
             rel="noreferrer"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
             className="flex items-center gap-4 bg-white/50 backdrop-blur-md hover:bg-white transition-all text-[#131313] px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-sm border border-black/[0.04] w-full sm:w-auto justify-center"
           >
             <Github className="w-4 h-4" /> GitHub
-          </a>
+          </motion.a>
         </motion.div>
       </div>
 
