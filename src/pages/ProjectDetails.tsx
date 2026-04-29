@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Github, ExternalLink, ShieldCheck, Database, Lock, Code, Layers, Zap } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, ShieldCheck, Database, Lock, Code, Layers, Zap, Activity } from 'lucide-react';
 import { projects } from '../lib/projects';
 import { Helmet } from 'react-helmet-async';
 import { setScrollTarget } from '../lib/scrollTarget';
@@ -34,6 +34,7 @@ const ProjectDetails = () => {
     'mockapi-pro': <Database className="w-12 h-12" />,
     'vulnapi': <ShieldCheck className="w-12 h-12" />,
     'django-secure': <Lock className="w-12 h-12" />,
+    'sentinel-api': <Activity className="w-12 h-12" />,
   };
 
   const getVariantStyles = (variant: string) => {
@@ -42,6 +43,7 @@ const ProjectDetails = () => {
       case 'coral': return 'from-[#FCF9F7] to-[#F7EBE8] text-[#FF5F56]';
       case 'sand': return 'from-[#F7F3E9] to-[#EBE4D5] text-[#2B302F]';
       case 'indigo': return 'from-[#E9E9FC] to-[#D5D5F2] text-[#6366F1]';
+      case 'blue': return 'from-[#E0F2FE] to-[#BAE6FD] text-[#007AFF]';
       default: return 'from-[#EFEEE7] to-[#DFDED7] text-[#131313]';
     }
   };

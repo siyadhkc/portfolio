@@ -4,7 +4,7 @@ export interface Project {
   subtitle: string;
   description: string;
   tags: string[];
-  variant: 'teal' | 'coral' | 'sand' | 'indigo';
+  variant: 'teal' | 'coral' | 'sand' | 'indigo' | 'blue';
   github: string;
   live: string;
   features: string[];
@@ -62,5 +62,22 @@ export const projects: Project[] = [
       'Seamless integration with existing DRF projects'
     ],
     tech: ['Django', 'Django REST Framework', 'Python']
+  },
+  {
+    id: 'sentinel-api',
+    title: 'Sentinel API',
+    subtitle: 'Real-time API gateway security monitor with automated threat blocking and alerting.',
+    description: 'Sentinel API provides a robust layer of protection for your infrastructure, monitoring traffic in real-time and automatically neutralizing threats before they reach your backend.',
+    tags: ['Go', 'Redis', 'Security'],
+    variant: 'blue',
+    github: 'https://github.com/siyadhkc',
+    live: 'https://github.com/siyadhkc',
+    features: [
+      'Real-time threat detection and mitigation',
+      'Automated rate limiting and IP blocking',
+      'Detailed security event audit logs',
+      'Integration with Slack and Discord for alerts'
+    ],
+    tech: ['Go', 'Redis', 'gRPC', 'Prometheus']
   }
 ];

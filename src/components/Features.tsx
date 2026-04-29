@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Database, ShieldCheck, Lock, ArrowUpRight } from 'lucide-react';
+import { Database, ShieldCheck, Lock, Activity, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { projects } from '../lib/projects';
 
@@ -9,16 +9,6 @@ interface StackCellProps {
   value: string;
   index: number;
   borderClasses: string;
-}
-
-interface FeatureCardProps {
-  id: string;
-  title: string;
-  subtitle: string;
-  variant: string;
-  children?: React.ReactNode;
-  tags: string[];
-  className?: string;
 }
 
 const StackCell = ({ label, value, index, borderClasses }: StackCellProps) => (
@@ -36,6 +26,16 @@ const StackCell = ({ label, value, index, borderClasses }: StackCellProps) => (
   </motion.div>
 );
 
+interface FeatureCardProps {
+  id: string;
+  title: string;
+  subtitle: string;
+  variant: 'teal' | 'coral' | 'sand' | 'indigo' | 'blue';
+  children?: React.ReactNode;
+  tags: string[];
+  className?: string;
+}
+
 const FeatureCard = ({ id, title, subtitle, variant, children, tags, className }: FeatureCardProps) => {
   return (
     <Link to={`/projects/${id}`} className="block w-full">
@@ -50,6 +50,7 @@ const FeatureCard = ({ id, title, subtitle, variant, children, tags, className }
             variant === 'indigo' ? 'bg-gradient-to-br from-[#E9E9FC] to-[#D5D5F2]' :
               variant === 'sand' ? 'bg-gradient-to-br from-[#F7F3E9] to-[#EBE4D5]' :
                 variant === 'coral' ? 'bg-gradient-to-br from-[#FCF9F7] to-[#F7EBE8]' :
+                  variant === 'blue' ? 'bg-gradient-to-br from-[#E0F2FE] to-[#BAE6FD]' :
                   'bg-[#EFEEE7]'} ${className}`}
       >
         <div className="flex justify-between items-start z-20 shrink-0 mb-4 sm:mb-0">
@@ -108,7 +109,7 @@ export const Features = () => {
 
       <div className="max-w-[1200px] mx-auto px-8"><hr className="border-[#E8E8E3]" /></div>
 
-      {/* PROJECTS SECTION ALIGNED TO COMET */}
+      {/* PROJECTS SECTION */}
       <section id="projects" className="py-16 md:py-24 px-4 md:px-8 w-full max-w-[1200px] mx-auto">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="font-serif text-[2.5rem] md:text-[5rem] text-[#131313] tracking-tight leading-tight">Selected Projects</h2>
@@ -125,7 +126,6 @@ export const Features = () => {
             tags={projects[0].tags}
             variant={projects[0].variant}
           >
-            {/* Mockup for Dashboard/API */}
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center pl-6 pr-6 md:pl-10 sm:-mt-24">
               <div className="w-full bg-white/70 backdrop-blur-md rounded-xl shadow-lg border border-black/5 p-4 flex flex-col overflow-hidden relative group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-shadow">
                 <Database className="w-6 h-6 text-[#1D91A1] mb-4 opacity-50" />
@@ -151,17 +151,13 @@ export const Features = () => {
             tags={projects[1].tags}
             variant={projects[1].variant}
           >
-            {/* Mockup for Scanner */}
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center sm:-mt-24">
               <div className="w-[75%] bg-white rounded-2xl shadow-sm border border-[#E8E8E3] p-6 flex flex-col relative group-hover:shadow-md transition-shadow">
                 <ShieldCheck className="w-8 h-8 text-[#FF5F56] absolute top-6 right-6 opacity-30 group-hover:opacity-60 transition-opacity" />
                 <h4 className="font-mono text-[11px] text-[#A1A1A1] uppercase tracking-widest mb-6">Scan Progress</h4>
-
-                {/* Progress Bar */}
                 <div className="w-full h-2 bg-black/5 rounded-full mb-4 overflow-hidden">
                   <div className="w-[65%] h-full bg-[#1D91A1]"></div>
                 </div>
-
                 <div className="flex justify-between items-center text-[12px] font-mono text-[#6C6C6C]">
                   <span>Injecting Payloads...</span>
                   <span>65%</span>
@@ -177,9 +173,7 @@ export const Features = () => {
             subtitle={projects[2].subtitle}
             tags={projects[2].tags}
             variant={projects[2].variant}
-            className="md:col-span-2 md:h-[350px]"
           >
-            {/* Horizontal Mockup */}
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center px-4 md:px-10 sm:-mt-20">
               <div className="w-[90%] md:w-full max-w-[600px] bg-white rounded-xl shadow-sm border border-black/5 p-4 flex items-center gap-3 md:gap-4 group-hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] transition-shadow">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#F2F2EC] flex items-center justify-center shrink-0">
@@ -190,6 +184,28 @@ export const Features = () => {
                   <div className="w-[70%] h-2.5 md:h-3 bg-black/5 rounded-full"></div>
                 </div>
                 <div className="hidden sm:block w-16 md:w-20 h-6 md:h-8 rounded-full bg-[#E0DFD8] opacity-50"></div>
+              </div>
+            </div>
+          </FeatureCard>
+
+          {/* Card 4: Sentinel API */}
+          <FeatureCard
+            id="sentinel-api"
+            title={projects[3].title}
+            subtitle={projects[3].subtitle}
+            tags={projects[3].tags}
+            variant={projects[3].variant}
+          >
+            <div className="absolute inset-0 flex items-center justify-center p-8 sm:-mt-24">
+              <div className="w-full max-w-[320px] bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-black/5 p-6 flex flex-col items-center group-hover:scale-105 transition-transform">
+                <Activity className="w-12 h-12 text-[#007AFF] mb-4" />
+                <div className="w-full space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    <div className="flex-1 h-2 bg-black/5 rounded-full" />
+                  </div>
+                  <div className="w-[80%] h-2 bg-black/5 rounded-full mx-auto" />
+                </div>
               </div>
             </div>
           </FeatureCard>
