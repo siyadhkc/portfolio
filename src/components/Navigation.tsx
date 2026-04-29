@@ -247,10 +247,10 @@ export const Navigation = () => {
           <motion.a
             href={resumeFile}
             download="SiyadhKc_CV.pdf"
-            whileHover={{ y: -2 }}
+            whileHover={{ y: -2, backgroundColor: "rgba(225, 239, 235, 0.9)" }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsDownloadSpinning(true)}
-            className="flex items-center justify-center bg-[#E1EFEB]/80 hover:bg-[#D1E6E4] text-[#1D91A1] p-3 sm:px-5 sm:py-2.5 rounded-full font-sans text-[13px] font-medium shadow-sm transition-all"
+            className="flex items-center justify-center bg-[#E1EFEB]/70 backdrop-blur-md hover:bg-[#D1E6E4] text-[#1D91A1] p-3 sm:px-5 sm:py-2.5 rounded-full font-sans text-[13px] font-medium shadow-sm border border-white/40 transition-all"
           >
             <motion.div
               animate={{ rotate: isDownloadSpinning ? 360 : 0 }}
@@ -266,11 +266,11 @@ export const Navigation = () => {
           <div className="h-4 w-px bg-black/10 mx-0.5 hidden sm:block"></div>
 
           <motion.button
-            whileHover={{ scale: 1.02, y: -2 }}
+            whileHover={{ scale: 1.02, y: -2, backgroundColor: "rgba(43, 48, 47, 0.95)" }}
             whileTap={{ scale: 0.96 }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`relative flex items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-colors duration-300 min-w-[48px] lg:min-w-[145px] overflow-hidden ${
-              isMenuOpen ? 'bg-black text-white' : 'bg-[#2B302F] hover:bg-[#1A1F1E] text-white'
+            className={`relative flex items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-all duration-300 min-w-[48px] lg:min-w-[145px] overflow-hidden border border-white/10 ${
+              isMenuOpen ? 'bg-black text-white shadow-lg' : 'bg-[#2B302F]/90 backdrop-blur-md text-white shadow-sm'
             }`}
           >
             <AnimatePresence mode="wait" initial={false}>

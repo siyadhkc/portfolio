@@ -106,7 +106,7 @@ const ProjectDetails = () => {
                   href={project.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 sm:gap-3 bg-black text-white px-4 sm:px-6 py-3 rounded-full font-medium shadow-lg hover:bg-[#1A1A1A] transition-all text-sm sm:text-base whitespace-nowrap"
+                  className="flex items-center justify-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-xl text-white px-4 sm:px-6 py-3 rounded-full font-medium shadow-lg hover:bg-black transition-all text-sm sm:text-base whitespace-nowrap border border-white/10"
                 >
                   <Github className="w-5 h-5" /> GitHub
                 </a>
@@ -114,7 +114,7 @@ const ProjectDetails = () => {
                   href={project.live}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 sm:gap-3 bg-white text-black px-4 sm:px-6 py-3 rounded-full font-medium shadow-md border border-black/5 hover:bg-gray-50 transition-all text-sm sm:text-base whitespace-nowrap"
+                  className="flex items-center justify-center gap-2 sm:gap-3 bg-white/40 backdrop-blur-xl text-black px-4 sm:px-6 py-3 rounded-full font-medium shadow-md border border-white/60 hover:bg-white/80 transition-all text-sm sm:text-base whitespace-nowrap"
                 >
                   <ExternalLink className="w-5 h-5" /> Live Demo
                 </a>
@@ -175,7 +175,7 @@ const ProjectDetails = () => {
               </p>
               <a
                 href="mailto:siyadhkc@gmail.com"
-                className="w-full inline-flex items-center justify-center bg-[#E1EFEB] text-[#1D91A1] py-3 rounded-full font-medium hover:bg-[#D1E6E4] transition-colors"
+                className="w-full inline-flex items-center justify-center bg-[#E1EFEB]/70 backdrop-blur-md text-[#1D91A1] py-3 rounded-full font-medium hover:bg-[#D1E6E4] border border-white/40 transition-all"
               >
                 Get in touch
               </a>

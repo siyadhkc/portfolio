@@ -79,12 +79,20 @@ export const Hero = () => {
         >
           <motion.button
             onClick={() => scrollTo('projects')}
-            whileHover={{ y: -2 }}
+            whileHover={{ y: -2, backgroundColor: "rgba(10, 14, 23, 0.95)" }}
             whileTap={{ scale: 0.97 }}
-            className="group flex items-center gap-4 bg-[#0A0E17] hover:bg-black transition-all text-white px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_15px_40px_rgba(0,0,0,0.15)] ring-1 ring-white/10 w-full sm:w-auto justify-center"
+            className="group flex items-center gap-4 bg-[#0A0E17]/90 backdrop-blur-xl hover:bg-black transition-all text-white px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/10 w-full sm:w-auto justify-center relative overflow-hidden"
           >
-            View Work 
-            <motion.div whileHover={{ x: 5 }} className="transition-transform">
+            {/* Shimmer Effect */}
+            <motion.div
+              animate={{ x: ["-100%", "200%"] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
+            />
+            
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <span className="relative z-10">View Work</span>
+            <motion.div whileHover={{ x: 5 }} className="transition-transform relative z-10">
               <ArrowRight className="w-4 h-4" />
             </motion.div>
           </motion.button>
@@ -93,9 +101,9 @@ export const Hero = () => {
             href="https://github.com/siyadhkc"
             target="_blank"
             rel="noreferrer"
-            whileHover={{ y: -2 }}
+            whileHover={{ y: -2, backgroundColor: "rgba(255, 255, 255, 0.8)" }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-4 bg-white/50 backdrop-blur-md hover:bg-white transition-all text-[#131313] px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-sm border border-black/[0.04] w-full sm:w-auto justify-center"
+            className="flex items-center gap-4 bg-white/40 backdrop-blur-xl hover:bg-white/60 transition-all text-[#131313] px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-white/40 w-full sm:w-auto justify-center"
           >
             <Github className="w-4 h-4" /> GitHub
           </motion.a>

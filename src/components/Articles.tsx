@@ -84,8 +84,14 @@ const ArticleCard = ({
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: '-40px' }}
     transition={{ duration: 0.55, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-    className="group block border-b border-black/[0.06] py-12 cursor-pointer"
+    className="group block border-b border-black/[0.06] py-12 cursor-pointer relative overflow-hidden"
   >
+    {/* Glass Hover Highlight */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileHover={{ opacity: 1 }}
+      className="absolute inset-0 bg-white/40 backdrop-blur-sm -z-10 transition-opacity duration-300"
+    />
     {/* Row: image + content */}
     <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
 
