@@ -1,11 +1,17 @@
 import React from 'react';
 import { ArrowRight, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLenis } from 'lenis/react';
 
 export const Hero = () => {
+  const lenis = useLenis();
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el && lenis) {
+      lenis.scrollTo(el, { offset: -120, duration: 1.5 });
+    } else if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (

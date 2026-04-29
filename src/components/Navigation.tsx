@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Download, X, Github, Linkedin, Twitter, BookOpen, Briefcase } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLenis } from 'lenis/react';
 import resumeFile from '../assets/Siyadhkc_Resume.pdf';
+import { setScrollTarget } from '../lib/scrollTarget';
 
 export const Navigation = () => {
   const { scrollY } = useScroll();
@@ -19,9 +21,16 @@ export const Navigation = () => {
   const Logo = () => (
     <Link
       to="/"
-      onClick={() => {
+      onClick={(e) => {
         setIsLogoSpinning(true);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (location.pathname === '/') {
+          e.preventDefault();
+          if (lenis) {
+            lenis.scrollTo(0, { duration: 1.2 });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }
       }}
       className="group relative flex items-center gap-3 px-4 py-2 rounded-full transition-all duration-500"
     >
@@ -132,27 +141,26 @@ export const Navigation = () => {
     return () => observer.disconnect();
   }, [location.pathname]);
 
+  const lenis = useLenis();
+
   const handleNavClick = (id: string) => {
     setIsMenuOpen(false);
     if (location.pathname !== '/') {
-      navigate(`/#${id}`);
+      // Set target BEFORE navigate so ScrollToTop skips the reset
+      setScrollTarget(id);
+      navigate('/');
       return;
     }
+    // Already on home — just smooth scroll to section
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      if (lenis) {
+        lenis.scrollTo(el, { offset: -120, duration: 1, immediate: false });
+      } else {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
-
-  useEffect(() => {
-    if (location.hash && location.pathname === '/') {
-      const id = location.hash.replace('#', '');
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
-  }, [location]);
 
   const menuItems = [
     { label: 'Projects', id: 'projects', type: 'scroll', icon: <Briefcase className="w-5 h-5 sm:w-4 sm:h-4" /> },

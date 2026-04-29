@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Database, ShieldCheck, Lock, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { projects } from '../lib/projects';
 
 interface StackCellProps {
   label: string;
@@ -10,12 +12,12 @@ interface StackCellProps {
 }
 
 interface FeatureCardProps {
+  id: string;
   title: string;
   subtitle: string;
   variant: string;
   children?: React.ReactNode;
   tags: string[];
-  link: string;
   className?: string;
 }
 
@@ -34,47 +36,45 @@ const StackCell = ({ label, value, index, borderClasses }: StackCellProps) => (
   </motion.div>
 );
 
-const FeatureCard = ({ title, subtitle, variant, children, tags, link, className }: FeatureCardProps) => {
+const FeatureCard = ({ id, title, subtitle, variant, children, tags, className }: FeatureCardProps) => {
   return (
-    <motion.a
-      href={link}
-      target="_blank"
-      rel="noreferrer"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      whileTap={{ scale: 0.99 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      aria-label={`View project: ${title}`}
-      className={`group rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 relative overflow-hidden flex flex-col h-auto sm:h-[320px] md:h-[480px] min-h-[240px] shadow-sm hover:shadow-md transition-shadow duration-500 border border-black/[0.03] cursor-pointer 
-        ${variant === 'teal' ? 'bg-gradient-to-br from-[#E1EFEB] to-[#CBDFDA]' :
-          variant === 'indigo' ? 'bg-gradient-to-br from-[#E9E9FC] to-[#D5D5F2]' :
-            variant === 'sand' ? 'bg-gradient-to-br from-[#F7F3E9] to-[#EBE4D5]' :
-              variant === 'coral' ? 'bg-gradient-to-br from-[#FCF9F7] to-[#F7EBE8]' :
-                'bg-[#EFEEE7]'} ${className}`}
-    >
-      <div className="flex justify-between items-start z-20 shrink-0 mb-4 sm:mb-0">
-        <h3 className="font-serif text-[28px] md:text-[32px] text-[#1A1A1A] tracking-tight group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
-        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:bg-[#1D91A1] group-hover:text-white group-hover:border-[#1D91A1] transition-all duration-500">
-          <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+    <Link to={`/projects/${id}`} className="block w-full">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        whileTap={{ scale: 0.99 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className={`group rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 relative overflow-hidden flex flex-col h-auto sm:h-[320px] md:h-[480px] min-h-[240px] shadow-sm hover:shadow-md transition-shadow duration-500 border border-black/[0.03] cursor-pointer 
+          ${variant === 'teal' ? 'bg-gradient-to-br from-[#E1EFEB] to-[#CBDFDA]' :
+            variant === 'indigo' ? 'bg-gradient-to-br from-[#E9E9FC] to-[#D5D5F2]' :
+              variant === 'sand' ? 'bg-gradient-to-br from-[#F7F3E9] to-[#EBE4D5]' :
+                variant === 'coral' ? 'bg-gradient-to-br from-[#FCF9F7] to-[#F7EBE8]' :
+                  'bg-[#EFEEE7]'} ${className}`}
+      >
+        <div className="flex justify-between items-start z-20 shrink-0 mb-4 sm:mb-0">
+          <h3 className="font-serif text-[28px] md:text-[32px] text-[#1A1A1A] tracking-tight group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:bg-[#1D91A1] group-hover:text-white group-hover:border-[#1D91A1] transition-all duration-500">
+            <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </div>
         </div>
-      </div>
 
-      <div className="flex-1 w-full relative z-0 min-h-[180px] sm:min-h-0">
-        {children}
-      </div>
-
-      <div className="relative sm:absolute sm:inset-x-6 md:inset-x-8 sm:bottom-6 md:bottom-8 bg-[#FDFDFC]/80 backdrop-blur-xl p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] z-20 border border-white/50 shadow-sm transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex flex-col gap-4 mt-auto sm:mt-0">
-        <p className="text-[#3E4240] text-sm md:text-[16px] font-medium leading-relaxed opacity-90">{subtitle}</p>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag: string) => (
-            <span key={tag} className="font-mono text-[9px] md:text-[10px] text-[#8A8A85] bg-black/[0.03] border border-black/[0.05] px-2.5 py-1 rounded-full tracking-widest uppercase">
-              {tag}
-            </span>
-          ))}
+        <div className="flex-1 w-full relative z-0 min-h-[180px] sm:min-h-0">
+          {children}
         </div>
-      </div>
-    </motion.a>
+
+        <div className="relative sm:absolute sm:inset-x-6 md:inset-x-8 sm:bottom-6 md:bottom-8 bg-[#FDFDFC]/80 backdrop-blur-xl p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] z-20 border border-white/50 shadow-sm transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex flex-col gap-4 mt-auto sm:mt-0">
+          <p className="text-[#3E4240] text-sm md:text-[16px] font-medium leading-relaxed opacity-90">{subtitle}</p>
+          <div className="flex flex-wrap gap-2">
+            {tags.map((tag: string) => (
+              <span key={tag} className="font-mono text-[9px] md:text-[10px] text-[#8A8A85] bg-black/[0.03] border border-black/[0.05] px-2.5 py-1 rounded-full tracking-widest uppercase">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </Link>
   );
 };
 
@@ -119,11 +119,11 @@ export const Features = () => {
 
           {/* Card 1: MockAPI Pro */}
           <FeatureCard
-            title="MockAPI Pro"
-            subtitle="Self-hostable mock API server with team workspaces, rule engine, and OpenAPI import."
-            tags={['Django', 'React', 'Docker']}
-            variant="teal"
-            link="https://github.com/siyadhkc"
+            id="mockapi-pro"
+            title={projects[0].title}
+            subtitle={projects[0].subtitle}
+            tags={projects[0].tags}
+            variant={projects[0].variant}
           >
             {/* Mockup for Dashboard/API */}
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center pl-6 pr-6 md:pl-10 sm:-mt-24">
@@ -145,11 +145,11 @@ export const Features = () => {
 
           {/* Card 2: VulnAPI */}
           <FeatureCard
-            title="VulnAPI"
-            subtitle="Python-native REST API DAST scanner covering OWASP API Top 10 with interactive report."
-            tags={['Django', 'React', 'OWASP']}
-            variant="coral"
-            link="https://github.com/siyadhkc"
+            id="vulnapi"
+            title={projects[1].title}
+            subtitle={projects[1].subtitle}
+            tags={projects[1].tags}
+            variant={projects[1].variant}
           >
             {/* Mockup for Scanner */}
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center sm:-mt-24">
@@ -172,11 +172,11 @@ export const Features = () => {
 
           {/* Card 3: django-secure */}
           <FeatureCard
-            title="django-secure"
-            subtitle="Drop-in DRF security hardening package for passive protection and audit logging."
-            tags={['Django', 'DRF', 'Security']}
-            variant="sand"
-            link="https://github.com/siyadhkc"
+            id="django-secure"
+            title={projects[2].title}
+            subtitle={projects[2].subtitle}
+            tags={projects[2].tags}
+            variant={projects[2].variant}
             className="md:col-span-2 md:h-[350px]"
           >
             {/* Horizontal Mockup */}

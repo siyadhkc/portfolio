@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin } from 'lucide-react';
+import { useLenis } from 'lenis/react';
 
 export const FooterCTA = () => {
+  const lenis = useLenis();
   return (
     <div id="contact" className="w-full bg-[#F7F7F2] pb-6 pt-6 md:pt-10 px-2 sm:px-4 md:px-8 relative rounded-b-3xl md:rounded-b-[4rem]">
 
@@ -210,7 +212,12 @@ export const FooterCTA = () => {
         <div className="flex items-center gap-10 text-[#8A8A85] font-mono text-[10px] tracking-[0.4em] uppercase">
           <span className="text-[#5B5F5D]/60 tracking-[0.2em]">Kerala, India</span>
           <span className="hidden md:block w-px h-3 bg-black/10"></span>
-          <a href="#" className="hover:text-[#1D91A1] transition-all hover:-translate-y-0.5">Back to top ↑</a>
+          <button
+            onClick={() => lenis?.scrollTo(0, { duration: 1.5 })}
+            className="hover:text-[#1D91A1] transition-all hover:-translate-y-0.5"
+          >
+            Back to top ↑
+          </button>
         </div>
       </footer>
     </div>

@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Articles } from '../components/Articles';
 
 const ArticlesPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <>
       <Helmet>
@@ -44,14 +41,21 @@ const ArticlesPage = () => {
           </div>
 
           <div className="flex items-center gap-7">
+            <Link
+              to="/"
+              className="font-mono text-[9px] tracking-[0.2em] text-[#ABABAB] hover:text-[#1A1A1A] uppercase transition-colors duration-200"
+            >
+              Home
+            </Link>
             {[
-              { label: 'Home', href: '/' },
               { label: 'GitHub', href: 'https://github.com/siyadhkc' },
               { label: 'LinkedIn', href: 'https://linkedin.com/in/siyadhkc' },
             ].map((link) => (
               <a
                 key={link.label}
                 href={link.href}
+                target="_blank"
+                rel="noreferrer"
                 className="font-mono text-[9px] tracking-[0.2em] text-[#ABABAB] hover:text-[#1A1A1A] uppercase transition-colors duration-200"
               >
                 {link.label}
