@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Database, ShieldCheck, Lock, Activity, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { projects } from '../lib/projects';
+import { saveScroll, saveSection } from '../lib/scrollState';
 
 // ── Variant → className lookup — O(1), never recreated ───────────────────────
 const VARIANT_CLASS: Record<string, string> = {
@@ -59,8 +60,18 @@ interface FeatureCardProps {
   className?: string;
 }
 
-const FeatureCard = memo(({ id, title, subtitle, variant, children, tags, className }: FeatureCardProps) => (
-  <Link to={`/projects/${id}`} className="block w-full">
+const FeatureCard = memo(({ id, title, subtitle, variant, children, tags, className }: FeatureCardProps) => {
+  const handleProjectClick = () => {
+    saveScroll();
+    saveSection("projects");
+  };
+
+  return (
+    <Link
+      to={`/projects/${id}`}
+      onClick={handleProjectClick}
+      className="block w-full"
+    >
     <motion.div
       {...cardMotion}
       whileTap={{ scale: 0.99 }}
@@ -88,8 +99,9 @@ const FeatureCard = memo(({ id, title, subtitle, variant, children, tags, classN
         </div>
       </div>
     </motion.div>
-  </Link>
-));
+    </Link>
+  );
+});
 FeatureCard.displayName = 'FeatureCard';
 
 // ── Features page component ───────────────────────────────────────────────────

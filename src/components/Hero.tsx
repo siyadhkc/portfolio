@@ -1,20 +1,16 @@
-import { useCallback } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Github } from 'lucide-react';
-import { useLenis } from 'lenis/react';
 
 export const Hero = () => {
-  const lenis = useLenis();
-
-  // Stable callback — only recreated if lenis instance changes
-  const scrollTo = useCallback(
-    (id: string) => {
-      const el = document.getElementById(id);
-      if (el && lenis) lenis.scrollTo(el, { offset: -120, duration: 1.5 });
-      else if (el) el.scrollIntoView({ behavior: 'smooth' });
-    },
-    [lenis],
-  );
+  // Stable callback
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  };
 
   return (
     <div id="hero" role="banner" aria-label="Hero Section" className="relative pt-[140px] pb-24 lg:pt-[180px] lg:pb-32 overflow-hidden flex flex-col items-center min-h-[90vh]">
@@ -49,7 +45,7 @@ export const Hero = () => {
           transition={{ duration: 0.6 }}
           className="font-mono text-[11px] md:text-[13px] tracking-[0.3em] text-[#8A8A85] uppercase mb-6"
         >
-          Full-Stack Developer | Web &amp; API Security Specialist
+          Full-Stack Developer | Web & API Security Specialist
         </motion.p>
 
         <motion.h1

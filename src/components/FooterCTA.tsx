@@ -1,7 +1,7 @@
 import React, { memo, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin } from 'lucide-react';
-import { useLenis } from 'lenis/react';
+
 
 // ── Copy Button — isolated state so toast never re-renders the whole footer ──
 const CopyButton = memo(() => {
@@ -33,11 +33,11 @@ const CopyButton = memo(() => {
 CopyButton.displayName = 'CopyButton';
 
 export const FooterCTA = () => {
-  const lenis = useLenis();
+
 
   const scrollToTop = useCallback(() => {
-    lenis?.scrollTo(0, { duration: 1.5 });
-  }, [lenis]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <div id="contact" className="w-full bg-[#F7F7F2] pb-6 pt-6 md:pt-10 px-2 sm:px-4 md:px-8 relative rounded-b-3xl md:rounded-b-[4rem]">

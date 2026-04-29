@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { Mail, Download, X, Github, Linkedin, Twitter, BookOpen, Briefcase } from 'lucide-react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, AnimatePresence, useTransform } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useLenis } from 'lenis/react';
+
 import resumeFile from '../assets/Siyadhkc_Resume.pdf';
-import { setScrollTarget } from '../lib/scrollTarget';
+import { saveSection } from '../lib/scrollState';
 
 // ── Static data — defined outside component so they are never recreated ──────
 const CONTACT_LINKS = [
@@ -24,18 +24,16 @@ interface LogoProps {
   isSpinning: boolean;
   onSpin: () => void;
   pathname: string;
-  lenis: ReturnType<typeof useLenis>;
 }
 
-const Logo = memo(({ isSpinning, onSpin, pathname, lenis }: LogoProps) => (
+const Logo = memo(({ isSpinning, onSpin, pathname }: LogoProps) => (
   <Link
     to="/"
     onClick={(e) => {
       onSpin();
       if (pathname === '/') {
         e.preventDefault();
-        if (lenis) lenis.scrollTo(0, { duration: 1.2 });
-        else window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }}
     className="group relative flex items-center gap-3 px-4 py-2 rounded-full transition-all duration-500"
@@ -90,7 +88,7 @@ export const Navigation = () => {
   const { scrollY } = useScroll();
   const location = useLocation();
   const navigate = useNavigate();
-  const lenis = useLenis();
+
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogoSpinning, setIsLogoSpinning] = useState(false);
@@ -109,17 +107,17 @@ export const Navigation = () => {
     (id: string) => {
       setIsMenuOpen(false);
       if (location.pathname !== '/') {
-        setScrollTarget(id);
+        saveSection(id);
         navigate('/');
         return;
       }
       const el = document.getElementById(id);
       if (el) {
-        if (lenis) lenis.scrollTo(el, { offset: -120, duration: 1, immediate: false });
-        else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const top = el.getBoundingClientRect().top + window.scrollY - 120;
+        window.scrollTo({ top, behavior: 'smooth' });
       }
     },
-    [location.pathname, lenis, navigate],
+    [location.pathname, navigate],
   );
 
   // Outside-click handler
@@ -192,7 +190,6 @@ export const Navigation = () => {
             isSpinning={isLogoSpinning}
             onSpin={handleLogoSpin}
             pathname={location.pathname}
-            lenis={lenis}
           />
         </div>
 

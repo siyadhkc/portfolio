@@ -3,6 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./styles.css";
 
+if (typeof window !== 'undefined') {
+  window.history.scrollRestoration = 'manual';
+}
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <App />

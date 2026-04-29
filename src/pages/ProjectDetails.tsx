@@ -1,10 +1,10 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Github, ExternalLink, ShieldCheck, Database, Lock, Code, Layers, Zap, Activity } from 'lucide-react';
 import { projects } from '../lib/projects';
 import { Helmet } from 'react-helmet-async';
-import { setScrollTarget } from '../lib/scrollTarget';
+import { saveSection } from '../lib/scrollState';
 
 // ── Module-level constants — never recreated on re-render ─────────────────────
 
@@ -37,12 +37,22 @@ const featureMotion = (i: number) => ({
 const ProjectDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const project = projects.find((p) => p.id === id);
 
+  // UI "Back to projects" button.
+  // If the user navigated here from Home, navigate(-1) goes back and
+  // ScrollController in App.tsx will restore the saved scroll position.
+  // If the user landed directly via URL (no history), navigate('/') pushes
+  // home and ScrollController scrolls to the projects section.
   const handleBackClick = React.useCallback(() => {
-    setScrollTarget('projects');
-    navigate('/');
-  }, [navigate]);
+    if (location.key !== 'default') {
+      navigate(-1);
+    } else {
+      saveSection('projects');
+      navigate('/');
+    }
+  }, [navigate, location.key]);
 
   if (!project) {
     return (

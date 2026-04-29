@@ -1,12 +1,10 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import { ReactLenis } from 'lenis/react'
-import 'lenis/dist/lenis.css'
 import { HelmetProvider } from 'react-helmet-async'
 import { Navigation } from './components/Navigation'
 import PageTransition from './components/PageTransition'
-import ScrollToTop from './components/ScrollToTop'
 import { AnimatePresence } from 'framer-motion'
+// import { getSection } from './lib/scrollState'
 
 const Home = lazy(() => import('./pages/Home'))
 const ArticlesPage = lazy(() => import('./pages/ArticlesPage'))
@@ -17,6 +15,24 @@ const PageLoader = () => (
     <div className="w-8 h-8 border-2 border-[#1D91A1]/20 border-t-[#1D91A1] rounded-full animate-spin" />
   </div>
 )
+
+/**
+ * ScrollToTop - Resets scroll to top for non-Home pages.
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    // If we are going to Home, let Home's internal logic handle restoration
+    if (pathname === '/') return
+
+    // Standard native reset for other pages (Articles, Details)
+    // This ensures we start at the top even if we saved a section for Home restoration later.
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
 
 function AppContent() {
   const location = useLocation()
@@ -66,17 +82,9 @@ function AppContent() {
 function App() {
   return (
     <HelmetProvider>
-      <ReactLenis root options={{
-        lerp: 0.1,
-        duration: 1.2,
-        smoothWheel: true,
-        touchMultiplier: 1.8,
-        infinite: false,
-      }}>
-        <Router>
-          <AppContent />
-        </Router>
-      </ReactLenis>
+      <Router>
+        <AppContent />
+      </Router>
     </HelmetProvider>
   )
 }
