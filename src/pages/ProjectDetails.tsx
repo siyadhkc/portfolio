@@ -6,47 +6,56 @@ import { projects } from '../lib/projects';
 import { Helmet } from 'react-helmet-async';
 import { setScrollTarget } from '../lib/scrollTarget';
 
+// ── Module-level constants — never recreated on re-render ─────────────────────
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  'mockapi-pro':  <Database className="w-12 h-12" />,
+  'vulnapi':      <ShieldCheck className="w-12 h-12" />,
+  'django-secure': <Lock className="w-12 h-12" />,
+  'sentinel-api': <Activity className="w-12 h-12" />,
+};
+
+const VARIANT_STYLES: Record<string, string> = {
+  teal:   'from-[#E1EFEB] to-[#CBDFDA] text-[#1D91A1]',
+  coral:  'from-[#FCF9F7] to-[#F7EBE8] text-[#FF5F56]',
+  sand:   'from-[#F7F3E9] to-[#EBE4D5] text-[#2B302F]',
+  indigo: 'from-[#E9E9FC] to-[#D5D5F2] text-[#6366F1]',
+  blue:   'from-[#E0F2FE] to-[#BAE6FD] text-[#007AFF]',
+};
+
+const DEFAULT_VARIANT = 'from-[#EFEEE7] to-[#DFDED7] text-[#131313]';
+
+// ── Feature card motion — defined outside so it's never recreated ─────────────
+const featureMotion = (i: number) => ({
+  initial: { opacity: 0, y: 10 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true } as const,
+  transition: { delay: i * 0.1 },
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 const ProjectDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const project = projects.find((p) => p.id === id);
 
-  const handleBackClick = () => {
+  const handleBackClick = React.useCallback(() => {
     setScrollTarget('projects');
     navigate('/');
-  };
+  }, [navigate]);
 
   if (!project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#F7F7F2] px-6">
         <h1 className="text-4xl font-serif mb-4">Project Not Found</h1>
-        <button
-          onClick={handleBackClick}
-          className="text-[#1D91A1] hover:underline flex items-center gap-2"
-        >
+        <button onClick={handleBackClick} className="text-[#1D91A1] hover:underline flex items-center gap-2">
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </button>
       </div>
     );
   }
 
-  const iconMap = {
-    'mockapi-pro': <Database className="w-12 h-12" />,
-    'vulnapi': <ShieldCheck className="w-12 h-12" />,
-    'django-secure': <Lock className="w-12 h-12" />,
-    'sentinel-api': <Activity className="w-12 h-12" />,
-  };
-
-  const getVariantStyles = (variant: string) => {
-    switch (variant) {
-      case 'teal': return 'from-[#E1EFEB] to-[#CBDFDA] text-[#1D91A1]';
-      case 'coral': return 'from-[#FCF9F7] to-[#F7EBE8] text-[#FF5F56]';
-      case 'sand': return 'from-[#F7F3E9] to-[#EBE4D5] text-[#2B302F]';
-      case 'indigo': return 'from-[#E9E9FC] to-[#D5D5F2] text-[#6366F1]';
-      case 'blue': return 'from-[#E0F2FE] to-[#BAE6FD] text-[#007AFF]';
-      default: return 'from-[#EFEEE7] to-[#DFDED7] text-[#131313]';
-    }
-  };
+  const variantStyle = VARIANT_STYLES[project.variant] ?? DEFAULT_VARIANT;
 
   return (
     <>
@@ -57,10 +66,10 @@ const ProjectDetails = () => {
 
       <main className="min-h-screen bg-[#F7F7F2] pb-16 md:pb-24">
         {/* Hero Section */}
-        <div className={`w-full bg-gradient-to-br ${getVariantStyles(project.variant)} pt-28 sm:pt-32 md:pt-36 pb-14 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-12 relative overflow-hidden`}>
+        <div className={`w-full bg-gradient-to-br ${variantStyle} pt-28 sm:pt-32 md:pt-36 pb-14 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-12 relative overflow-hidden`}>
           <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 sm:translate-x-1/4 opacity-10 pointer-events-none">
             <div className="scale-[2.8] sm:scale-[3.5] md:scale-[5]">
-              {iconMap[project.id as keyof typeof iconMap] || <Code className="w-12 h-12" />}
+              {ICON_MAP[project.id] ?? <Code className="w-12 h-12" />}
             </div>
           </div>
 
@@ -132,9 +141,7 @@ const ProjectDetails = () => {
               <h2 className="font-serif text-[1.75rem] sm:text-3xl mb-5 sm:mb-6 flex items-center gap-3 leading-tight">
                 <Layers className="w-5 h-5 sm:w-6 sm:h-6 text-[#1D91A1] shrink-0" /> Project Overview
               </h2>
-              <p className="text-[#5B5F5D] text-base sm:text-lg leading-relaxed mb-8">
-                {project.description}
-              </p>
+              <p className="text-[#5B5F5D] text-base sm:text-lg leading-relaxed mb-8">{project.description}</p>
             </section>
 
             <section>
@@ -145,10 +152,7 @@ const ProjectDetails = () => {
                 {project.features.map((feature, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
+                    {...featureMotion(i)}
                     className="p-5 sm:p-6 bg-white rounded-2xl border border-black/[0.03] shadow-sm hover:shadow-md transition-shadow"
                   >
                     <p className="text-[#3E4240] font-medium leading-relaxed">{feature}</p>

@@ -52,3 +52,20 @@ html {
 .dark ::-webkit-scrollbar-thumb {
   @apply bg-white/20;
 }
+
+/* Hero button shimmer — CSS animation runs on compositor thread (no JS loop) */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(300%) skewX(-12deg); }
+}
+
+.shimmer-sweep {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  animation: shimmer-sweep 3s ease-in-out infinite;
+  animation-delay: 1s;
+}

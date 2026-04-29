@@ -1,86 +1,103 @@
-import React from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin } from 'lucide-react';
 import { useLenis } from 'lenis/react';
 
+// ── Copy Button — isolated state so toast never re-renders the whole footer ──
+const CopyButton = memo(() => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText('siyadhkc@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, []);
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="absolute top-6 right-6 text-[#8A8A85] hover:text-[#1D91A1] transition-colors p-2"
+      title="Copy to clipboard"
+    >
+      {copied && (
+        <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#1D91A1] text-white text-[10px] px-2 py-1 rounded whitespace-nowrap pointer-events-none text-center min-w-[80px]">
+          Email copied!
+        </span>
+      )}
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+      </svg>
+    </button>
+  );
+});
+CopyButton.displayName = 'CopyButton';
+
 export const FooterCTA = () => {
   const lenis = useLenis();
+
+  const scrollToTop = useCallback(() => {
+    lenis?.scrollTo(0, { duration: 1.5 });
+  }, [lenis]);
+
   return (
     <div id="contact" className="w-full bg-[#F7F7F2] pb-6 pt-6 md:pt-10 px-2 sm:px-4 md:px-8 relative rounded-b-3xl md:rounded-b-[4rem]">
 
       {/* The main cinematic dark container */}
       <div className="relative w-full rounded-2xl md:rounded-[3rem] overflow-hidden bg-[#0A0D14] py-16 md:py-32 flex flex-col items-center justify-center shadow-[0_30px_100px_rgba(0,0,0,0.5)] border border-white/10">
 
-        {/* Modern Pixel Grain Dreamy Space Background */}
+        {/* Space Background */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#02040A]">
+          <div className="absolute inset-0 bg-[#02040A]" />
 
-          {/* Base Minimal Deep Void */}
-          <div className="absolute inset-0 bg-[#02040A]"></div>
-
-          {/* Dreamy Aurora / Nebula Gradients - WIDE SPREAD & LOW LIGHT */}
-          {/* Teal Aurora Band */}
+          {/* Aurora bands — only animate while in viewport */}
           <motion.div
-            animate={{
-              opacity: [0.2, 0.4, 0.2],
-              rotate: [-3, 3, -3],
-              y: ["-5%", "5%", "-5%"]
-            }}
-            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ opacity: [0.2, 0.4, 0.2], rotate: [-3, 3, -3], y: ['-5%', '5%', '-5%'] }}
+            transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
+            viewport={{ once: false, amount: 0.1 }}
             className="absolute top-[-10%] left-[-20%] w-[140%] h-[70%] bg-[radial-gradient(ellipse_at_center,_rgba(29,145,161,0.2)_0%,_rgba(29,145,161,0.05)_40%,_transparent_80%)] z-0"
             style={{ willChange: 'transform, opacity' }}
           />
-
-          {/* Copper Aurora Band */}
           <motion.div
-            animate={{
-              opacity: [0.15, 0.35, 0.15],
-              rotate: [3, -3, 3],
-              x: ["5%", "-5%", "5%"]
-            }}
-            transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ opacity: [0.15, 0.35, 0.15], rotate: [3, -3, 3], x: ['5%', '-5%', '5%'] }}
+            transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
+            viewport={{ once: false, amount: 0.1 }}
             className="absolute bottom-[-10%] right-[-20%] w-[150%] h-[80%] bg-[radial-gradient(ellipse_at_center,_rgba(229,122,68,0.15)_0%,_rgba(229,122,68,0.05)_40%,_transparent_80%)] z-0"
             style={{ willChange: 'transform, opacity' }}
           />
-
-          {/* Deep Purple Core Sweep */}
           <motion.div
             animate={{ opacity: [0.1, 0.3, 0.1], scaleY: [1, 1.2, 1] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+            viewport={{ once: false, amount: 0.1 }}
             className="absolute top-[10%] left-[10%] w-[80%] h-[120%] bg-[radial-gradient(ellipse_at_center,_rgba(124,77,255,0.15)_0%,_rgba(124,77,255,0.05)_40%,_transparent_70%)] z-0"
             style={{ willChange: 'transform, opacity' }}
           />
 
-          {/* Abstract Starfield (More prominent) */}
+          {/* Starfield */}
           <motion.div
-            animate={{ y: ["0%", "-30%"] }}
-            transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
+            animate={{ y: ['0%', '-30%'] }}
+            transition={{ duration: 180, repeat: Infinity, ease: 'linear' }}
             className="absolute top-0 left-0 w-full h-[200%] z-0 opacity-80"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='50' r='1.5' fill='%23ffffff' opacity='0.3'/%3E%3Ccircle cx='180' cy='120' r='1' fill='%23ffffff' opacity='0.4'/%3E%3Ccircle cx='320' cy='80' r='2' fill='%23ffffff' opacity='0.3'/%3E%3Ccircle cx='100' cy='250' r='1.5' fill='%231D91A1' opacity='0.5'/%3E%3Ccircle cx='250' cy='320' r='1' fill='%23ffffff' opacity='0.3'/%3E%3Ccircle cx='50' cy='380' r='2' fill='%23E57A44' opacity='0.4'/%3E%3C/svg%3E")`,
-              backgroundSize: '400px 400px'
+              backgroundSize: '400px 400px',
             }}
-          ></motion.div>
+          />
 
-          {/* Edge Fades - Pulled back so colors can shine vividly */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_60%,#02040A_100%)] z-10 pointer-events-none opacity-80"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_#02040A_100%)] z-10 pointer-events-none opacity-60"></div>
+          {/* Edge fades */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_60%,#02040A_100%)] z-10 pointer-events-none opacity-80" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_#02040A_100%)] z-10 pointer-events-none opacity-60" />
 
-          {/* Modern Noise / Pixel Grain Texture */}
-          {/* Base Grain (Soft, blended texture) */}
-          <div className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-[0.35]" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
-
-          {/* High-frequency Crisp Grain (Visible over dark zones) */}
-          <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.1]" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"1.5\" numOctaves=\"2\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
-
+          {/* Grain textures */}
+          <div className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-[0.35]" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }} />
+          <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.1]" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"1.5\" numOctaves=\"2\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }} />
         </div>
 
-        {/* Content overlapping space background */}
+        {/* Content */}
         <div className="relative z-10 w-full max-w-[800px] mx-auto px-4 sm:px-6 flex flex-col items-center">
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center text-center mb-10 md:mb-16"
           >
@@ -88,47 +105,27 @@ export const FooterCTA = () => {
             <p className="text-[#A1A1A1] font-sans text-base md:text-xl px-4 max-w-[500px] leading-relaxed">Available for architecture auditing and high-scale systems consulting.</p>
           </motion.div>
 
-          {/* Contact Layout Container */}
           <div className="w-full">
-            {/* Professional Desktop/Tablet Grid */}
+            {/* Desktop Grid */}
             <div className="hidden sm:grid grid-cols-2 gap-px bg-white/10 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-white/10">
               <div className="relative group/email">
-                <a href="mailto:siyadhkc@gmail.com"
-                  className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group h-full">
+                <a href="mailto:siyadhkc@gmail.com" className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group h-full">
                   <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover/email:border-[#1D91A1]/40 group-hover/email:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover/email:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover/email:opacity-100 transition-opacity duration-500" />
                     <Mail className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover/email:scale-110 group-hover/email:text-white transition-all duration-500" />
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Direct Email</span>
                     <span className="text-white text-lg md:text-xl font-medium tracking-tight">siyadhkc@gmail.com</span>
                   </div>
-                  <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover/email:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Available for architecture & scale consulting.</p>
+                  <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover/email:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Available for architecture &amp; scale consulting.</p>
                 </a>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText('siyadhkc@gmail.com');
-                    const toast = document.getElementById('copy-toast');
-                    if (toast) {
-                      toast.innerText = 'Email copied!';
-                      toast.classList.remove('opacity-0');
-                      setTimeout(() => toast.classList.add('opacity-0'), 2000);
-                    }
-                  }}
-                  className="absolute top-6 right-6 text-[#8A8A85] hover:text-[#1D91A1] transition-colors p-2"
-                  title="Copy to clipboard"
-                >
-                  <div id="copy-toast" className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#1D91A1] text-white text-[10px] px-2 py-1 rounded opacity-0 transition-opacity whitespace-nowrap pointer-events-none text-center min-w-[80px]"></div>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                  </svg>
-                </button>
+                <CopyButton />
               </div>
 
-              <a href="https://github.com/siyadhkc" target="_blank" rel="me noreferrer"
-                className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
+              <a href="https://github.com/siyadhkc" target="_blank" rel="me noreferrer" className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover:border-[#1D91A1]/40 group-hover:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <Github className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover:scale-110 group-hover:text-white transition-all duration-500" />
                 </div>
                 <div className="flex flex-col gap-1">
@@ -138,10 +135,9 @@ export const FooterCTA = () => {
                 <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Explore core projects and open source.</p>
               </a>
 
-              <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="me noreferrer"
-                className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
+              <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="me noreferrer" className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover:border-[#1D91A1]/40 group-hover:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <Linkedin className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover:scale-110 group-hover:text-white transition-all duration-500" />
                 </div>
                 <div className="flex flex-col gap-1">
@@ -151,10 +147,9 @@ export const FooterCTA = () => {
                 <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Connect for professional opportunities.</p>
               </a>
 
-              <a href="https://x.com/siyadhkc" target="_blank" rel="noreferrer"
-                className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
+              <a href="https://x.com/siyadhkc" target="_blank" rel="noreferrer" className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover:border-[#1D91A1]/40 group-hover:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <svg className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover:scale-110 group-hover:text-white transition-all duration-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
@@ -163,11 +158,11 @@ export const FooterCTA = () => {
                   <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Network</span>
                   <span className="text-white text-lg md:text-xl font-medium tracking-tight">@siyadhkc</span>
                 </div>
-                <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Following the latest in systems & scale.</p>
+                <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Following the latest in systems &amp; scale.</p>
               </a>
             </div>
 
-            {/* Mobile Vertical Link List (Perplexity/Comet Style) */}
+            {/* Mobile List */}
             <div className="flex flex-col items-center sm:hidden w-full gap-10 mt-4 px-4 text-center">
               <div className="flex flex-col items-center gap-6">
                 <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 mb-2">
@@ -177,45 +172,31 @@ export const FooterCTA = () => {
                 </div>
                 <p className="font-mono text-[11px] tracking-[0.2em] text-[#8A8A85] uppercase">Connect With Me</p>
               </div>
-
               <div className="flex flex-col items-start w-full gap-5 pl-10">
-                <a href="mailto:siyadhkc@gmail.com" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
-                  EMAIL <span className="text-[14px] opacity-40">↗</span>
-                </a>
-                <a href="https://github.com/siyadhkc" target="_blank" rel="me noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
-                  GITHUB <span className="text-[14px] opacity-40">↗</span>
-                </a>
-                <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="me noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
-                  LINKEDIN <span className="text-[14px] opacity-40">↗</span>
-                </a>
-                <a href="https://x.com/siyadhkc" target="_blank" rel="noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">
-                  TWITTER <span className="text-[14px] opacity-40">↗</span>
-                </a>
+                <a href="mailto:siyadhkc@gmail.com" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">EMAIL <span className="text-[14px] opacity-40">↗</span></a>
+                <a href="https://github.com/siyadhkc" target="_blank" rel="me noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">GITHUB <span className="text-[14px] opacity-40">↗</span></a>
+                <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="me noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">LINKEDIN <span className="text-[14px] opacity-40">↗</span></a>
+                <a href="https://x.com/siyadhkc" target="_blank" rel="noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">TWITTER <span className="text-[14px] opacity-40">↗</span></a>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* Mini Footer - World Class Architectural Style */}
+      {/* Mini Footer */}
       <footer className="w-full max-w-[1200px] mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-8 border-t border-[#00000008] mt-12 overflow-hidden">
         <div className="flex flex-col md:flex-row items-center gap-6 text-[#8A8A85] font-mono text-[10px] tracking-[0.4em] uppercase">
           <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#1D91A1] animate-pulse"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1D91A1] animate-pulse" />
             @2026 SIYADHKC
           </span>
-          <span className="hidden md:block w-px h-3 bg-black/10"></span>
+          <span className="hidden md:block w-px h-3 bg-black/10" />
           <span className="text-[#5B5F5D] tracking-[0.25em]">Senior Backend Architect</span>
         </div>
-
         <div className="flex items-center gap-10 text-[#8A8A85] font-mono text-[10px] tracking-[0.4em] uppercase">
           <span className="text-[#5B5F5D]/60 tracking-[0.2em]">Kerala, India</span>
-          <span className="hidden md:block w-px h-3 bg-black/10"></span>
-          <button
-            onClick={() => lenis?.scrollTo(0, { duration: 1.5 })}
-            className="hover:text-[#1D91A1] transition-all hover:-translate-y-0.5"
-          >
+          <span className="hidden md:block w-px h-3 bg-black/10" />
+          <button onClick={scrollToTop} className="hover:text-[#1D91A1] transition-all hover:-translate-y-0.5">
             Back to top ↑
           </button>
         </div>

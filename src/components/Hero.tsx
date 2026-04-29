@@ -1,35 +1,32 @@
-import React from 'react';
-import { ArrowRight, Github } from 'lucide-react';
+import { useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowRight, Github } from 'lucide-react';
 import { useLenis } from 'lenis/react';
 
 export const Hero = () => {
   const lenis = useLenis();
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el && lenis) {
-      lenis.scrollTo(el, { offset: -120, duration: 1.5 });
-    } else if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+
+  // Stable callback — only recreated if lenis instance changes
+  const scrollTo = useCallback(
+    (id: string) => {
+      const el = document.getElementById(id);
+      if (el && lenis) lenis.scrollTo(el, { offset: -120, duration: 1.5 });
+      else if (el) el.scrollIntoView({ behavior: 'smooth' });
+    },
+    [lenis],
+  );
 
   return (
     <div id="hero" role="banner" aria-label="Hero Section" className="relative pt-[140px] pb-24 lg:pt-[180px] lg:pb-32 overflow-hidden flex flex-col items-center min-h-[90vh]">
 
-      {/* Detailed Responsive Background Setup */}
+      {/* Background */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#F7F7F2]">
-        
-        {/* Teal orb - Scaled up on mobile so it doesn't become a tiny dot */}
-        <div className="absolute -top-[10%] -left-[30%] md:-top-[20%] md:-left-[10%] w-[150vw] h-[150vw] md:w-[70vw] md:h-[70vw] rounded-full bg-[#1D91A1]/10 blur-[80px] md:blur-[120px] mix-blend-multiply"></div>
-        
-        {/* Orange orb - Scaled up on mobile */}
-        <div className="absolute top-[20%] -right-[40%] md:top-[10%] md:-right-[10%] w-[120vw] h-[120vw] md:w-[60vw] md:h-[60vw] rounded-full bg-[#E57A44]/15 blur-[80px] md:blur-[120px] mix-blend-multiply"></div>
+        <div className="absolute -top-[10%] -left-[30%] md:-top-[20%] md:-left-[10%] w-[150vw] h-[150vw] md:w-[70vw] md:h-[70vw] rounded-full bg-[#1D91A1]/10 blur-[80px] md:blur-[120px] mix-blend-multiply" />
+        <div className="absolute top-[20%] -right-[40%] md:top-[10%] md:-right-[10%] w-[120vw] h-[120vw] md:w-[60vw] md:h-[60vw] rounded-full bg-[#E57A44]/15 blur-[80px] md:blur-[120px] mix-blend-multiply" />
 
-        {/* Vector lines - Responsive sizing prevents horizontal squish on narrow mobile screens */}
-        <svg 
-          className="absolute inset-0 w-[250%] sm:w-[150%] md:w-full h-full md:h-[150%] left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 opacity-40 pointer-events-none" 
-          viewBox="0 0 100 100" 
+        <svg
+          className="absolute inset-0 w-[250%] sm:w-[150%] md:w-full h-full md:h-[150%] left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 opacity-40 pointer-events-none"
+          viewBox="0 0 100 100"
           preserveAspectRatio="none"
         >
           <path d="M-50,60 Q50,40 150,80" fill="none" stroke="#2B302F" strokeWidth="0.05" />
@@ -38,7 +35,10 @@ export const Hero = () => {
         </svg>
 
         {/* Noise overlay */}
-        <div className="absolute inset-0 opacity-[0.35] mix-blend-color-burn pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
+        <div
+          className="absolute inset-0 opacity-[0.35] mix-blend-color-burn pointer-events-none"
+          style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}
+        />
       </div>
 
       {/* Content */}
@@ -49,7 +49,7 @@ export const Hero = () => {
           transition={{ duration: 0.6 }}
           className="font-mono text-[11px] md:text-[13px] tracking-[0.3em] text-[#8A8A85] uppercase mb-6"
         >
-          Full-Stack Developer | Web & API Security Specialist
+          Full-Stack Developer | Web &amp; API Security Specialist
         </motion.p>
 
         <motion.h1
@@ -79,18 +79,13 @@ export const Hero = () => {
         >
           <motion.button
             onClick={() => scrollTo('projects')}
-            whileHover={{ y: -2, backgroundColor: "rgba(10, 14, 23, 0.95)" }}
+            whileHover={{ y: -2, backgroundColor: 'rgba(10,14,23,0.95)' }}
             whileTap={{ scale: 0.97 }}
             className="group flex items-center gap-4 bg-[#0A0E17]/90 backdrop-blur-xl hover:bg-black transition-all text-white px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/10 w-full sm:w-auto justify-center relative overflow-hidden"
           >
-            {/* Shimmer Effect */}
-            <motion.div
-              animate={{ x: ["-100%", "200%"] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
-            />
-            
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            {/* CSS shimmer — runs on compositor thread, no JS repeat loop */}
+            <span className="absolute inset-0 shimmer-sweep pointer-events-none" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <span className="relative z-10">View Work</span>
             <motion.div whileHover={{ x: 5 }} className="transition-transform relative z-10">
               <ArrowRight className="w-4 h-4" />
@@ -101,7 +96,7 @@ export const Hero = () => {
             href="https://github.com/siyadhkc"
             target="_blank"
             rel="noreferrer"
-            whileHover={{ y: -2, backgroundColor: "rgba(255, 255, 255, 0.8)" }}
+            whileHover={{ y: -2, backgroundColor: 'rgba(255,255,255,0.8)' }}
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-4 bg-white/40 backdrop-blur-xl hover:bg-white/60 transition-all text-[#131313] px-8 sm:px-10 py-4 rounded-full font-sans text-[15px] sm:text-[16px] font-medium shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-white/40 w-full sm:w-auto justify-center"
           >
