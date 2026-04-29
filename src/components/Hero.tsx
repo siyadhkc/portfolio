@@ -13,7 +13,7 @@ export const Hero = () => {
   };
 
   return (
-    <div id="hero" role="banner" aria-label="Hero Section" className="relative pt-[140px] pb-24 lg:pt-[180px] lg:pb-32 overflow-hidden flex flex-col items-center min-h-[90vh]">
+    <div id="hero" role="banner" aria-label="Hero Section" className="relative pt-[110px] pb-16 lg:pt-[140px] lg:pb-20 overflow-hidden flex flex-col items-center min-h-[75vh]">
 
       {/* Background */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#F7F7F2]">
@@ -38,12 +38,12 @@ export const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[900px] mx-auto px-6 text-center flex flex-col items-center mt-10 md:mt-20">
+      <div className="relative z-10 w-full max-w-[900px] mx-auto px-6 text-center flex flex-col items-center mt-6 md:mt-10">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="font-mono text-[11px] md:text-[13px] tracking-[0.3em] text-[#8A8A85] uppercase mb-6"
+          className="font-mono text-[11px] md:text-[13px] tracking-[0.3em] text-[#8A8A85] uppercase mb-4"
         >
           Full-Stack Developer | Web & API Security Specialist
         </motion.p>
@@ -52,7 +52,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-serif text-[3.5rem] sm:text-[4.5rem] md:text-[6.5rem] lg:text-[7.5rem] tracking-tight leading-[0.9] text-[#131313] mb-8"
+          className="font-serif text-[2.8rem] sm:text-[3.8rem] md:text-[5.5rem] lg:text-[6.2rem] tracking-tight leading-[0.9] text-[#131313] mb-6"
         >
           siyadhkc<br />
           <span className="italic font-light opacity-60">Architecting scale.</span>
@@ -62,7 +62,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[#5B5F5D] font-sans text-base sm:text-lg md:text-[22px] mb-12 md:mb-16 max-w-[700px] leading-relaxed mx-auto text-balance px-4 opacity-80"
+          className="text-[#5B5F5D] font-sans text-base sm:text-lg md:text-[22px] mb-10 md:mb-12 max-w-[700px] leading-relaxed mx-auto text-balance px-4 opacity-80"
         >
           Building secure, high-performance backends. I bridge enterprise infrastructure with offensive security research to harden systems from the core.
         </motion.p>
