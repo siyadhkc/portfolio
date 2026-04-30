@@ -45,7 +45,7 @@ export const Hero = () => {
           transition={{ duration: 0.6 }}
           className="font-mono text-[11px] md:text-[13px] tracking-[0.3em] text-[#8A8A85] uppercase mb-4"
         >
-          Full-Stack Developer | Web & API Security Specialist
+          Full-Stack Developer | Web & API Security
         </motion.p>
 
         <motion.h1
@@ -54,7 +54,7 @@ export const Hero = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-serif text-[2.8rem] sm:text-[3.8rem] md:text-[5.5rem] lg:text-[6.2rem] tracking-tight leading-[0.9] text-[#131313] mb-6"
         >
-          siyadhkc<br />
+          Siyadh.kc<br />
           <span className="italic font-light opacity-60">Architecting scale.</span>
         </motion.h1>
 

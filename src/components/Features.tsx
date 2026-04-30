@@ -75,7 +75,7 @@ const FeatureCard = memo(({ id, title, subtitle, variant, children, tags, classN
     <motion.div
       {...cardMotion}
       whileTap={{ scale: 0.99 }}
-      className={`group rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 relative overflow-hidden flex flex-col h-auto sm:h-[320px] md:h-[480px] min-h-[240px] shadow-sm hover:shadow-md transition-shadow duration-500 border border-black/[0.03] cursor-pointer ${VARIANT_CLASS[variant] ?? 'bg-[#EFEEE7]'} ${className ?? ''}`}
+      className={`group rounded-xl md:rounded-2xl p-6 md:p-10 relative overflow-hidden flex flex-col h-auto sm:h-[320px] md:h-[480px] min-h-[240px] shadow-sm hover:shadow-md transition-shadow duration-500 border border-black/[0.03] cursor-pointer ${VARIANT_CLASS[variant] ?? 'bg-[#EFEEE7]'} ${className ?? ''}`}
     >
       <div className="flex justify-between items-start z-20 shrink-0 mb-4 sm:mb-0">
         <h3 className="font-serif text-[28px] md:text-[32px] text-[#1A1A1A] tracking-tight group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
@@ -88,7 +88,7 @@ const FeatureCard = memo(({ id, title, subtitle, variant, children, tags, classN
         {children}
       </div>
 
-      <div className="relative sm:absolute sm:inset-x-6 md:inset-x-8 sm:bottom-6 md:bottom-8 bg-[#FDFDFC]/80 backdrop-blur-xl p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] z-20 border border-white/50 shadow-sm transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex flex-col gap-4 mt-auto sm:mt-0">
+      <div className="relative sm:absolute sm:inset-x-6 md:inset-x-8 sm:bottom-6 md:bottom-8 bg-[#FDFDFC]/80 backdrop-blur-xl p-6 md:p-8 rounded-xl md:rounded-2xl z-20 border border-white/50 shadow-sm transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex flex-col gap-4 mt-auto sm:mt-0">
         <p className="text-[#3E4240] text-sm md:text-[16px] font-medium leading-relaxed opacity-90">{subtitle}</p>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
@@ -147,7 +147,7 @@ export const Features = () => {
           {/* Card 1: MockAPI Pro */}
           <FeatureCard id="mockapi-pro" title={projects[0].title} subtitle={projects[0].subtitle} tags={projects[0].tags} variant={projects[0].variant}>
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center pl-6 pr-6 md:pl-10 sm:-mt-24">
-              <div className="w-full bg-white/70 backdrop-blur-md rounded-xl shadow-lg border border-black/5 p-4 flex flex-col overflow-hidden relative group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-shadow">
+              <div className="w-full bg-white/70 backdrop-blur-md rounded-md shadow-lg border border-black/5 p-4 flex flex-col overflow-hidden relative group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-shadow">
                 <Database className="w-6 h-6 text-[#1D91A1] mb-4 opacity-50" />
                 <div className="w-[85%] h-4 bg-black/5 rounded-full mb-3" />
                 <div className="w-[60%] h-4 bg-[#E1EFEB] rounded-full mb-6" />
@@ -166,7 +166,7 @@ export const Features = () => {
           {/* Card 2: VulnAPI */}
           <FeatureCard id="vulnapi" title={projects[1].title} subtitle={projects[1].subtitle} tags={projects[1].tags} variant={projects[1].variant}>
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center sm:-mt-24">
-              <div className="w-[75%] bg-white rounded-2xl shadow-sm border border-[#E8E8E3] p-6 flex flex-col relative group-hover:shadow-md transition-shadow">
+              <div className="w-[75%] bg-white rounded-lg shadow-sm border border-[#E8E8E3] p-6 flex flex-col relative group-hover:shadow-md transition-shadow">
                 <ShieldCheck className="w-8 h-8 text-[#FF5F56] absolute top-6 right-6 opacity-30 group-hover:opacity-60 transition-opacity" />
                 <h4 className="font-mono text-[11px] text-[#A1A1A1] uppercase tracking-widest mb-6">Scan Progress</h4>
                 <div className="w-full h-2 bg-black/5 rounded-full mb-4 overflow-hidden">
@@ -183,7 +183,7 @@ export const Features = () => {
           {/* Card 3: django-secure */}
           <FeatureCard id="django-secure" title={projects[2].title} subtitle={projects[2].subtitle} tags={projects[2].tags} variant={projects[2].variant}>
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center px-4 md:px-10 sm:-mt-20">
-              <div className="w-[90%] md:w-full max-w-[600px] bg-white rounded-xl shadow-sm border border-black/5 p-4 flex items-center gap-3 md:gap-4 group-hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] transition-shadow">
+              <div className="w-[90%] md:w-full max-w-[600px] bg-white rounded-md shadow-sm border border-black/5 p-4 flex items-center gap-3 md:gap-4 group-hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] transition-shadow">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#F2F2EC] flex items-center justify-center shrink-0">
                   <Lock className="w-4 h-4 md:w-5 md:h-5 text-[#2B302F]" />
                 </div>
@@ -199,7 +199,7 @@ export const Features = () => {
           {/* Card 4: Sentinel API */}
           <FeatureCard id="sentinel-api" title={projects[3].title} subtitle={projects[3].subtitle} tags={projects[3].tags} variant={projects[3].variant}>
             <div className="absolute inset-0 flex items-center justify-center p-8 sm:-mt-24">
-              <div className="w-full max-w-[320px] bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-black/5 p-6 flex flex-col items-center group-hover:scale-105 transition-transform">
+              <div className="w-full max-w-[320px] bg-white/70 backdrop-blur-md rounded-lg shadow-lg border border-black/5 p-6 flex flex-col items-center group-hover:scale-105 transition-transform">
                 <Activity className="w-12 h-12 text-[#007AFF] mb-4" />
                 <div className="w-full space-y-3">
                   <div className="flex items-center gap-3">

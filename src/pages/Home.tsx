@@ -9,10 +9,10 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>siyadhkc — Backend Engineer</title>
+        <title>siyadhkc — Backend Developer</title>
         <meta
           name="description"
-          content="Portfolio of siyadhkc, a Backend Engineer specialized in Django, Security, and Cloud Architectures."
+          content="Portfolio of siyadhkc, a Backend Developer specialized in Django, Security, and Cloud Architectures."
         />
         <meta
           name="keywords"

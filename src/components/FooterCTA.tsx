@@ -31,6 +31,25 @@ const CopyButton = memo(() => {
   );
 });
 CopyButton.displayName = 'CopyButton';
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
+  }
+};
 
 export const FooterCTA = () => {
 
@@ -40,10 +59,10 @@ export const FooterCTA = () => {
   }, []);
 
   return (
-    <div id="contact" className="w-full bg-[#F7F7F2] pb-6 pt-6 md:pt-10 px-2 sm:px-4 md:px-8 relative rounded-b-3xl md:rounded-b-[4rem]">
+    <div id="contact" className="w-full bg-gradient-to-b from-[#F7F7F2] to-[#F2F2EC] pb-6 pt-6 md:pt-10 px-2 sm:px-4 md:px-8 relative rounded-b-3xl md:rounded-b-[4rem]">
 
       {/* The main cinematic dark container */}
-      <div className="relative w-full rounded-2xl md:rounded-[3rem] overflow-hidden bg-[#0A0D14] py-16 md:py-32 flex flex-col items-center justify-center shadow-[0_30px_100px_rgba(0,0,0,0.5)] border border-white/10">
+      <div className="relative w-full rounded-2xl md:rounded-[3rem] overflow-hidden bg-gradient-to-br from-[#0A0D14] to-[#05070A] py-16 md:py-32 flex flex-col items-center justify-center shadow-[0_30px_100px_rgba(0,0,0,0.5)] border border-white/10">
 
         {/* Space Background */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#02040A]">
@@ -98,7 +117,7 @@ export const FooterCTA = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="flex flex-col items-center text-center mb-10 md:mb-16"
           >
             <h2 className="font-serif text-[3.5rem] sm:text-[5rem] md:text-[7rem] text-white tracking-[-0.03em] leading-[1] mb-8 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">Get in touch</h2>
@@ -107,10 +126,20 @@ export const FooterCTA = () => {
 
           <div className="w-full">
             {/* Desktop Grid */}
-            <div className="hidden sm:grid grid-cols-2 gap-px bg-white/10 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-white/10">
-              <div className="relative group/email">
-                <a href="mailto:siyadhkc@gmail.com" className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group h-full">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover/email:border-[#1D91A1]/40 group-hover/email:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              className="hidden sm:grid grid-cols-2 gap-px bg-white/10 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-white/10"
+            >
+              <motion.div variants={itemVariants} className="relative group/email">
+                <motion.a 
+                  href="mailto:siyadhkc@gmail.com" 
+                  whileHover={{ backgroundColor: 'rgba(17, 22, 33, 0.95)', transition: { duration: 0.3 } }}
+                className="bg-[#0A0D14]/80 transition-colors p-8 md:p-12 flex flex-col items-start gap-4 group h-full"
+              >
+                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover/email:border-[#1D91A1]/40 group-hover/email:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover/email:opacity-100 transition-opacity duration-500" />
                     <Mail className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover/email:scale-110 group-hover/email:text-white transition-all duration-500" />
                   </div>
@@ -119,11 +148,18 @@ export const FooterCTA = () => {
                     <span className="text-white text-lg md:text-xl font-medium tracking-tight">siyadhkc@gmail.com</span>
                   </div>
                   <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover/email:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Available for architecture &amp; scale consulting.</p>
-                </a>
+                </motion.a>
                 <CopyButton />
-              </div>
+              </motion.div>
 
-              <a href="https://github.com/siyadhkc" target="_blank" rel="me noreferrer" className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
+              <motion.a 
+                variants={itemVariants} 
+                href="https://github.com/siyadhkc" 
+                target="_blank" 
+                rel="me noreferrer" 
+                whileHover={{ backgroundColor: 'rgba(17, 22, 33, 0.95)', transition: { duration: 0.3 } }}
+                className="bg-[#0A0D14]/80 transition-colors p-8 md:p-12 flex flex-col items-start gap-4 group"
+              >
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover:border-[#1D91A1]/40 group-hover:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <Github className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover:scale-110 group-hover:text-white transition-all duration-500" />
@@ -133,9 +169,16 @@ export const FooterCTA = () => {
                   <span className="text-white text-lg md:text-xl font-medium tracking-tight">github.com/siyadhkc</span>
                 </div>
                 <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Explore core projects and open source.</p>
-              </a>
+              </motion.a>
 
-              <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="me noreferrer" className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
+              <motion.a 
+                variants={itemVariants} 
+                href="https://linkedin.com/in/siyadhkc" 
+                target="_blank" 
+                rel="me noreferrer" 
+                whileHover={{ backgroundColor: 'rgba(17, 22, 33, 0.95)', transition: { duration: 0.3 } }}
+                className="bg-[#0A0D14]/80 transition-colors p-8 md:p-12 flex flex-col items-start gap-4 group"
+              >
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover:border-[#1D91A1]/40 group-hover:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <Linkedin className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover:scale-110 group-hover:text-white transition-all duration-500" />
@@ -145,9 +188,16 @@ export const FooterCTA = () => {
                   <span className="text-white text-lg md:text-xl font-medium tracking-tight">linkedin.com/in/siyadhkc</span>
                 </div>
                 <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Connect for professional opportunities.</p>
-              </a>
+              </motion.a>
 
-              <a href="https://x.com/siyadhkc" target="_blank" rel="noreferrer" className="bg-[#0A0D14]/80 hover:bg-[#111621]/90 transition-all duration-700 p-8 md:p-12 flex flex-col items-start gap-4 group">
+              <motion.a 
+                variants={itemVariants} 
+                href="https://x.com/siyadhkc" 
+                target="_blank" 
+                rel="noreferrer" 
+                whileHover={{ backgroundColor: 'rgba(17, 22, 33, 0.95)', transition: { duration: 0.3 } }}
+                className="bg-[#0A0D14]/80 transition-colors p-8 md:p-12 flex flex-col items-start gap-4 group"
+              >
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center relative group-hover:border-[#1D91A1]/40 group-hover:bg-[#1D91A1]/10 transition-all duration-500 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#1D91A1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <svg className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover:scale-110 group-hover:text-white transition-all duration-500" fill="currentColor" viewBox="0 0 24 24">
@@ -159,26 +209,32 @@ export const FooterCTA = () => {
                   <span className="text-white text-lg md:text-xl font-medium tracking-tight">@siyadhkc</span>
                 </div>
                 <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Following the latest in systems &amp; scale.</p>
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
             {/* Mobile List */}
-            <div className="flex flex-col items-center sm:hidden w-full gap-10 mt-4 px-4 text-center">
-              <div className="flex flex-col items-center gap-6">
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="flex flex-col items-center sm:hidden w-full gap-10 mt-4 px-4 text-center"
+            >
+              <motion.div variants={itemVariants} className="flex flex-col items-center gap-6">
                 <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 mb-2">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </div>
                 <p className="font-mono text-[11px] tracking-[0.2em] text-[#8A8A85] uppercase">Connect With Me</p>
-              </div>
-              <div className="flex flex-col items-start w-full gap-5 pl-10">
+              </motion.div>
+              <motion.div variants={itemVariants} className="flex flex-col items-start w-full gap-5 pl-10">
                 <a href="mailto:siyadhkc@gmail.com" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">EMAIL <span className="text-[14px] opacity-40">↗</span></a>
                 <a href="https://github.com/siyadhkc" target="_blank" rel="me noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">GITHUB <span className="text-[14px] opacity-40">↗</span></a>
                 <a href="https://linkedin.com/in/siyadhkc" target="_blank" rel="me noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">LINKEDIN <span className="text-[14px] opacity-40">↗</span></a>
                 <a href="https://x.com/siyadhkc" target="_blank" rel="noreferrer" className="font-mono text-[18px] tracking-[0.15em] text-white hover:text-[#1D91A1] transition-colors flex items-center gap-3">TWITTER <span className="text-[14px] opacity-40">↗</span></a>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -188,10 +244,10 @@ export const FooterCTA = () => {
         <div className="flex flex-col md:flex-row items-center gap-6 text-[#8A8A85] font-mono text-[10px] tracking-[0.4em] uppercase">
           <span className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#1D91A1] animate-pulse" />
-            @2026 SIYADHKC
+            @2026 SIYADH.KC
           </span>
           <span className="hidden md:block w-px h-3 bg-black/10" />
-          <span className="text-[#5B5F5D] tracking-[0.25em]">Senior Backend Architect</span>
+          <span className="text-[#5B5F5D] tracking-[0.25em]">Full-Stack Developer | Web & API Security</span>
         </div>
         <div className="flex items-center gap-10 text-[#8A8A85] font-mono text-[10px] tracking-[0.4em] uppercase">
           <span className="text-[#5B5F5D]/60 tracking-[0.2em]">Kerala, India</span>
