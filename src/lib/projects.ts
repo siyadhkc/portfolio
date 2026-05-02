@@ -15,68 +15,68 @@ export const projects: Project[] = [
   {
     id: 'mockapi-pro',
     title: 'MockAPI Pro',
-    subtitle: 'Self-hostable mock API server with team workspaces, rule engine, and OpenAPI import.',
-    description: 'MockAPI Pro is a robust solution for developers and teams needing reliable mock services during the development and testing phases. It provides a flexible rule engine to simulate complex API behaviors and supports OpenAPI imports for rapid prototyping.',
+    subtitle: 'A self-hostable mock server for teams who need reliable APIs during development.',
+    description: 'I built MockAPI Pro to fix the bottlenecks I faced in my own development cycles. It handles complex rules and OpenAPI imports so teams can stop waiting on backend deploys and start coding against stable mocks.',
     tags: ['Django', 'React', 'Docker'],
     variant: 'teal',
     github: 'https://github.com/siyadhkc',
     live: 'https://github.com/siyadhkc',
     features: [
-      'Team workspaces for collaborative development',
-      'Dynamic rule engine for custom API responses',
-      'One-click OpenAPI (Swagger) import',
-      'Full Docker support for easy deployment'
+      'Team workspaces for shared mocks',
+      'Rule engine for simulating edge cases',
+      'OpenAPI (Swagger) import support',
+      'Docker-ready for local or cloud hosting'
     ],
     tech: ['Django REST Framework', 'React', 'Redis', 'PostgreSQL', 'Docker Compose']
   },
   {
     id: 'vulnapi',
     title: 'VulnAPI',
-    subtitle: 'Python-native REST API DAST scanner covering OWASP API Top 10 with interactive report.',
-    description: 'VulnAPI is a security-focused tool designed to identify vulnerabilities in RESTful APIs. It automates the process of checking for OWASP API Top 10 risks, providing developers with actionable insights and interactive reports to harden their systems.',
-    tags: ['Django', 'React', 'OWASP'],
+    subtitle: 'Python-native DAST scanner for REST APIs, built to automate OWASP security checks.',
+    description: 'VulnAPI automates the security audits I found myself doing manually over and over. It scans for OWASP API Top 10 vulnerabilities and gives you a clear report on what needs fixing.',
+    tags: ['Python', 'Security', 'OWASP'],
     variant: 'coral',
     github: 'https://github.com/siyadhkc',
     live: 'https://github.com/siyadhkc',
     features: [
-      'Automated OWASP API Top 10 scanning',
-      'Interactive security reports with remediation tips',
-      'Customizable payload injection',
-      'Passive and active scanning modes'
+      'Automated scanning for API vulnerabilities',
+      'Interactive reports with fix recommendations',
+      'Payload injection testing',
+      'Active and passive scanning modes'
     ],
     tech: ['Python', 'Django', 'React', 'Celery', 'SQLite']
   },
   {
     id: 'django-secure',
     title: 'django-secure',
-    subtitle: 'Drop-in DRF security hardening package for passive protection and audit logging.',
-    description: 'django-secure is a lightweight but powerful package for Django REST Framework. It implements several passive security measures out-of-the-box, such as secure headers, audit logging for sensitive endpoints, and simplified rate limiting.',
+    subtitle: 'A drop-in package for hardening Django REST APIs with passive defense layers.',
+    description: 'Security shouldn\'t be an afterthought. I wrote this package to give DRF projects instant protection—secure headers, audit logging, and rate limiting—without rewriting the whole codebase.',
     tags: ['Django', 'DRF', 'Security'],
     variant: 'sand',
     github: 'https://github.com/siyadhkc',
     live: 'https://github.com/siyadhkc',
     features: [
-      'Automatic security header configuration',
-      'Comprehensive audit logging middleware',
-      'Configurable IP-based rate limiting',
-      'Seamless integration with existing DRF projects'
+      'Instant security header configuration',
+      'Middleware for detailed audit logging',
+      'Configurable IP rate limiting',
+      'Minimal setup for existing projects'
     ],
     tech: ['Django', 'Django REST Framework', 'Python']
   },
   {
     id: 'sentinel-api',
     title: 'Sentinel API',
-    subtitle: 'Real-time API gateway security monitor with automated threat blocking and alerting.',
-    description: 'Sentinel API provides a robust layer of protection for your infrastructure, monitoring traffic in real-time and automatically neutralizing threats before they reach your backend.',
+    subtitle: 'Real-time security gateway that monitors and blocks threats before they hit your backend.',
+    description: 'Sentinel acts as the first line of defense. It monitors traffic in real-time and automatically blocks malicious actors before they can even touch your application logic.',
     tags: ['Go', 'Redis', 'Security'],
     variant: 'blue',
     github: 'https://github.com/siyadhkc',
     live: 'https://github.com/siyadhkc',
     features: [
-      'Real-time threat detection and mitigation',
-      'Automated rate limiting and IP blocking',
-      'Detailed security event audit logs',
-      'Integration with Slack and Discord for alerts'
+      'Live threat detection and blocking',
+      'Automated IP blacklisting',
+      'Detailed audit logs for every event',
+      'Real-time alerts via Slack/Discord'
     ],
     tech: ['Go', 'Redis', 'gRPC', 'Prometheus']
   }

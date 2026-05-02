@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
-import { Mail, Download, X, Github, Linkedin, Twitter, BookOpen, Briefcase } from 'lucide-react';
+import { Mail, Download, X, Github, Linkedin, Twitter, BookOpen, Briefcase, User } from 'lucide-react';
 import { motion, useScroll, AnimatePresence, useTransform } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import resumeFile from '../assets/Siyadhkc_Resume.pdf';
-import { saveSection } from '../lib/scrollState';
+import { saveSection, clearAllScroll } from '../lib/scrollState';
 
 // ── Static data — defined outside component so they are never recreated ──────
 const CONTACT_LINKS = [
@@ -15,72 +15,108 @@ const CONTACT_LINKS = [
 ];
 
 const MENU_ITEMS = [
-  { label: 'Projects', id: 'projects', type: 'scroll', icon: <Briefcase className="w-5 h-5 sm:w-4 sm:h-4" /> },
-  { label: 'Articles', id: '/articles', type: 'link', icon: <BookOpen className="w-5 h-5 sm:w-4 sm:h-4" /> },
+  { label: 'About', id: '/about', type: 'link', icon: <User className="w-[18px] h-[18px] sm:w-4 sm:h-4" /> },
+  { label: 'Projects', id: 'projects', type: 'scroll', icon: <Briefcase className="w-[18px] h-[18px] sm:w-4 sm:h-4" /> },
+  { label: 'Articles', id: '/articles', type: 'link', icon: <BookOpen className="w-[18px] h-[18px] sm:w-4 sm:h-4" /> },
 ] as const;
 
 // ── Logo extracted to module scope — never recreated on Navigation re-render ──
 interface LogoProps {
-  isSpinning: boolean;
+  spinCount: number;
   onSpin: () => void;
   pathname: string;
 }
 
-const Logo = memo(({ isSpinning, onSpin, pathname }: LogoProps) => (
-  <Link
-    to="/"
-    onClick={(e) => {
-      onSpin();
-      if (pathname === '/') {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }}
-    className="group relative flex items-center gap-3 px-4 py-2 rounded-full transition-all duration-500"
-  >
-    <div className="relative flex items-center overflow-visible">
-      {/* Mobile Aperture */}
-      <div className="sm:hidden relative w-12 h-12 flex items-center justify-center">
-        <svg className="absolute inset-0 w-full h-full rotate-[-90deg]">
-          <motion.circle
-            cx="24" cy="24" r="22" fill="none" stroke="currentColor"
-            strokeWidth="0.5" strokeDasharray="4, 4" className="text-black/20"
-            animate={{ rotate: isSpinning ? 360 : 0 }}
-            transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+const Logo = memo(({ spinCount, onSpin, pathname }: LogoProps) => {
+  const [trigger, setTrigger] = useState(0);
+
+  return (
+    <Link
+      to="/"
+      onClick={(e) => {
+        onSpin();
+        setTrigger(t => t + 1);
+        clearAllScroll(); // Force clear any saved restoration state
+        
+        // If on Home page, just scroll up
+        if (pathname === '/') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          // Navigating home: App.tsx will handle the reset
+        }
+      }}
+      className="group relative flex items-center outline-none p-2"
+      onMouseEnter={() => setTrigger(t => t + 1)}
+      onTouchStart={() => setTrigger(t => t + 1)}
+    >
+      <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
+        <svg viewBox="0 0 40 40" className="w-full h-full overflow-visible" fill="none">
+          {/* Premium Drop Shadow */}
+          <filter id="premium-shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#000000" floodOpacity="0.15" />
+          </filter>
+
+          {/* Top Half of 'S' - Break, Spin & Fix */}
+          <motion.path 
+            key={`${trigger}-top`}
+            d="M28 11 C28 4.5, 12 4.5, 12 13 C12 16.5, 15 18.5, 20 20"
+            stroke="#333333" 
+            strokeWidth="5.5" 
+            strokeLinecap="round"
+            // filter="url(#premium-shadow)"
+            style={{ originX: "10px", originY: "10px" }}
+            initial={{ pathLength: 1, y: 0, x: 0, rotate: 0 }}
+            animate={{ 
+              y: [0, -5, 0],
+              x: [0, -5, 0],
+              rotate: [0, 0, -360]
+            }}
+            transition={{ 
+              duration: 0.8,
+              times: [0, 0.25, 1],
+              ease: "easeInOut"
+            }}
           />
-          <motion.circle
-            cx="24" cy="24" r="22" fill="none" stroke="#1D91A1"
-            strokeWidth="1" strokeDasharray="20, 120" strokeLinecap="round"
-            animate={{ rotate: isSpinning ? 720 : 0 }}
-            transition={{ duration: 1.2, ease: 'easeInOut' }}
+
+          {/* Bottom Half of 'S' - Break, Spin & Fix */}
+          <motion.path 
+            key={`${trigger}-bottom`}
+            d="M20 20 C25 21.5, 28 23.5, 28 27 C28 35.5, 12 35.5, 12 29"
+            stroke="#333333ff" 
+            strokeWidth="5.5" 
+            strokeLinecap="round"
+            style={{ originX: "10px", originY: "10px" }}
+            initial={{ pathLength: 1, y: 0, x: 0, rotate: 0 }}
+            animate={{ 
+              y: [0, 5, 0],
+              x: [0, 5, 0],
+              rotate: [0, 0, 360]
+            }}
+            transition={{ 
+              duration: 0.8,
+              times: [0, 0.25, 1],
+              ease: "easeInOut"
+            }}
           />
         </svg>
-        <motion.span
-          animate={{ rotate: isSpinning ? 360 : 0 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-          className="text-2xl font-serif font-bold text-black relative z-10"
-        >
-          s
-        </motion.span>
-      </div>
 
-      {/* Desktop Branding */}
-      <div className="hidden sm:flex items-start gap-1">
-        <div className="relative overflow-hidden group/text">
-          <span className="font-serif text-[22px] font-bold text-black tracking-[-0.05em] leading-none block">
-            siyadhkc
-          </span>
-          <motion.div
-            initial={{ x: '-100%' }}
-            whileHover={{ x: '100%' }}
-            transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className="absolute inset-y-0 w-full bg-gradient-to-r from-transparent via-[#1D91A1]/20 to-transparent skew-x-12"
-          />
-        </div>
+        {/* Click Feedback */}
+        <AnimatePresence>
+          {spinCount > 0 && (
+            <motion.div
+              key={spinCount}
+              initial={{ scale: 0.8, opacity: 0.2 }}
+              animate={{ scale: 1.5, opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0 rounded-full bg-black/5 pointer-events-none"
+            />
+          )}
+        </AnimatePresence>
       </div>
-    </div>
-  </Link>
-));
+    </Link>
+  );
+});
 Logo.displayName = 'Logo';
 
 // ── Main Navigation component ─────────────────────────────────────────────────
@@ -91,14 +127,14 @@ export const Navigation = () => {
 
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLogoSpinning, setIsLogoSpinning] = useState(false);
+  const [logoSpinCount, setLogoSpinCount] = useState(0);
   const [isDownloadSpinning, setIsDownloadSpinning] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
 
   const navRef = React.useRef<HTMLDivElement>(null);
 
   // Stable callbacks — only recreated when deps change
-  const handleLogoSpin = useCallback(() => setIsLogoSpinning(true), []);
+  const handleLogoSpin = useCallback(() => setLogoSpinCount((c) => c + 1), []);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
   const toggleMenu = useCallback(() => setIsMenuOpen((v) => !v), []);
   const handleDownloadSpin = useCallback(() => setIsDownloadSpinning(true), []);
@@ -133,7 +169,7 @@ export const Navigation = () => {
   }, [isMenuOpen]);
 
   // Scroll transforms
-  const topBg = useTransform(scrollY, [0, 50], ['rgba(255,255,255,0)', 'rgba(255,255,255,0.7)']);
+  const topBg = useTransform(scrollY, [0, 50], ['rgba(250,249,246,0)', 'rgba(250,249,246,0.85)']);
   const blurValue = useTransform(scrollY, [0, 50], ['blur(0px)', 'blur(20px)']);
   const borderOp = useTransform(scrollY, [0, 50], ['rgba(255,255,255,0)', 'rgba(0,0,0,0.04)']);
   const shadowValue = useTransform(scrollY, [0, 50], ['none', '0 10px 40px -10px rgba(0,0,0,0.05)']);
@@ -155,7 +191,9 @@ export const Navigation = () => {
       { threshold: 0.3, rootMargin: '-10% 0px -70% 0px' },
     );
     const projectSection = document.getElementById('projects');
+    const aboutSection = document.getElementById('about');
     if (projectSection) observer.observe(projectSection);
+    if (aboutSection) observer.observe(aboutSection);
     return () => observer.disconnect();
   }, [location.pathname]);
 
@@ -187,7 +225,7 @@ export const Navigation = () => {
         {/* Left: Logo */}
         <div className="flex items-center justify-start overflow-hidden">
           <Logo
-            isSpinning={isLogoSpinning}
+            spinCount={logoSpinCount}
             onSpin={handleLogoSpin}
             pathname={location.pathname}
           />
@@ -195,13 +233,13 @@ export const Navigation = () => {
 
         {/* Center: Nav Pill */}
         <div className="flex items-center justify-center">
-          <div className="flex items-center gap-1 sm:gap-1 bg-black/[0.03] p-1.5 sm:p-1 rounded-full border border-black/[0.03] shadow-inner">
+          <div className="flex items-center gap-1 bg-black/[0.03] p-1.5 sm:p-1 rounded-full border border-black/[0.03] shadow-inner">
             {navItems.map((item) => {
               const LinkContent = (
                 <>
-                  <span className="md:hidden">{item.icon}</span>
-                  <span className="hidden md:inline">{item.label}</span>
-                  <span className="md:hidden sr-only">{item.label}</span>
+                  <span className="flex sm:hidden items-center justify-center w-full h-full">{item.icon}</span>
+                  <span className="hidden sm:inline">{item.label}</span>
+                  <span className="sm:hidden sr-only">{item.label}</span>
                 </>
               );
 
@@ -211,7 +249,7 @@ export const Navigation = () => {
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleNavClick(item.id)}
-                  className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-[13px] font-medium transition-all duration-200 ${
+                  className={`flex items-center justify-center sm:gap-2 w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 rounded-full text-[13px] font-medium transition-all duration-200 ${
                     item.isActive ? 'bg-white text-black shadow-sm' : 'text-[#606060] hover:text-black hover:bg-white hover:shadow-sm'
                   }`}
                 >
@@ -221,7 +259,7 @@ export const Navigation = () => {
                 <motion.div key={item.id} whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }}>
                   <Link
                     to={item.id}
-                    className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-[13px] font-medium transition-all duration-200 ${
+                    className={`flex items-center justify-center sm:gap-2 w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 rounded-full text-[13px] font-medium transition-all duration-200 ${
                       item.isActive ? 'bg-white text-black shadow-sm' : 'text-[#606060] hover:text-black hover:bg-white hover:shadow-sm'
                     }`}
                   >
@@ -260,7 +298,7 @@ export const Navigation = () => {
             whileHover={{ scale: 1.02, y: -2, backgroundColor: 'rgba(43,48,47,0.95)' }}
             whileTap={{ scale: 0.96 }}
             onClick={toggleMenu}
-            className={`relative flex items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-all duration-300 min-w-[48px] lg:min-w-[145px] overflow-hidden border border-white/10 ${
+            className={`hidden sm:flex relative items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-all duration-300 min-w-[48px] lg:min-w-[145px] overflow-hidden border border-white/10 ${
               isMenuOpen ? 'bg-black text-white shadow-lg' : 'bg-[#2B302F]/90 backdrop-blur-md text-white shadow-sm'
             }`}
           >

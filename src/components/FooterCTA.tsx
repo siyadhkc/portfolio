@@ -121,7 +121,7 @@ export const FooterCTA = () => {
             className="flex flex-col items-center text-center mb-10 md:mb-16"
           >
             <h2 className="font-serif text-[3.5rem] sm:text-[5rem] md:text-[7rem] text-white tracking-[-0.03em] leading-[1] mb-8 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">Get in touch</h2>
-            <p className="text-[#A1A1A1] font-sans text-base md:text-xl px-4 max-w-[500px] leading-relaxed">Available for architecture auditing and high-scale systems consulting.</p>
+            <p className="text-[#A1A1A1] font-sans text-base md:text-xl px-4 max-w-[500px] leading-relaxed">Open for security audits, interesting projects, or just a technical chat.</p>
           </motion.div>
 
           <div className="w-full">
@@ -144,10 +144,10 @@ export const FooterCTA = () => {
                     <Mail className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover/email:scale-110 group-hover/email:text-white transition-all duration-500" />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Direct Email</span>
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Email</span>
                     <span className="text-white text-lg md:text-xl font-medium tracking-tight">siyadhkc@gmail.com</span>
                   </div>
-                  <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover/email:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Available for architecture &amp; scale consulting.</p>
+                  <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover/email:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">The fastest way to reach me for anything technical.</p>
                 </motion.a>
                 <CopyButton />
               </motion.div>
@@ -165,10 +165,10 @@ export const FooterCTA = () => {
                   <Github className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover:scale-110 group-hover:text-white transition-all duration-500" />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Source Code</span>
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Code</span>
                   <span className="text-white text-lg md:text-xl font-medium tracking-tight">github.com/siyadhkc</span>
                 </div>
-                <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Explore core projects and open source.</p>
+                <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Where I push my projects and security research.</p>
               </motion.a>
 
               <motion.a 
@@ -184,10 +184,10 @@ export const FooterCTA = () => {
                   <Linkedin className="w-5 h-5 text-[#1D91A1] relative z-10 group-hover:scale-110 group-hover:text-white transition-all duration-500" />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Professional</span>
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">LinkedIn</span>
                   <span className="text-white text-lg md:text-xl font-medium tracking-tight">linkedin.com/in/siyadhkc</span>
                 </div>
-                <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Connect for professional opportunities.</p>
+                <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover/email:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Connecting with other engineers and security researchers.</p>
               </motion.a>
 
               <motion.a 
@@ -205,10 +205,10 @@ export const FooterCTA = () => {
                   </svg>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Network</span>
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#8A8A85] uppercase">Twitter</span>
                   <span className="text-white text-lg md:text-xl font-medium tracking-tight">@siyadhkc</span>
                 </div>
-                <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Following the latest in systems &amp; scale.</p>
+                <p className="text-[#5B5F5D] text-sm font-sans mt-2 opacity-40 group-hover/email:opacity-100 transition-opacity duration-500 leading-relaxed max-w-[200px]">Talking about Python, security, and dev workflows.</p>
               </motion.a>
             </motion.div>
 
@@ -247,7 +247,7 @@ export const FooterCTA = () => {
             @2026 SIYADH.KC
           </span>
           <span className="hidden md:block w-px h-3 bg-black/10" />
-          <span className="text-[#5B5F5D] tracking-[0.25em]">Full-Stack Developer | Web & API Security</span>
+          <span className="text-[#5B5F5D] tracking-[0.25em]">Python Developer & Security Researcher</span>
         </div>
         <div className="flex items-center gap-10 text-[#8A8A85] font-mono text-[10px] tracking-[0.4em] uppercase">
           <span className="text-[#5B5F5D]/60 tracking-[0.2em]">Kerala, India</span>

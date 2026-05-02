@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion'
 // import { getSection } from './lib/scrollState'
 
 const Home = lazy(() => import('./pages/Home'))
+const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ArticlesPage = lazy(() => import('./pages/ArticlesPage'))
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'))
 
@@ -23,22 +24,22 @@ function ScrollToTop() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    // If we are going to Home, let Home's internal logic handle restoration
-    if (pathname === '/') return
-
-    // Standard native reset for other pages (Articles, Details)
-    // This ensures we start at the top even if we saved a section for Home restoration later.
+    // Reset to top for ALL page changes.
+    // This prevents landing at the bottom of the Home page when coming from long Articles/About pages.
     window.scrollTo(0, 0)
   }, [pathname])
 
   return null
 }
 
+import { GlobalBackground } from './components/GlobalBackground'
+
 function AppContent() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen font-sans bg-comet-cream text-comet-text selection:bg-[#1D91A1]/30 selection:text-[#1D91A1]">
+    <div className="min-h-screen font-sans bg-transparent text-comet-text selection:bg-[#1D91A1]/30 selection:text-[#1D91A1] relative">
+      <GlobalBackground />
       <ScrollToTop />
       <Navigation />
       <AnimatePresence mode="wait" initial={false}>
@@ -49,6 +50,16 @@ function AppContent() {
               <Suspense fallback={<PageLoader />}>
                 <PageTransition>
                   <Home />
+                </PageTransition>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <PageTransition>
+                  <AboutPage />
                 </PageTransition>
               </Suspense>
             }

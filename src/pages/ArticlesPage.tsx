@@ -20,7 +20,7 @@ const ArticlesPage = () => {
         <link rel="canonical" href="https://siyadhkc.vercel.app/articles" />
       </Helmet>
 
-      <main className="min-h-screen bg-[#FAF9F6]">
+      <main className="min-h-screen relative z-10 overflow-hidden ">
         <Articles />
 
         {/* Minimal Footer */}
@@ -37,7 +37,7 @@ const ArticlesPage = () => {
               © 2026 SIYADHKC
             </span>
             <span className="hidden sm:block w-px h-3 bg-black/[0.06]"></span>
-            <span className="hidden sm:block font-mono text-[9px] tracking-[0.2em] text-[#ABABAB] uppercase">Backend Engineer</span>
+            <span className="hidden sm:block font-mono text-[9px] tracking-[0.2em] text-[#ABABAB] uppercase">Developer / Researcher</span>
           </div>
 
           <div className="flex items-center gap-7">

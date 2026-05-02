@@ -13,29 +13,7 @@ export const Hero = () => {
   };
 
   return (
-    <div id="hero" role="banner" aria-label="Hero Section" className="relative pt-[110px] pb-16 lg:pt-[140px] lg:pb-20 overflow-hidden flex flex-col items-center min-h-[75vh]">
-
-      {/* Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-[#F7F7F2]">
-        <div className="absolute -top-[10%] -left-[30%] md:-top-[20%] md:-left-[10%] w-[150vw] h-[150vw] md:w-[70vw] md:h-[70vw] rounded-full bg-[#1D91A1]/10 blur-[80px] md:blur-[120px] mix-blend-multiply" />
-        <div className="absolute top-[20%] -right-[40%] md:top-[10%] md:-right-[10%] w-[120vw] h-[120vw] md:w-[60vw] md:h-[60vw] rounded-full bg-[#E57A44]/15 blur-[80px] md:blur-[120px] mix-blend-multiply" />
-
-        <svg
-          className="absolute inset-0 w-[250%] sm:w-[150%] md:w-full h-full md:h-[150%] left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 opacity-40 pointer-events-none"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <path d="M-50,60 Q50,40 150,80" fill="none" stroke="#2B302F" strokeWidth="0.05" />
-          <path d="M-20,40 Q40,100 120,20" fill="none" stroke="#1D91A1" strokeWidth="0.05" />
-          <path d="M-10,20 Q60,-10 100,50" fill="none" stroke="#E57A44" strokeWidth="0.05" />
-        </svg>
-
-        {/* Noise overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.35] mix-blend-color-burn pointer-events-none"
-          style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}
-        />
-      </div>
+    <div id="hero" role="banner" aria-label="Hero Section" className="relative pt-[110px] pb-16 lg:pt-[140px] lg:pb-20 flex flex-col items-center min-h-[55vh]">
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[900px] mx-auto px-6 text-center flex flex-col items-center mt-6 md:mt-10">
@@ -45,17 +23,17 @@ export const Hero = () => {
           transition={{ duration: 0.6 }}
           className="font-mono text-[11px] md:text-[13px] tracking-[0.3em] text-[#8A8A85] uppercase mb-4"
         >
-          Full-Stack Developer | Web & API Security
+          Python Developer & Security Researcher
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-serif text-[2.8rem] sm:text-[3.8rem] md:text-[5.5rem] lg:text-[6.2rem] tracking-tight leading-[0.9] text-[#131313] mb-6"
+          className="font-hero font-black uppercase text-[3.8rem] sm:text-[3.8rem] md:text-[5.5rem] lg:text-[8.2rem] tracking-tight leading-[0.9] text-[#333333] mb-6"
         >
-          Siyadh.kc<br />
-          <span className="italic font-light opacity-60">Architecting scale.</span>
+          Siyadh kc<br />
+          {/* <span className="italic font-light opacity-60 font-serif">I break things to build them better.</span> */}
         </motion.h1>
 
         <motion.p
@@ -64,7 +42,7 @@ export const Hero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-[#5B5F5D] font-sans text-base sm:text-lg md:text-[22px] mb-10 md:mb-12 max-w-[700px] leading-relaxed mx-auto text-balance px-4 opacity-80"
         >
-          Building secure, high-performance backends. I bridge enterprise infrastructure with offensive security research to harden systems from the core.
+         <span className="italic font-light opacity-90 font-serif">I break things to build them better.</span>
         </motion.p>
 
         <motion.div

@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         comet: {
-          cream: '#F7F7F2',
+          cream: '#FAF9F6',
           dark: '#020202',
           teal: '#1D91A1',
           text: '#131313',
@@ -17,8 +17,9 @@ export default {
         }
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'serif'],
-        sans: ['"Inter"', 'sans-serif'],
+        serif: ['"Outfit"', 'sans-serif'],
+        sans: ['"Outfit"', 'sans-serif'],
+        hero: ['"Outfit"', 'sans-serif'],
       },
       boxShadow: {
         'glass': '0 4px 30px rgba(0, 0, 0, 0.05)',

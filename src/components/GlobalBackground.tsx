@@ -1,0 +1,71 @@
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+
+export const GlobalBackground = () => {
+  const location = useLocation();
+  const isProjectDetail = location.pathname.startsWith('/projects/');
+
+  return (
+    <div className="absolute inset-0 z-[-1] overflow-hidden bg-[#FAF9F6]">
+      {/* 0. Top Color Injection */}
+      <div className={`absolute top-0 left-0 right-0 h-[40vh] sm:h-[50vh] bg-gradient-to-b from-[#1D91A1]/[0.04] to-transparent pointer-events-none transition-opacity duration-700 ${isProjectDetail ? 'opacity-30' : 'opacity-100'}`} />
+
+      {/* 1. Base Layer: Soft Mesh Gradient - Optimized for Mobile */}
+      <div className={`absolute inset-0 transition-opacity duration-700 ${isProjectDetail ? 'opacity-[0.18]' : 'opacity-60'}`}>
+        {/* Top-Left Teal Mesh */}
+        <div className="absolute -top-[10%] -left-[20%] sm:-top-[15%] sm:-left-[5%] w-[120vw] sm:w-[80vw] h-[120vw] sm:h-[80vw] rounded-full bg-[#1D91A1]/[0.14] sm:bg-[#1D91A1]/[0.18] blur-[60px] sm:blur-[100px] animate-pulse" style={{ animationDuration: '15s' }} />
+        
+        {/* Bottom-Right Amber Mesh */}
+        <div className="absolute -bottom-[5%] -right-[20%] sm:-bottom-[10%] sm:-right-[5%] w-[130vw] sm:w-[85vw] h-[130vw] sm:h-[85vw] rounded-full bg-[#E57A44]/[0.16] sm:bg-[#E57A44]/[0.22] blur-[70px] sm:blur-[120px] animate-pulse" style={{ animationDuration: '18s', animationDelay: '2s' }} />
+        
+        {/* Center Soft Orbs (Simplified for mobile) */}
+        <div className="absolute top-[25%] -right-[15%] w-[70vw] sm:w-[50vw] h-[70vw] sm:h-[50vw] rounded-full bg-[#1D91A1]/[0.08] blur-[60px] sm:blur-[90px]" />
+        <div className="absolute top-[55%] -left-[15%] w-[60vw] sm:w-[45vw] h-[60vw] sm:h-[45vw] rounded-full bg-[#E57A44]/[0.1] blur-[70px] sm:blur-[110px]" />
+      </div>
+
+      {/* 2. Middle Layer: Fine Organic Lines (Responsive Weights) */}
+      <div className={`absolute inset-0 transition-opacity duration-700 pointer-events-none ${isProjectDetail ? 'opacity-[0.12]' : 'opacity-40'}`}>
+        <svg
+          className="w-full h-full"
+          viewBox="0 0 1000 1000"
+          preserveAspectRatio="xMidYMid slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="line-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#1D91A1" stopOpacity="0" />
+              <stop offset="50%" stopColor="#1D91A1" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#1D91A1" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="line-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#E57A44" stopOpacity="0" />
+              <stop offset="50%" stopColor="#E57A44" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#E57A44" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="line-grad-3" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#2B302F" stopOpacity="0" />
+              <stop offset="50%" stopColor="#2B302F" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#2B302F" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          
+          {/* Drifting Lines - Thicker on Mobile */}
+          <g className="animate-float-slow opacity-50 sm:opacity-100">
+            <path d="M-100,250 C150,450 450,50 1100,550" fill="none" stroke="url(#line-grad-1)" strokeWidth="1.2" className="sm:stroke-[0.8]" />
+            <path d="M-50,650 C250,350 750,850 1050,450" fill="none" stroke="url(#line-grad-2)" strokeWidth="1" strokeDasharray="4 8" className="sm:stroke-[0.5]" />
+            <path d="M150,-100 C350,250 50,650 550,1100" fill="none" stroke="url(#line-grad-3)" strokeWidth="0.8" className="sm:stroke-[0.3]" />
+          </g>
+        </svg>
+      </div>
+
+      {/* 3. Top Layer: High-Frequency Tactile Noise (Grain) */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 mix-blend-overlay pointer-events-none ${isProjectDetail ? 'opacity-[0.05]' : 'opacity-[0.15] sm:opacity-[0.25]'}`}
+        style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.75\" numOctaves=\"4\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}
+      />
+      
+      {/* 4. Bottom Vignette for Scroll Depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#FAF9F6]/80 pointer-events-none" />
+    </div>
+  );
+};
