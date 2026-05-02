@@ -139,7 +139,7 @@ ArticleCard.displayName = 'ArticleCard';
 export const Articles = () => (
   <div className="w-full relative z-10">
 
-    <div className="relative z-10 w-full max-w-[860px] mx-auto px-6 md:px-10">
+    <div id="articles" style={{ scrollSnapAlign: 'start' }} className="relative z-10 w-full max-w-[860px] mx-auto px-6 md:px-10">
       {/* Hero statement */}
     <motion.div
       initial={{ opacity: 0, y: 20 }}

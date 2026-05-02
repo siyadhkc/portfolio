@@ -59,7 +59,7 @@ export const FooterCTA = () => {
   }, []);
 
   return (
-    <div id="contact" className="w-full bg-gradient-to-b from-[#F7F7F2] to-[#F2F2EC] pb-6 pt-6 md:pt-10 px-2 sm:px-4 md:px-8 relative rounded-b-3xl md:rounded-b-[4rem]">
+    <div id="contact" style={{ scrollSnapAlign: 'start' }} className="w-full bg-gradient-to-b from-[#F7F7F2] to-[#F2F2EC] pb-6 pt-6 md:pt-10 px-2 sm:px-4 md:px-8 relative rounded-b-3xl md:rounded-b-[4rem]">
 
       {/* The main cinematic dark container */}
       <div className="relative w-full rounded-2xl md:rounded-[3rem] overflow-hidden bg-gradient-to-br from-[#0A0D14] to-[#05070A] py-16 md:py-32 flex flex-col items-center justify-center shadow-[0_30px_100px_rgba(0,0,0,0.5)] border border-white/10">
@@ -247,7 +247,7 @@ export const FooterCTA = () => {
             @2026 SIYADH.KC
           </span>
           <span className="hidden md:block w-px h-3 bg-black/10" />
-          <span className="text-[#5B5F5D] tracking-[0.25em]">Python Developer & Security Researcher</span>
+          <span className="text-[#5B5F5D] tracking-[0.25em]">Security Researcher</span>
         </div>
         <div className="flex items-center gap-10 text-[#8A8A85] font-mono text-[10px] tracking-[0.4em] uppercase">
           <span className="text-[#5B5F5D]/60 tracking-[0.2em]">Kerala, India</span>

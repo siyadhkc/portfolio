@@ -8,11 +8,14 @@
 
 html {
   background-color: #FAF9F6;
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 
 @layer base {
   body {
     @apply font-sans antialiased text-comet-text bg-comet-cream selection:bg-comet-teal selection:text-white overflow-x-hidden;
+    scroll-padding-top: 120px;
   }
 
   h1,

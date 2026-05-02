@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { HelmetProvider } from 'react-helmet-async'
 import { Navigation } from './components/Navigation'
 import PageTransition from './components/PageTransition'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 // import { getSection } from './lib/scrollState'
 
 const Home = lazy(() => import('./pages/Home'))
@@ -13,7 +13,38 @@ const ProjectDetails = lazy(() => import('./pages/ProjectDetails'))
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-comet-cream">
-    <div className="w-8 h-8 border-2 border-[#1D91A1]/20 border-t-[#1D91A1] rounded-full animate-spin" />
+    <div className="relative w-12 h-12">
+      <motion.svg
+        viewBox="0 0 48 48"
+        initial={{ rotate: 0 }}
+        animate={{ rotate: 360 }}
+        transition={{ 
+          duration: 2, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="w-full h-full"
+      >
+        <motion.circle
+          cx="24"
+          cy="24"
+          r="18"
+          fill="none"
+          stroke="#1D91A1"
+          strokeWidth="4"
+          strokeLinecap="round"
+          animate={{ 
+            pathLength: [0.05, 0.75, 0.05],
+            rotate: [0, 270, 360]
+          }}
+          transition={{ 
+            duration: 1.5,
+            repeat: Infinity,
+            ease: [0.4, 0, 0.2, 1]
+          }}
+        />
+      </motion.svg>
+    </div>
   </div>
 )
 

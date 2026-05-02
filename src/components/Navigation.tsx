@@ -57,14 +57,12 @@ const Logo = memo(({ spinCount, onSpin, pathname }: LogoProps) => {
             <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#000000" floodOpacity="0.15" />
           </filter>
 
-          {/* Top Half of 'S' - Break, Spin & Fix */}
           <motion.path 
             key={`${trigger}-top`}
             d="M28 11 C28 4.5, 12 4.5, 12 13 C12 16.5, 15 18.5, 20 20"
             stroke="#333333" 
             strokeWidth="5.5" 
             strokeLinecap="round"
-            // filter="url(#premium-shadow)"
             style={{ originX: "10px", originY: "10px" }}
             initial={{ pathLength: 1, y: 0, x: 0, rotate: 0 }}
             animate={{ 
@@ -127,6 +125,7 @@ export const Navigation = () => {
 
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [logoSpinCount, setLogoSpinCount] = useState(0);
   const [isDownloadSpinning, setIsDownloadSpinning] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
@@ -246,20 +245,20 @@ export const Navigation = () => {
               return item.type === 'scroll' ? (
                 <motion.button
                   key={item.id}
-                  whileHover={{ y: -1 }}
+                  whileHover={{ y: -1, transition: { type: "spring", stiffness: 400, damping: 10 } }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleNavClick(item.id)}
-                  className={`flex items-center justify-center sm:gap-2 w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 rounded-full text-[13px] font-medium transition-all duration-200 ${
+                  className={`flex items-center justify-center sm:gap-2 w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 rounded-full text-[13px] font-medium transition-all duration-150 ${
                     item.isActive ? 'bg-white text-black shadow-sm' : 'text-[#606060] hover:text-black hover:bg-white hover:shadow-sm'
                   }`}
                 >
                   {LinkContent}
                 </motion.button>
               ) : (
-                <motion.div key={item.id} whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }}>
+                <motion.div key={item.id} whileHover={{ y: -1, transition: { type: "spring", stiffness: 400, damping: 10 } }} whileTap={{ scale: 0.97 }}>
                   <Link
                     to={item.id}
-                    className={`flex items-center justify-center sm:gap-2 w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 rounded-full text-[13px] font-medium transition-all duration-200 ${
+                    className={`flex items-center justify-center sm:gap-2 w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 rounded-full text-[13px] font-medium transition-all duration-150 ${
                       item.isActive ? 'bg-white text-black shadow-sm' : 'text-[#606060] hover:text-black hover:bg-white hover:shadow-sm'
                     }`}
                   >
@@ -273,13 +272,11 @@ export const Navigation = () => {
 
         {/* Right: Actions */}
         <div className="flex items-center justify-end gap-1 sm:gap-2 shrink-0">
-          <motion.a
-            href={resumeFile}
-            download="SiyadhKc_CV.pdf"
+          <motion.button
             whileHover={{ y: -2, backgroundColor: 'rgba(225,239,235,0.9)' }}
             whileTap={{ scale: 0.95 }}
-            onClick={handleDownloadSpin}
-            className="flex items-center justify-center bg-[#E1EFEB]/70 backdrop-blur-md hover:bg-[#D1E6E4] text-[#1D91A1] p-3 sm:px-5 sm:py-2.5 rounded-full font-sans text-[13px] font-medium shadow-sm border border-white/40 transition-all"
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center justify-center bg-[#E1EFEB]/70 backdrop-blur-md hover:bg-[#D1E6E4] text-[#1D91A1] p-3 sm:px-5 sm:py-2.5 rounded-full font-sans text-[13px] font-medium shadow-sm border border-white/40 transition-all pointer-events-auto"
           >
             <motion.div
               animate={{ rotate: isDownloadSpinning ? 360 : 0 }}
@@ -290,26 +287,26 @@ export const Navigation = () => {
               <Download className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2" />
             </motion.div>
             <span className="hidden lg:inline text-[12px]">Resume</span>
-          </motion.a>
+          </motion.button>
 
           <div className="h-4 w-px bg-black/10 mx-0.5 hidden sm:block" />
 
           <motion.button
-            whileHover={{ scale: 1.02, y: -2, backgroundColor: 'rgba(43,48,47,0.95)' }}
+            whileHover={{ scale: 1.02, y: -2, backgroundColor: 'rgba(43,48,47,0.95)', transition: { type: "spring", stiffness: 400, damping: 10 } }}
             whileTap={{ scale: 0.96 }}
             onClick={toggleMenu}
-            className={`hidden sm:flex relative items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-all duration-300 min-w-[48px] lg:min-w-[145px] overflow-hidden border border-white/10 ${
-              isMenuOpen ? 'bg-black text-white shadow-lg' : 'bg-[#2B302F]/90 backdrop-blur-md text-white shadow-sm'
+            className={`hidden sm:flex relative items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-all duration-150 min-w-[48px] lg:min-w-[145px] overflow-hidden border border-white/10 ${
+            isMenuOpen ? 'bg-black text-white shadow-lg' : 'bg-[#2B302F]/90 backdrop-blur-md text-white shadow-sm'
             }`}
           >
             <AnimatePresence mode="wait" initial={false}>
               {isMenuOpen ? (
                 <motion.span
                   key="close"
-                  initial={{ opacity: 0, y: 6 }}
+                  initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.15, ease: 'easeOut' }}
                   className="flex items-center justify-center gap-2 w-full"
                 >
                   <X className="w-4 h-4" />
@@ -347,7 +344,7 @@ export const Navigation = () => {
                 initial={{ opacity: 0, scale: 0.95, y: 10, rotateX: -10 }}
                 animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 10, rotateX: -10 }}
-                transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                transition={{ duration: 0.2, ease: "circOut" }}
                 style={{ transformOrigin: 'top right', willChange: 'transform, opacity' }}
                 className="absolute right-0 top-full mt-4 w-64 bg-white/95 backdrop-blur-3xl border border-black/[0.05] rounded-[2rem] p-4 shadow-2xl z-50 overflow-hidden perspective-[1000px] flex flex-col gap-4"
               >
@@ -377,6 +374,53 @@ export const Navigation = () => {
           )}
         </AnimatePresence>
       </motion.nav>
+
+      {/* Bottom Minimal Resume Download Modal - Moved outside nav container to fix positioning */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-end justify-center p-6 pb-20 sm:pb-12 pointer-events-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: 40 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-[340px] bg-white rounded-3xl p-8 shadow-2xl border border-black/5 flex flex-col items-center"
+            >
+              <div className="text-center mb-8">
+                <h3 className="text-[1.35rem] font-bold text-[#1A1A1A] tracking-tight mb-1.5">Download Resume?</h3>
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#888888] opacity-80">Last updated: May 2026</span>
+              </div>
+              
+              <div className="flex flex-col w-full gap-2">
+                <a
+                  href={resumeFile}
+                  download="SiyadhKc_CV.pdf"
+                  onClick={() => {
+                    handleDownloadSpin();
+                    setIsModalOpen(false);
+                  }}
+                  className="w-full bg-[#131313] text-white py-3.5 rounded-xl font-bold text-[13px] hover:bg-black transition-all flex items-center justify-center shadow-md"
+                >
+                  Download
+                </a>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-full py-3.5 text-[#888888] font-semibold text-[13px] hover:text-black transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

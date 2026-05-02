@@ -19,7 +19,7 @@ const AboutPage = () => {
         <meta name="description" content="About Siyadh, a Python Full-Stack Developer & Security Specialist." />
       </Helmet>
       
-      <main className="min-h-screen relative overflow-hidden flex flex-col px-6 md:px-10">
+      <main id="about" style={{ scrollSnapAlign: 'start' }} className="min-h-screen relative overflow-hidden flex flex-col px-6 md:px-10">
         <div className="max-w-[860px] w-full mx-auto relative z-10 flex flex-col gap-16">
           
           {/* Header */}
@@ -50,8 +50,8 @@ const AboutPage = () => {
             className="grid grid-cols-1 md:grid-cols-12 gap-6"
           >
             {/* Card 1: What I Do */}
-            <motion.div variants={cardVariants} className="md:col-span-8 p-8 md:p-10 rounded-[2rem] glass-panel flex flex-col gap-6 group hover:border-comet-teal/20 hover:shadow-lg transition-all duration-500 bg-white/30 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-comet-teal/5 via-transparent to-comet-teal/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <motion.div variants={cardVariants} className="md:col-span-8 p-8 md:p-10 rounded-[2.5rem] flex flex-col gap-6 group transition-all duration-500 bg-white/40 border border-black/[0.03] hover:border-black/[0.08] relative overflow-hidden shadow-sm hover:shadow-md">
+              <div className="absolute inset-0 bg-gradient-to-br from-comet-teal/[0.08] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               <div className="w-12 h-12 rounded-2xl bg-comet-teal/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
                 <Terminal className="w-6 h-6 text-comet-teal" />
               </div>
@@ -64,8 +64,8 @@ const AboutPage = () => {
             </motion.div>
 
             {/* Card 2: Small stat/focus */}
-            <motion.div variants={cardVariants} className="md:col-span-4 p-8 md:p-10 rounded-[2rem] glass-panel flex flex-col justify-between group hover:border-amber-500/20 hover:shadow-lg transition-all duration-500 bg-white/30 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-bl from-amber-500/5 via-transparent to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <motion.div variants={cardVariants} className="md:col-span-4 p-8 md:p-10 rounded-[2.5rem] flex flex-col justify-between group transition-all duration-500 bg-white/40 border border-black/[0.03] hover:border-black/[0.08] relative overflow-hidden shadow-sm hover:shadow-md">
+              <div className="absolute inset-0 bg-gradient-to-bl from-amber-500/[0.08] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
                 <ShieldCheck className="w-6 h-6 text-amber-500" />
               </div>
@@ -78,10 +78,10 @@ const AboutPage = () => {
             </motion.div>
 
             {/* Card 3: Specialty */}
-            <motion.div variants={cardVariants} className="md:col-span-6 p-8 md:p-10 rounded-[2rem] glass-panel flex flex-col gap-6 hover:border-comet-teal/10 hover:shadow-lg transition-all duration-500 bg-white/30 group relative overflow-hidden">
-               <div className="absolute inset-0 bg-gradient-to-tr from-comet-teal/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-               <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
-                <Code2 className="w-6 h-6 text-comet-text/70" />
+            <motion.div variants={cardVariants} className="md:col-span-6 p-8 md:p-10 rounded-[2.5rem] flex flex-col gap-6 group transition-all duration-500 bg-white/40 border border-black/[0.03] hover:border-black/[0.08] relative overflow-hidden shadow-sm hover:shadow-md">
+               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/[0.06] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+               <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
+                <Code2 className="w-6 h-6 text-indigo-500" />
               </div>
               <div className="flex flex-col h-full justify-between gap-8 relative z-10">
                 <div>
@@ -101,10 +101,10 @@ const AboutPage = () => {
             </motion.div>
 
             {/* Card 4: Off the clock */}
-            <motion.div variants={cardVariants} className="md:col-span-6 p-8 md:p-10 rounded-[2rem] glass-panel flex flex-col gap-6 hover:border-amber-500/10 hover:shadow-lg transition-all duration-500 bg-white/30 group relative overflow-hidden">
-               <div className="absolute inset-0 bg-gradient-to-tl from-amber-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-               <div className="w-12 h-12 rounded-2xl bg-black/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
-                <Coffee className="w-6 h-6 text-comet-text/70" />
+            <motion.div variants={cardVariants} className="md:col-span-6 p-8 md:p-10 rounded-[2.5rem] flex flex-col gap-6 group transition-all duration-500 bg-white/40 border border-black/[0.03] hover:border-black/[0.08] relative overflow-hidden shadow-sm hover:shadow-md">
+               <div className="absolute inset-0 bg-gradient-to-tl from-rose-500/[0.06] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+               <div className="w-12 h-12 rounded-2xl bg-rose-500/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
+                <Coffee className="w-6 h-6 text-rose-500" />
               </div>
               <div className="relative z-10">
                 <h3 className="font-semibold text-2xl text-comet-text mb-3">Off the Clock</h3>

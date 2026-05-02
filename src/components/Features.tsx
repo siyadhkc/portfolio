@@ -75,11 +75,11 @@ const FeatureCard = memo(({ id, title, subtitle, variant, children, tags, classN
     <motion.div
       {...cardMotion}
       whileTap={{ scale: 0.99 }}
-      className={`group rounded-2xl md:rounded-3xl p-5 md:p-10 relative overflow-hidden flex flex-col h-[420px] sm:h-[380px] md:h-[500px] shadow-sm hover:shadow-xl transition-all duration-300 border border-black/[0.03] cursor-pointer will-change-transform ${VARIANT_CLASS[variant] ?? 'bg-[#EFEEE7]'} ${className ?? ''}`}
+      className={`group rounded-2xl md:rounded-3xl p-5 md:p-10 relative overflow-hidden flex flex-col h-[420px] sm:h-[380px] md:h-[500px] shadow-sm hover:shadow-xl transition-all duration-500 border border-black/[0.03] cursor-pointer will-change-transform ${VARIANT_CLASS[variant] ?? 'bg-[#EFEEE7]'} ${className ?? ''}`}
     >
       <div className="flex justify-end items-start z-30 shrink-0">
-        <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:bg-[#1D91A1] group-hover:text-white group-hover:border-[#1D91A1] transition-all duration-300">
-          <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-white/40 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:border-black/20 group-hover:bg-white/80 transition-all duration-500">
+          <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-[#1A1A1A] transition-transform duration-500 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>
 
@@ -87,8 +87,8 @@ const FeatureCard = memo(({ id, title, subtitle, variant, children, tags, classN
         {children}
       </div>
 
-      <div className="absolute inset-x-4 bottom-4 sm:inset-x-6 sm:bottom-6 md:inset-x-8 md:bottom-8 bg-white/70 sm:bg-white/80 backdrop-blur-md sm:backdrop-blur-xl p-5 md:p-8 rounded-xl md:rounded-2xl z-20 border border-white/50 shadow-lg transition-all duration-300 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex flex-col gap-2.5 sm:gap-3">
-        <h3 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#1A1A1A] tracking-tight group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
+      <div className="absolute inset-x-4 bottom-4 sm:inset-x-6 sm:bottom-6 md:inset-x-8 md:bottom-8 bg-white/70 sm:bg-white/80 backdrop-blur-md sm:backdrop-blur-xl p-5 md:p-8 rounded-xl md:rounded-2xl z-20 border border-white/50 shadow-lg transition-all duration-500 group-hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] flex flex-col gap-2.5 sm:gap-3">
+        <h3 className="font-bold text-[1.2rem] sm:text-[1.4rem] md:text-[1.6rem] lg:text-[1.85rem] text-[#1A1A1A] tracking-tight transition-colors leading-[1.1]">{title}</h3>
         <p className="text-[#3E4240] text-[13px] sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed opacity-90 line-clamp-2">{subtitle}</p>
         <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1 md:pt-2">
           {tags.map((tag) => (
@@ -110,7 +110,7 @@ export const Features = () => {
     <div className="w-full relative z-10 mb-20">
 
       {/* STACK SECTION */}
-      <section id="stack" className="pt-20 pb-16 md:pt-24 md:pb-20 px-4 md:px-8 w-full max-w-[1000px] mx-auto">
+      <section id="stack" style={{ scrollSnapAlign: 'start' }} className="pt-20 pb-16 md:pt-24 md:pb-20 px-4 md:px-8 w-full max-w-[1000px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -136,7 +136,7 @@ export const Features = () => {
       <div className="max-w-[1200px] mx-auto px-8 mb-5"><hr className="border-[#E8E8E3]" /></div>
 
       {/* PROJECTS SECTION */}
-      <section id="projects" className="py-16 md:py-24 px-4 md:px-8 w-full max-w-[1200px] mx-auto">
+      <section id="projects" style={{ scrollSnapAlign: 'start' }} className="py-16 md:py-24 px-4 md:px-8 w-full max-w-[1200px] mx-auto">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="font-black text-4xl sm:text-5xl lg:text-6xl lg:leading-[1.1] text-[#131313] tracking-tight leading-tight">What I've Built</h2>
           <p className="text-[#6C6C6C] font-sans text-lg sm:text-xl mt-3 md:mt-4">Some of the things I've coded, hacked, or engineered.</p>
@@ -146,7 +146,7 @@ export const Features = () => {
 
           {/* Card 1: MockAPI Pro */}
           <FeatureCard id="mockapi-pro" title={projects[0].title} subtitle={projects[0].subtitle} tags={projects[0].tags} variant={projects[0].variant}>
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center px-4 md:px-10 sm:-mt-24 transition-all duration-700 group-hover:-translate-y-[55%]">
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center px-4 md:px-10 sm:-mt-24 transition-all duration-700 group-hover:-translate-y-[52%]">
               <div className="relative w-full max-w-[480px] bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-black/[0.05] overflow-hidden group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.18)] transition-all duration-700">
                 {/* Minimal Browser Header */}
                 <div className="h-5 sm:h-6 bg-[#F9F9F7] border-b border-black/[0.03] flex items-center px-3 gap-1.5">
@@ -218,7 +218,7 @@ export const Features = () => {
 
           {/* Card 3: django-secure - Security Shield */}
           <FeatureCard id="django-secure" title={projects[2].title} subtitle={projects[2].subtitle} tags={projects[2].tags} variant={projects[2].variant}>
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center px-4 md:px-10 sm:-mt-20 transition-all duration-700 group-hover:-translate-y-[55%]">
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center px-4 md:px-10 sm:-mt-20 transition-all duration-700 group-hover:-translate-y-[53%]">
               <div className="relative w-full max-w-[420px] aspect-[16/9] bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.08)] flex items-center justify-center overflow-hidden group-hover:bg-white/60 transition-all duration-700">
                 {/* Shield Visual */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#1D91A1]/5 to-transparent" />
