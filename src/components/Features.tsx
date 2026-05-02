@@ -75,24 +75,24 @@ const FeatureCard = memo(({ id, title, subtitle, variant, children, tags, classN
     <motion.div
       {...cardMotion}
       whileTap={{ scale: 0.99 }}
-      className={`group rounded-xl md:rounded-2xl p-6 md:p-10 relative overflow-hidden flex flex-col h-auto sm:h-[320px] md:h-[480px] min-h-[240px] shadow-sm hover:shadow-md transition-shadow duration-500 border border-black/[0.03] cursor-pointer ${VARIANT_CLASS[variant] ?? 'bg-[#EFEEE7]'} ${className ?? ''}`}
+      className={`group rounded-2xl md:rounded-3xl p-5 md:p-10 relative overflow-hidden flex flex-col h-[420px] sm:h-[380px] md:h-[500px] shadow-sm hover:shadow-xl transition-all duration-500 border border-black/[0.03] cursor-pointer ${VARIANT_CLASS[variant] ?? 'bg-[#EFEEE7]'} ${className ?? ''}`}
     >
-      <div className="flex justify-end items-start z-20 shrink-0 mb-4 sm:mb-0">
-        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:bg-[#1D91A1] group-hover:text-white group-hover:border-[#1D91A1] transition-all duration-500">
-          <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      <div className="flex justify-end items-start z-30 shrink-0">
+        <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border border-white/50 shadow-sm group-hover:bg-[#1D91A1] group-hover:text-white group-hover:border-[#1D91A1] transition-all duration-500">
+          <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>
 
-      <div className="flex-1 w-full relative z-0 min-h-[180px] sm:min-h-0">
+      <div className="flex-1 w-full relative z-10 flex items-center justify-center -mt-8 sm:-mt-12 md:-mt-16">
         {children}
       </div>
 
-      <div className="relative sm:absolute sm:inset-x-6 md:inset-x-8 sm:bottom-6 md:bottom-8 bg-[#FDFDFC]/80 backdrop-blur-xl p-6 md:p-8 rounded-xl md:rounded-2xl z-20 border border-white/50 shadow-sm transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] flex flex-col gap-3 mt-auto sm:mt-0">
-        <h3 className="font-bold text-2xl md:text-3xl lg:text-4xl text-[#1A1A1A] tracking-tight group-hover:text-[#1D91A1] transition-colors leading-tight mb-1">{title}</h3>
-        <p className="text-[#3E4240] text-base md:text-lg font-medium leading-relaxed opacity-90">{subtitle}</p>
-        <div className="flex flex-wrap gap-2 pt-2">
+      <div className="absolute inset-x-4 bottom-4 sm:inset-x-6 sm:bottom-6 md:inset-x-8 md:bottom-8 bg-white/80 backdrop-blur-xl p-5 md:p-8 rounded-xl md:rounded-2xl z-20 border border-white/50 shadow-lg transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex flex-col gap-2.5 sm:gap-3">
+        <h3 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#1A1A1A] tracking-tight group-hover:text-[#1D91A1] transition-colors leading-tight">{title}</h3>
+        <p className="text-[#3E4240] text-[13px] sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed opacity-90 line-clamp-2">{subtitle}</p>
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1 md:pt-2">
           {tags.map((tag) => (
-            <span key={tag} className="font-mono text-[9px] md:text-[10px] text-[#8A8A85] bg-black/[0.03] border border-black/[0.05] px-2.5 py-1 rounded-full tracking-widest uppercase">
+            <span key={tag} className="font-mono text-[8px] md:text-[10px] text-[#8A8A85] bg-black/[0.03] border border-black/[0.05] px-2 md:px-2.5 py-0.5 md:py-1 rounded-full tracking-widest uppercase">
               {tag}
             </span>
           ))}
