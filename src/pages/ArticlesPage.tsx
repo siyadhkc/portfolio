@@ -20,7 +20,7 @@ const ArticlesPage = () => {
         <link rel="canonical" href="https://siyadhkc.vercel.app/articles" />
       </Helmet>
 
-      <main className="min-h-screen relative z-10 overflow-hidden ">
+      <main className="min-h-screen relative z-10 overflow-hidden">
         <Articles />
 
         {/* Minimal Footer */}
@@ -32,18 +32,18 @@ const ArticlesPage = () => {
           className="w-full max-w-[860px] mx-auto px-6 md:px-8 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-black/[0.06]"
         >
           <div className="flex items-center gap-5">
-            <span className="flex items-center gap-2.5 font-mono text-[9px] tracking-[0.35em] text-[#ABABAB] uppercase">
-              <span className="w-1 h-1 rounded-full bg-[#1D91A1]/40 inline-block"></span>
+            <span className="flex items-center gap-2.5 font-mono text-[9px] tracking-[0.35em] text-slate-500 uppercase font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#A88438]/40 inline-block animate-pulse"></span>
               © 2026 SIYADHKC
             </span>
             <span className="hidden sm:block w-px h-3 bg-black/[0.06]"></span>
-            <span className="hidden sm:block font-mono text-[9px] tracking-[0.2em] text-[#ABABAB] uppercase">Developer / Researcher</span>
+            <span className="hidden sm:block font-mono text-[9px] tracking-[0.2em] text-slate-500 uppercase font-semibold">Developer / Researcher</span>
           </div>
 
           <div className="flex items-center gap-7">
             <Link
               to="/"
-              className="font-mono text-[9px] tracking-[0.2em] text-[#ABABAB] hover:text-[#1A1A1A] uppercase transition-colors duration-200"
+              className="font-mono text-[9px] tracking-[0.2em] text-slate-500 hover:text-slate-800 uppercase transition-colors duration-200 font-semibold"
             >
               Home
             </Link>
@@ -56,7 +56,7 @@ const ArticlesPage = () => {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="font-mono text-[9px] tracking-[0.2em] text-[#ABABAB] hover:text-[#1A1A1A] uppercase transition-colors duration-200"
+                className="font-mono text-[9px] tracking-[0.2em] text-slate-500 hover:text-slate-800 uppercase transition-colors duration-200 font-semibold"
               >
                 {link.label}
               </a>

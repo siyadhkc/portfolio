@@ -4,17 +4,17 @@
 
 :root {
   background-color: #FAF9F6;
+  color: #1e293b;
 }
 
 html {
   background-color: #FAF9F6;
-  scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
+  color-scheme: light;
 }
 
 @layer base {
   body {
-    @apply font-sans antialiased text-comet-text bg-comet-cream selection:bg-comet-teal selection:text-white overflow-x-hidden;
+    @apply font-sans antialiased text-slate-800 bg-[#FAF9F6] selection:bg-purple-600/10 selection:text-purple-600 overflow-x-hidden;
     scroll-padding-top: 120px;
   }
 
@@ -24,7 +24,7 @@ html {
   h4,
   h5,
   h6 {
-    @apply tracking-tight;
+    @apply tracking-tight font-medium;
   }
 }
 
@@ -39,41 +39,144 @@ html {
 
   @keyframes float-slow {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(15px, -15px) scale(1.02); }
-    66% { transform: translate(-10px, 10px) scale(0.98); }
+    33% { transform: translate(12px, -12px) scale(1.02); }
+    66% { transform: translate(-8px, 8px) scale(0.98); }
+  }
+
+  @keyframes float-blob-1 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate3d(35px, -45px, 0) scale(1.06) rotate(120deg); }
+    66% { transform: translate3d(-25px, 25px, 0) scale(0.94) rotate(240deg); }
+  }
+  @keyframes float-blob-2 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(360deg); }
+    33% { transform: translate3d(-40px, 30px, 0) scale(0.94) rotate(240deg); }
+    66% { transform: translate3d(30px, -40px, 0) scale(1.06) rotate(120deg); }
+  }
+  @keyframes float-blob-3 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(30px, 40px, 0) scale(1.04); }
+  }
+  @keyframes float-blob-4 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(0.92); }
+    50% { transform: translate3d(-25px, -35px, 0) scale(1.04); }
   }
 
   .animate-float-slow {
     animation: float-slow 20s ease-in-out infinite;
   }
 
+  .animate-blob-1 {
+    animation: float-blob-1 32s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-blob-2 {
+    animation: float-blob-2 36s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-blob-3 {
+    animation: float-blob-3 28s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-blob-4 {
+    animation: float-blob-4 40s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* Soft Off-White Translucent Glass Panels */
   .glass-panel {
-    @apply bg-white/40 backdrop-blur-md border border-white/20 shadow-glass;
+    @apply bg-white/30 backdrop-blur-md border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.02)];
   }
 
   .dark-glass-panel {
-    @apply bg-black/40 backdrop-blur-md border border-white/10 shadow-dark-glass;
+    @apply bg-white/45 backdrop-blur-lg border border-white/60 shadow-[0_12px_36px_rgba(0,0,0,0.03)];
+  }
+
+  /* Modern soft gradient background for projects section */
+  .projects-gradient-bg {
+    background: linear-gradient(
+      135deg,
+      rgba(220, 208, 255, 0.08) 0%,
+      rgba(255, 245, 230, 0.08) 25%,
+      rgba(230, 245, 255, 0.08) 50%,
+      rgba(255, 235, 245, 0.08) 75%,
+      rgba(240, 220, 255, 0.08) 100%
+    );
+  }
+
+  /* Custom Spotlight Hover Effect Utilities for Light Theme */
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(0, 0, 0, 0.05),
+      transparent 40%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.5s ease;
+  }
+
+  .spotlight-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      450px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(139, 92, 246, 0.02), /* Extremely faint lilac glow on hover */
+      transparent 55%
+    );
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  @media (hover: hover) {
+    .spotlight-card:hover::after {
+      opacity: 1;
+    }
+  }
+
+  .text-glow-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-800 to-slate-500;
   }
 }
 
-/* Custom scrollbar for webkit */
+/* Custom premium light theme scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-transparent;
+  background: #FAF9F6;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-black/20 rounded-full;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  border: 2px solid #FAF9F6;
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  @apply bg-white/20;
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.18);
 }
 
-/* Hero button shimmer — CSS animation runs on compositor thread (no JS loop) */
+/* Hero button shimmer */
 @keyframes shimmer-sweep {
   0%   { transform: translateX(-100%) skewX(-12deg); }
   100% { transform: translateX(300%) skewX(-12deg); }
@@ -83,9 +186,9 @@ html {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.25) 50%,
     transparent 100%
   );
-  animation: shimmer-sweep 3s ease-in-out infinite;
-  animation-delay: 1s;
+  animation: shimmer-sweep 3.5s ease-in-out infinite;
+  animation-delay: 1.5s;
 }

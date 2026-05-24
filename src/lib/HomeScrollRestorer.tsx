@@ -13,7 +13,7 @@ export default function HomeScrollRestorer() {
     const scrollY = getScroll();
     const section = getSection();
 
-    // Small delay to ensure DOM and Lenis are ready
+    // Small delay to ensure DOM layout is ready
     const timer = setTimeout(() => {
       // 1. Priority: Section-based restoration
       if (section) {

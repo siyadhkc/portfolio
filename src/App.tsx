@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import { Navigation } from './components/Navigation'
 import PageTransition from './components/PageTransition'
 import { AnimatePresence, motion } from 'framer-motion'
+import { CustomCursor } from './components/CustomCursor'
 // import { getSection } from './lib/scrollState'
 
 const Home = lazy(() => import('./pages/Home'))
@@ -12,7 +13,7 @@ const ArticlesPage = lazy(() => import('./pages/ArticlesPage'))
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'))
 
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-comet-cream">
+  <div className="min-h-screen flex items-center justify-center bg-space-black">
     <div className="relative w-12 h-12">
       <motion.svg
         viewBox="0 0 48 48"
@@ -30,7 +31,7 @@ const PageLoader = () => (
           cy="24"
           r="18"
           fill="none"
-          stroke="#1D91A1"
+          stroke="#00f2fe"
           strokeWidth="4"
           strokeLinecap="round"
           animate={{ 
@@ -64,12 +65,14 @@ function ScrollToTop() {
 }
 
 import { GlobalBackground } from './components/GlobalBackground'
+import { SmoothScroll } from './components/SmoothScroll'
 
 function AppContent() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen font-sans bg-transparent text-comet-text selection:bg-[#1D91A1]/30 selection:text-[#1D91A1] relative">
+    <div className="min-h-screen font-sans bg-transparent text-white relative">
+      <CustomCursor />
       <GlobalBackground />
       <ScrollToTop />
       <Navigation />
@@ -125,7 +128,9 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <AppContent />
+        <SmoothScroll>
+          <AppContent />
+        </SmoothScroll>
       </Router>
     </HelmetProvider>
   )
