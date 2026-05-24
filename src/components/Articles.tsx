@@ -18,7 +18,7 @@ const staticArticles: Article[] = [
     excerpt: "How I secure my DRF endpoints. No corporate jargon—just passive protection, audit logging, and rate-limiting that actually holds up.",
     category: 'SECURITY',
     date: 'JAN 15, 2024',
-    url: 'https://medium.com/@siyadhkc',
+    url: 'https://dev.to/siyadhkc',
     featured: true,
   },
   {
@@ -33,7 +33,7 @@ const staticArticles: Article[] = [
     excerpt: 'A raw breakdown of the API vulnerabilities I see most often in the wild and how to systematically kill them at the source.',
     category: 'SECURITY',
     date: 'OCT 5, 2023',
-    url: 'https://medium.com/@siyadhkc',
+    url: 'https://dev.to/siyadhkc',
   },
   {
     title: 'Designing Fault-Tolerant Systems with Celery and Redis',
@@ -47,7 +47,7 @@ const staticArticles: Article[] = [
     excerpt: "Getting into the weeds of how data actually moves across the wire. Understanding the network stack so you can build better apps.",
     category: 'SYSTEMS',
     date: 'FEB 10, 2024',
-    url: 'https://medium.com/@siyadhkc',
+    url: 'https://dev.to/siyadhkc',
   },
 ];
 
@@ -136,31 +136,62 @@ const ArticleCard = memo(({
       whileHover={{ opacity: 1 }}
       className="absolute inset-0 bg-white/30 backdrop-blur-md -z-10 transition-opacity duration-300 rounded-2xl border border-white/50"
     />
-    <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12 relative z-10 px-4 rounded-2xl transition-all">
-      {/* Image Container */}
-      <div className={`w-full ${isFeatured ? 'md:w-[360px] h-[220px] md:h-[260px]' : 'md:w-[320px] h-[190px] md:h-[220px]'} shrink-0 overflow-hidden rounded-2xl bg-white/20 border border-white/50 group-hover:border-purple-500/25 transition-all duration-300 shadow-sm`}>
-        {article.image
-          ? <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" />
-          : <Placeholder category={article.category} />
-        }
-      </div>
 
-      {/* Text Info */}
-      <div className="flex-1 flex flex-col justify-between min-h-[180px] md:min-h-[220px] py-1">
-        <div>
-          <div className="flex items-center gap-6 mb-5">
+    {isFeatured ? (
+      /* ── Featured: full-width image banner on top, text below ── */
+      <div className="flex flex-col gap-7 relative z-10 px-4">
+        {/* Full-width uncropped image */}
+        <div className="w-full rounded-2xl overflow-hidden border border-white/50 group-hover:border-purple-500/25 transition-all duration-300 shadow-sm bg-white/20">
+          {article.image
+            ? <img
+                src={article.image}
+                alt={article.title}
+                className="w-full h-auto block group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+              />
+            : <div className="w-full h-[260px]"><Placeholder category={article.category} /></div>
+          }
+        </div>
+
+        {/* Text below image */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-6">
             <span className={`font-mono text-[9px] tracking-[0.3em] uppercase font-bold ${categoryColor[article.category]}`}>
               {article.category}
             </span>
             <span className="font-mono text-[9px] tracking-[0.2em] text-slate-500 uppercase font-semibold">{article.date}</span>
           </div>
-          <h3 className={`font-bold ${isFeatured ? 'text-[1.7rem] md:text-[2rem]' : 'text-[1.4rem] md:text-[1.65rem]'} leading-[1.18] text-slate-800 tracking-tight mb-4`}>
+          <h3 className="font-bold text-[1.7rem] md:text-[2rem] leading-[1.18] text-slate-800 tracking-tight">
             {article.title}
           </h3>
+          <p className="text-slate-600 text-[13px] sm:text-sm leading-[1.7] font-sans font-semibold max-w-[680px]">{article.excerpt}</p>
         </div>
-        <p className="text-slate-600 text-[13px] sm:text-sm leading-[1.7] font-sans max-w-[480px] font-semibold">{article.excerpt}</p>
       </div>
-    </div>
+    ) : (
+      /* ── Regular: side thumbnail + text ── */
+      <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12 relative z-10 px-4 rounded-2xl transition-all">
+        <div className="w-full md:w-[320px] h-[190px] md:h-[220px] shrink-0 overflow-hidden rounded-2xl bg-white/20 border border-white/50 group-hover:border-purple-500/25 transition-all duration-300 shadow-sm">
+          {article.image
+            ? <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" />
+            : <Placeholder category={article.category} />
+          }
+        </div>
+
+        <div className="flex-1 flex flex-col justify-between min-h-[180px] md:min-h-[220px] py-1">
+          <div>
+            <div className="flex items-center gap-6 mb-5">
+              <span className={`font-mono text-[9px] tracking-[0.3em] uppercase font-bold ${categoryColor[article.category]}`}>
+                {article.category}
+              </span>
+              <span className="font-mono text-[9px] tracking-[0.2em] text-slate-500 uppercase font-semibold">{article.date}</span>
+            </div>
+            <h3 className="font-bold text-[1.4rem] md:text-[1.65rem] leading-[1.18] text-slate-800 tracking-tight mb-4">
+              {article.title}
+            </h3>
+          </div>
+          <p className="text-slate-600 text-[13px] sm:text-sm leading-[1.7] font-sans max-w-[480px] font-semibold">{article.excerpt}</p>
+        </div>
+      </div>
+    )}
   </motion.a>
 ));
 ArticleCard.displayName = 'ArticleCard';
@@ -196,22 +227,16 @@ export const Articles = () => {
 
     const fetchArticles = async () => {
       try {
-        const [devToRes, mediumRes] = await Promise.allSettled([
-          fetch('https://dev.to/api/articles?username=siyadhkc').then(r => {
-            if (!r.ok) throw new Error('Dev.to failed');
-            return r.json();
-          }),
-          fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@siyadhkc').then(r => {
-            if (!r.ok) throw new Error('Medium failed');
-            return r.json();
-          })
-        ]);
+        const devToData = await fetch('https://dev.to/api/articles?username=siyadhkc&per_page=30').then(r => {
+          if (!r.ok) throw new Error('Dev.to failed');
+          return r.json();
+        });
 
         let itemsList: Article[] = [];
 
-        // 1. Process Dev.to articles
-        if (devToRes.status === 'fulfilled' && Array.isArray(devToRes.value)) {
-          const mapped: Article[] = devToRes.value.map((item: any) => ({
+        // Process Dev.to articles
+        if (Array.isArray(devToData)) {
+          const mapped: Article[] = devToData.map((item: any) => ({
             title: item.title,
             excerpt: item.description || '',
             category: getCategoryFromTags(item.tag_list || []),
@@ -220,29 +245,7 @@ export const Articles = () => {
             image: item.cover_image || item.social_image || undefined,
             timestamp: new Date(item.published_at).getTime()
           } as any));
-          itemsList = [...itemsList, ...mapped];
-        }
-
-        // 2. Process Medium articles
-        if (mediumRes.status === 'fulfilled' && mediumRes.value?.status === 'ok') {
-          const mapped: Article[] = (mediumRes.value.items || []).map((item: any) => {
-            const cleanExcerpt = (item.description || item.content || '')
-              .replace(/<[^>]*>/g, '') // Strip HTML
-              .replace(/\s+/g, ' ')
-              .trim()
-              .slice(0, 160) + '...';
-
-            return {
-              title: item.title,
-              excerpt: cleanExcerpt,
-              category: getCategoryFromTags(item.categories || []),
-              date: formatDate(item.pubDate),
-              url: item.link,
-              image: item.thumbnail || undefined,
-              timestamp: new Date(item.pubDate.replace(/-/g, "/")).getTime()
-            } as any;
-          });
-          itemsList = [...itemsList, ...mapped];
+          itemsList = mapped;
         }
 
         // 3. Sort descending by timestamp
@@ -291,26 +294,19 @@ export const Articles = () => {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="pt-28 mt-12 pb-20"
         >
-          <p className="font-light text-[1.75rem] sm:text-[2.2rem] md:text-[2.65rem] text-slate-900 leading-[1.22] tracking-tight max-w-[560px]">
+          <p className="font-medium text-[1.75rem] sm:text-[2.2rem] md:text-[2.65rem] text-slate-900 leading-[1.22] tracking-tight max-w-[560px]">
             My thoughts on Python, web security, and whatever else I'm currently obsessing over.
           </p>
 
           <div className="flex flex-wrap gap-3 mt-10">
-            {[
-              { label: 'Dev.to', href: 'https://dev.to/siyadhkc' },
-              { label: 'Substack', href: 'https://substack.com/@siyadhkc' },
-              { label: 'Medium', href: 'https://medium.com/@siyadhkc' },
-            ].map((platform) => (
-              <a
-                key={platform.label}
-                href={platform.href}
-                target="_blank"
-                rel="noreferrer"
-                className="px-5 py-2.5 rounded-full border border-white/50 bg-white/20 hover:bg-slate-900 hover:text-white hover:border-transparent transition-all duration-300 font-mono text-[10px] tracking-[0.2em] uppercase shadow-sm flex items-center gap-2 text-slate-600 font-bold"
-              >
-                {platform.label}
-              </a>
-            ))}
+            <a
+              href="https://dev.to/siyadhkc"
+              target="_blank"
+              rel="noreferrer"
+              className="px-5 py-2.5 rounded-full border border-white/50 bg-white/20 hover:bg-slate-900 hover:text-white hover:border-transparent transition-all duration-300 font-mono text-[10px] tracking-[0.2em] uppercase shadow-sm flex items-center gap-2 text-slate-600 font-bold"
+            >
+              Dev.to
+            </a>
           </div>
         </motion.div>
 

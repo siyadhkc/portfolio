@@ -123,7 +123,7 @@ export const FooterCTA = () => {
             className="flex flex-col items-center text-center mb-12 md:mb-16 select-none"
           >
             <h2 className="font-hero font-black text-[3.2rem] sm:text-[4.5rem] md:text-[6rem] text-transparent bg-clip-text bg-gradient-to-b from-slate-900 to-slate-500 tracking-tight leading-[1] mb-6 uppercase">Get in touch</h2>
-            <p className="text-slate-600 font-sans text-base md:text-xl px-4 max-w-[500px] leading-relaxed font-semibold">Open for security audits, interesting projects, or just a technical chat.</p>
+            <p className="hidden sm:block text-slate-600 font-sans text-base md:text-xl px-4 max-w-[500px] leading-relaxed font-semibold">Open for security audits, interesting projects, or just a technical chat.</p>
           </motion.div>
 
           <div className="w-full">
@@ -280,7 +280,6 @@ export const FooterCTA = () => {
                   <span className="font-mono text-[8px] tracking-[0.2em] text-slate-400 uppercase font-bold">Email</span>
                   <span className="text-slate-800 text-[13px] font-bold tracking-tight truncate max-w-[125px]">siyadhkc@gmail.com</span>
                 </div>
-                <p className="text-slate-500 text-[10px] font-semibold text-left leading-normal font-sans">Reach out directly for audits or chats.</p>
               </motion.a>
 
               {/* Card 2: GitHub */}
@@ -299,7 +298,6 @@ export const FooterCTA = () => {
                   <span className="font-mono text-[8px] tracking-[0.2em] text-slate-400 uppercase font-bold">Code</span>
                   <span className="text-slate-800 text-[13px] font-bold tracking-tight truncate max-w-[125px]">github.com/siyadhkc</span>
                 </div>
-                <p className="text-slate-500 text-[10px] font-semibold text-left leading-normal font-sans">Explore open-source repositories.</p>
               </motion.a>
 
               {/* Card 3: LinkedIn */}
@@ -318,7 +316,6 @@ export const FooterCTA = () => {
                   <span className="font-mono text-[8px] tracking-[0.2em] text-slate-400 uppercase font-bold">LinkedIn</span>
                   <span className="text-slate-800 text-[13px] font-bold tracking-tight truncate max-w-[125px]">linkedin.com/in/siyadhkc</span>
                 </div>
-                <p className="text-slate-500 text-[10px] font-semibold text-left leading-normal font-sans">Connect with other researchers.</p>
               </motion.a>
 
               {/* Card 4: Twitter */}
@@ -339,7 +336,6 @@ export const FooterCTA = () => {
                   <span className="font-mono text-[8px] tracking-[0.2em] text-slate-400 uppercase font-bold">Twitter</span>
                   <span className="text-slate-800 text-[13px] font-bold tracking-tight truncate max-w-[125px]">@siyadhkc</span>
                 </div>
-                <p className="text-slate-500 text-[10px] font-semibold text-left leading-normal font-sans">Read tweets on security & Django.</p>
               </motion.a>
             </motion.div>
           </div>

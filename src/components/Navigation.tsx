@@ -300,7 +300,7 @@ export const Navigation = () => {
             >
               <Download className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 text-[#9F75E3]" />
             </motion.div>
-            <span className="hidden lg:inline text-[12px] tracking-wider uppercase font-semibold">CV</span>
+            <span className="hidden lg:inline text-[12px] tracking-wider uppercase font-semibold">RESUME</span>
           </motion.button>
 
           <div className="h-4 w-px bg-black/10 mx-0.5 hidden sm:block" />
@@ -410,7 +410,7 @@ export const Navigation = () => {
               className="relative w-full max-w-[340px] bg-white rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-black/[0.06] flex flex-col items-center"
             >
               <div className="text-center mb-8">
-                <h3 className="text-[1.35rem] font-bold text-slate-800 tracking-tight mb-1.5">Download CV?</h3>
+                <h3 className="text-[1.35rem] font-bold text-slate-800 tracking-tight mb-1.5">Download Resume?</h3>
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-slate-500 opacity-80">Last updated: May 2026</span>
               </div>
               
