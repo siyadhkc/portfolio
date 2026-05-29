@@ -75,29 +75,29 @@ export const GlobalBackground = () => {
           style={{ x: parallaxX, y: parallaxY }}
           className={`absolute inset-0 transition-opacity duration-1000 ${isProjectDetail ? 'opacity-[0.25]' : 'opacity-100'}`}
         >
-          {/* Soft Lavender-Lilac Blob (Top Left) */}
+          {/* Soft Lavender-Lilac Blob (Top Left) - Optimized blur by 50% & expanded gradient for high FPS */}
           <div 
-            className="absolute -top-[15%] -left-[10%] w-[65vw] h-[65vw] rounded-full bg-[radial-gradient(circle_at_center,hsla(263,90%,94%,0.5)_0%,hsla(263,90%,94%,0.15)_60%,transparent_100%)] blur-[110px] animate-blob-1 pointer-events-none"
+            className="absolute -top-[15%] -left-[10%] w-[65vw] h-[65vw] rounded-full bg-[radial-gradient(circle_at_center,hsla(263,90%,94%,0.45)_0%,hsla(263,90%,94%,0.08)_65%,transparent_100%)] blur-[55px] animate-blob-1 transform-gpu pointer-events-none"
           />
 
-          {/* Soft Peach-Rose Blob (Bottom Right) */}
+          {/* Soft Peach-Rose Blob (Bottom Right) - Optimized blur by 50% & expanded gradient for high FPS */}
           <div 
-            className="absolute -bottom-[15%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle_at_center,hsla(14,90%,94%,0.45)_0%,hsla(14,90%,94%,0.12)_60%,transparent_100%)] blur-[120px] animate-blob-2 pointer-events-none"
+            className="absolute -bottom-[15%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle_at_center,hsla(14,90%,94%,0.4)_0%,hsla(14,90%,94%,0.06)_65%,transparent_100%)] blur-[60px] animate-blob-2 transform-gpu pointer-events-none"
           />
 
-          {/* Soft Mint-Teal Blob (Top Right) */}
+          {/* Soft Mint-Teal Blob (Top Right) - Optimized blur by 50% & expanded gradient for high FPS */}
           <div 
-            className="absolute top-[10%] -right-[15%] w-[55vw] h-[55vw] rounded-full bg-[radial-gradient(circle_at_center,hsla(174,80%,93%,0.4)_0%,hsla(174,80%,93%,0.1)_60%,transparent_100%)] blur-[100px] animate-blob-3 pointer-events-none"
+            className="absolute top-[10%] -right-[15%] w-[55vw] h-[55vw] rounded-full bg-[radial-gradient(circle_at_center,hsla(174,80%,93%,0.35)_0%,hsla(174,80%,93%,0.05)_65%,transparent_100%)] blur-[50px] animate-blob-3 transform-gpu pointer-events-none"
           />
 
-          {/* Soft Champagne-Gold Shimmer (Center-Left) */}
+          {/* Soft Champagne-Gold Shimmer (Center-Left) - Optimized blur by 50% & expanded gradient for high FPS */}
           <div 
-            className="absolute top-[40%] -left-[15%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle_at_center,hsla(35,80%,94%,0.35)_0%,hsla(35,80%,94%,0.08)_60%,transparent_100%)] blur-[90px] animate-blob-4 pointer-events-none"
+            className="absolute top-[40%] -left-[15%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle_at_center,hsla(35,80%,94%,0.3)_0%,hsla(35,80%,94%,0.04)_65%,transparent_100%)] blur-[45px] animate-blob-4 transform-gpu pointer-events-none"
           />
         </motion.div>
       )}
 
-      {/* 3. Mouse-Following Reactive Spotlight Overlay (Ultra-Soft White Glow) - Desktop Only */}
+      {/* 3. Mouse-Following Reactive Spotlight Overlay (Ultra-Soft White Glow) - Highly Optimized Radial Gradient without CPU Blurs */}
       {!isMobile && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
@@ -107,7 +107,7 @@ export const GlobalBackground = () => {
               translateX: '-50%',
               translateY: '-50%',
             }}
-            className={`absolute w-[40vw] h-[40vw] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0%,rgba(168,85,247,0.02)_40%,transparent_100%)] blur-[90px] transition-opacity duration-1000 pointer-events-none ${isProjectDetail ? 'opacity-[0.15]' : 'opacity-100'}`}
+            className={`absolute w-[40vw] h-[40vw] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.45)_0%,rgba(255,255,255,0.12)_30%,rgba(168,85,247,0.02)_65%,transparent_100%)] transition-opacity duration-1000 pointer-events-none transform-gpu ${isProjectDetail ? 'opacity-[0.15]' : 'opacity-100'}`}
           />
         </div>
       )}
@@ -146,10 +146,10 @@ export const GlobalBackground = () => {
         </svg>
       </div>
 
-      {/* 5. Premium Textured Grain Overlay */}
+      {/* 5. Premium Textured Grain Overlay - Optimized numOctaves from 4 to 1 for high frame-rates */}
       <div
         className="absolute inset-0 mix-blend-overlay pointer-events-none opacity-[0.02]"
-        style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.95\" numOctaves=\"4\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}
+        style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.95\" numOctaves=\"1\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}
       />
       
       {/* 6. Base Space Absorbing Gradient Vignette */}
