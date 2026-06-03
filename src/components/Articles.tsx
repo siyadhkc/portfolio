@@ -7,6 +7,7 @@ interface Article {
   category: 'SECURITY' | 'BACKEND' | 'DEVOPS' | 'SYSTEMS';
   date: string;
   url: string;
+  readingTime: number;
   image?: string;
   featured?: boolean;
 }
@@ -19,6 +20,7 @@ const staticArticles: Article[] = [
     category: 'SECURITY',
     date: 'JAN 15, 2024',
     url: 'https://dev.to/siyadhkc',
+    readingTime: 5,
     featured: true,
   },
   {
@@ -27,6 +29,7 @@ const staticArticles: Article[] = [
     category: 'DEVOPS',
     date: 'AUG 20, 2023',
     url: 'https://dev.to/siyadhkc',
+    readingTime: 4,
   },
   {
     title: 'The OWASP API Top 10: What Every Backend Engineer Must Know',
@@ -34,6 +37,7 @@ const staticArticles: Article[] = [
     category: 'SECURITY',
     date: 'OCT 5, 2023',
     url: 'https://dev.to/siyadhkc',
+    readingTime: 6,
   },
   {
     title: 'Designing Fault-Tolerant Systems with Celery and Redis',
@@ -41,6 +45,7 @@ const staticArticles: Article[] = [
     category: 'BACKEND',
     date: 'MAR 2, 2024',
     url: 'https://dev.to/siyadhkc',
+    readingTime: 5,
   },
   {
     title: 'TCP/IP Internals for Application Developers',
@@ -48,6 +53,7 @@ const staticArticles: Article[] = [
     category: 'SYSTEMS',
     date: 'FEB 10, 2024',
     url: 'https://dev.to/siyadhkc',
+    readingTime: 7,
   },
 ];
 
@@ -76,21 +82,6 @@ const getCategoryFromTags = (tags: string[] | string): Article['category'] => {
   return 'BACKEND';
 };
 
-const formatDate = (dateStr: string) => {
-  try {
-    if (!dateStr) return 'OCT 5, 2023';
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return 'OCT 5, 2023';
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    }).toUpperCase();
-  } catch {
-    return 'OCT 5, 2023';
-  }
-};
-
 // ── Section header ────────────────────────────────────────────────────────────
 const SectionHeader = memo(({ label }: { label: string }) => (
   <div className="flex items-center gap-4 mb-6 mt-8">
@@ -102,10 +93,6 @@ SectionHeader.displayName = 'SectionHeader';
 
 // ── Article card ──────────────────────────────────────────────────────────────
 const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; isFeatured?: boolean }) => {
-  // Dynamic reading time calculation: approx. 200 WPM
-  const wordCount = article.title.split(/\s+/).length + article.excerpt.split(/\s+/).length;
-  const readTime = Math.max(2, Math.ceil(wordCount / 12) + 1);
-
   return (
     <a
       href={article.url}
@@ -122,7 +109,7 @@ const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; i
           </span>
           <span className="text-zinc-500 font-semibold">{article.date}</span>
           <span className="text-zinc-700 hidden xs:inline">•</span>
-          <span className="text-zinc-500 font-semibold uppercase hidden xs:inline">{readTime} MIN READ</span>
+          <span className="text-zinc-500 font-semibold uppercase hidden xs:inline">{article.readingTime} MIN READ</span>
         </div>
         <h3 className={`font-sans font-bold text-zinc-100 group-hover:text-cyan-400 transition-colors leading-tight ${
           isFeatured ? 'text-xl sm:text-[1.35rem]' : 'text-lg sm:text-[1.15rem]'
@@ -174,14 +161,18 @@ export const Articles = () => {
         if (Array.isArray(devToData)) {
           const mapped = devToData.map((item) => {
             const val = item as Record<string, unknown>;
+            const pubDate = String(val.published_at || val.published_timestamp || '');
+            const parsedTimestamp = pubDate ? new Date(pubDate).getTime() : Date.now();
+            
             return {
               title: String(val.title || ''),
               excerpt: String(val.description || ''),
               category: getCategoryFromTags((val.tag_list as string[]) || []),
-              date: formatDate(String(val.published_at || '')),
+              date: String(val.readable_publish_date || 'JUN 3').toUpperCase(),
               url: String(val.url || ''),
+              readingTime: Number(val.reading_time_minutes || 3),
               image: val.cover_image ? String(val.cover_image) : (val.social_image ? String(val.social_image) : undefined),
-              timestamp: new Date(String(val.published_at || '')).getTime()
+              timestamp: isNaN(parsedTimestamp) ? Date.now() : parsedTimestamp
             };
           });
           itemsList = mapped;
@@ -206,6 +197,7 @@ export const Articles = () => {
     fetchArticles();
     return () => { active = false; };
   }, []);
+
 
   const featuredArticles = articlesList.filter(a => a.featured);
   const recentArticles   = articlesList.filter(a => !a.featured);
