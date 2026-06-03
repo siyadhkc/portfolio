@@ -1,14 +1,16 @@
 import React from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, Github, ExternalLink, ShieldCheck, Database, Lock, Code, Layers, Zap, Activity } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, ShieldCheck, Database, Lock, Code, Layers, Zap, Activity, Network } from 'lucide-react';
 import { projects } from '../lib/projects';
 import { Helmet } from 'react-helmet-async';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
-  'mockapi-pro':  <Database className="w-5 h-5 text-cyan-400" />,
-  'vulnapi':      <ShieldCheck className="w-5 h-5 text-cyan-400" />,
+  'mockapi-pro':   <Database className="w-5 h-5 text-cyan-400" />,
+  'vulnapi':       <ShieldCheck className="w-5 h-5 text-cyan-400" />,
   'django-secure': <Lock className="w-5 h-5 text-violet-400" />,
-  'sentinel-api': <Activity className="w-5 h-5 text-cyan-400" />,
+  'sentinel-api':  <Activity className="w-5 h-5 text-cyan-400" />,
+  'packet-sentry': <Network className="w-5 h-5 text-indigo-400" />,
+  'nebula-db':     <Database className="w-5 h-5 text-violet-400" />,
 };
 
 const ProjectDetails = () => {

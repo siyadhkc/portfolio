@@ -79,6 +79,40 @@ export const projects: Project[] = [
       'gRPC-native telemetry and alert dispatching'
     ],
     tech: ['Go', 'WebAssembly', 'Redis', 'gRPC', 'Prometheus']
+  },
+  {
+    id: 'packet-sentry',
+    title: 'WireGuard Kernel Mesh',
+    subtitle: 'Decentralized kernel-space virtual private mesh network with automatic peer routing and key rotation.',
+    description: 'A user-space control plane linking Linux kernel WireGuard interfaces. It builds mesh networks with low-overhead routing paths, dynamically rotating cryptographic keys via a custom consensus algorithm.',
+    tags: ['Rust', 'Kernel', 'WireGuard'],
+    variant: 'indigo',
+    github: 'https://github.com/siyadhkc',
+    live: 'https://github.com/siyadhkc',
+    features: [
+      'Kernel-space encryption via WireGuard driver hooks',
+      'Dynamic path optimization using latency triangulation',
+      'Automated key rotation via secure handshakes',
+      'Real-time mesh topology visualization and status'
+    ],
+    tech: ['Rust', 'eBPF', 'WireGuard', 'Linux Kernel', 'gRPC']
+  },
+  {
+    id: 'nebula-db',
+    title: 'Nebula KV Engine',
+    subtitle: 'Highly-available, LSM-tree structured key-value store with Raft consensus and zero-allocation parser.',
+    description: 'An embedded LSM-tree database engine designed for extreme write performance. It incorporates a custom Raft consensus driver for distributed replication, linearizable reads, and auto-sharding.',
+    tags: ['Go', 'Database', 'Distributed'],
+    variant: 'blue',
+    github: 'https://github.com/siyadhkc',
+    live: 'https://github.com/siyadhkc',
+    features: [
+      'LSM-tree storage engine with active compaction threads',
+      'Raft consensus log replication for crash resiliency',
+      'Zero-allocation custom serialization parser',
+      'HTTP/gRPC interfaces for client integration'
+    ],
+    tech: ['Go', 'Raft', 'Protobuf', 'gRPC', 'RocksDB']
   }
 ];
 

@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { ShieldCheck, Lock, Activity, ArrowUpRight } from 'lucide-react';
+import React, { memo, useState } from 'react';
+import { ShieldCheck, Lock, Activity, ArrowUpRight, ChevronDown, Network, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { projects } from '../lib/projects';
 import { saveScroll, saveSection } from '../lib/scrollState';
@@ -64,10 +64,10 @@ FeatureCard.displayName = 'FeatureCard';
 
 // ── Features page component ───────────────────────────────────────────────────
 export const Features = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <div className="w-full relative z-10 mb-20">
-
-
 
       {/* PROJECTS SECTION */}
       <section id="projects" className="py-16 px-4 md:px-8 w-full max-w-[1000px] mx-auto">
@@ -100,17 +100,17 @@ export const Features = () => {
                   <div className="flex gap-2">
                     <span className="text-cyan-400">[GET]</span>
                     <span className="text-zinc-500">/v1/users/info [DRIFT: 150ms]</span>
-                    <span className="text-zinc-650 ml-auto">{"-> 200 OK"}</span>
+                    <span className="text-zinc-650 ml-auto">{"--> 200 OK"}</span>
                   </div>
                   <div className="flex gap-2">
                     <span className="text-amber-500">[POST]</span>
                     <span className="text-zinc-500">/v1/auth/session [JITTER: 25ms]</span>
-                    <span className="text-zinc-650 ml-auto">{"-> 201 CREATED"}</span>
+                    <span className="text-zinc-650 ml-auto">{"--> 201 CREATED"}</span>
                   </div>
                   <div className="flex gap-2">
                     <span className="text-rose-400">[DROP]</span>
                     <span className="text-zinc-500">/v1/billing/logs [LOSS: 5%]</span>
-                    <span className="text-zinc-650 ml-auto">{"-> TIMEOUT"}</span>
+                    <span className="text-zinc-650 ml-auto">{"--> TIMEOUT"}</span>
                   </div>
                 </div>
               </div>
@@ -185,7 +185,7 @@ export const Features = () => {
                 </div>
                 <Activity className="w-4 h-4 text-cyan-400" />
               </div>
-              {/* Static hearts metric chart */}
+              {/* Static metric chart */}
               <div className="w-full h-12 flex items-end gap-1">
                 {[30, 60, 40, 80, 50, 70, 45, 90, 80, 85].map((h, i) => (
                   <div 
@@ -208,7 +208,105 @@ export const Features = () => {
             </div>
           </FeatureCard>
 
+          {/* ── Expanded cards — shown only when isExpanded is true ── */}
+          {isExpanded && (
+            <>
+              {/* Card 5: WireGuard Kernel Mesh */}
+              <FeatureCard id="packet-sentry" title={projects[4].title} subtitle={projects[4].subtitle} tags={projects[4].tags}>
+                <div className="w-full max-w-[340px] bg-zinc-950 border border-zinc-850 rounded-xl overflow-hidden shadow-2xl">
+                  <div className="h-6 bg-zinc-900 border-b border-zinc-850 flex items-center px-3 justify-between">
+                    <div className="flex gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-850" />
+                    </div>
+                    <Network className="w-3.5 h-3.5 text-indigo-400 opacity-80" />
+                  </div>
+                  <div className="p-4 font-mono text-[9px] space-y-2 text-zinc-400">
+                    <div className="flex justify-between items-center border-b border-zinc-900 pb-1.5">
+                      <span className="text-indigo-400 font-bold tracking-wider">WG_MESH: ACTIVE</span>
+                      <span className="text-zinc-650">3 peers</span>
+                    </div>
+                    <div className="space-y-1.5">
+                      {[
+                        { peer: 'peer-a1f3', ip: '10.0.0.2', lat: '0.8ms', status: 'text-cyan-400' },
+                        { peer: 'peer-b7c2', ip: '10.0.0.5', lat: '1.2ms', status: 'text-cyan-400' },
+                        { peer: 'peer-d4e9', ip: '10.0.0.9', lat: '2.4ms', status: 'text-amber-500' },
+                      ].map(({ peer, ip, lat, status }) => (
+                        <div key={peer} className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className={`w-1.5 h-1.5 rounded-full ${status === 'text-cyan-400' ? 'bg-cyan-500' : 'bg-amber-500'} animate-pulse`} />
+                            <span className="text-zinc-400">{peer}</span>
+                          </div>
+                          <span className="text-zinc-600">{ip}</span>
+                          <span className={status}>{lat}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="pt-1.5 border-t border-zinc-900 flex justify-between items-center">
+                      <span className="text-zinc-600">KEY_ROTATION</span>
+                      <span className="text-indigo-400 font-bold">SCHEDULED: 3600s</span>
+                    </div>
+                  </div>
+                </div>
+              </FeatureCard>
+
+              {/* Card 6: Nebula KV Engine */}
+              <FeatureCard id="nebula-db" title={projects[5].title} subtitle={projects[5].subtitle} tags={projects[5].tags}>
+                <div className="w-full max-w-[340px] bg-zinc-950 border border-zinc-850 rounded-xl overflow-hidden shadow-2xl">
+                  <div className="h-6 bg-zinc-900 border-b border-zinc-850 flex items-center px-3 justify-between">
+                    <div className="flex gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-850" />
+                    </div>
+                    <Database className="w-3.5 h-3.5 text-violet-400 opacity-80" />
+                  </div>
+                  <div className="p-4 font-mono text-[9px] space-y-2 text-zinc-400">
+                    <div className="flex justify-between items-center border-b border-zinc-900 pb-1.5">
+                      <span className="text-violet-400 font-bold tracking-wider">RAFT_CLUSTER: QUORUM</span>
+                      <span className="text-zinc-650">3/3</span>
+                    </div>
+                    <div className="space-y-1.5">
+                      {[
+                        { node: 'node-0 [LEADER]', state: 'text-violet-400', writes: '42k/s' },
+                        { node: 'node-1', state: 'text-zinc-400', writes: 'synced' },
+                        { node: 'node-2', state: 'text-zinc-400', writes: 'synced' },
+                      ].map(({ node, state, writes }) => (
+                        <div key={node} className="flex items-center justify-between">
+                          <span className={state}>{node}</span>
+                          <span className="text-zinc-600">{writes}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="pt-1.5 border-t border-zinc-900 space-y-1">
+                      <div className="flex justify-between">
+                        <span className="text-zinc-600">LSM_COMPACTION</span>
+                        <span className="text-cyan-400">RUNNING</span>
+                      </div>
+                      <div className="w-full h-1 bg-zinc-900 rounded overflow-hidden">
+                        <div className="h-full bg-violet-500/60 w-[62%]" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </FeatureCard>
+            </>
+          )}
+
         </div>
+
+        {/* ── Load More / Show Less toggle ─────────────────────────────────── */}
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={() => setIsExpanded((v) => !v)}
+            className="group flex items-center gap-2.5 px-6 py-2.5 rounded-lg bg-zinc-900/60 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-cyan-400 font-mono text-[11px] uppercase tracking-wider font-bold transition-all duration-200"
+          >
+            <span>{isExpanded ? 'Show Less' : 'Load More'}</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+            />
+          </button>
+        </div>
+
       </section>
 
     </div>
