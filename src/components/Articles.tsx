@@ -164,7 +164,7 @@ export const Articles = () => {
     let active = true;
     const fetchArticles = async () => {
       try {
-        const devToData = await fetch('https://dev.to/api/articles?username=siyadhkc&per_page=30').then(r => {
+        const devToData = await fetch(`https://dev.to/api/articles?username=siyadhkc&per_page=30&nocache=${Date.now()}`).then(r => {
           if (!r.ok) throw new Error('Dev.to failed');
           return r.json();
         });
