@@ -14,70 +14,71 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'mockapi-pro',
-    title: 'MockAPI Pro',
-    subtitle: 'A self-hostable mock server for teams who need reliable APIs during development.',
-    description: 'I built MockAPI Pro to fix the bottlenecks I faced in my own development cycles. It handles complex rules and OpenAPI imports so teams can stop waiting on backend deploys and start coding against stable mocks.',
-    tags: ['Django', 'React', 'Docker'],
+    title: 'HyperMock Sandbox',
+    subtitle: 'High-fidelity sandbox API emulation and network virtualization engine for distributed meshes.',
+    description: 'HyperMock emulates complex multi-service microservice meshes. It compiles OpenAPI specifications into state-machine graphs, allowing simulation of extreme latency injection, packet loss, and contract drift verification in local sandboxed environments.',
+    tags: ['Go', 'Rust', 'Docker'],
     variant: 'teal',
     github: 'https://github.com/siyadhkc',
     live: 'https://github.com/siyadhkc',
     features: [
-      'Team workspaces for shared mocks',
-      'Rule engine for simulating edge cases',
-      'OpenAPI (Swagger) import support',
-      'Docker-ready for local or cloud hosting'
+      'Stateful API emulation via OpenAPI compiled graphs',
+      'Network drift simulation (jitter, latency, packet loss)',
+      'Dynamic response computation using custom script runtimes',
+      'Virtual network isolation for sandbox testing'
     ],
-    tech: ['Django REST Framework', 'React', 'Redis', 'PostgreSQL', 'Docker Compose']
+    tech: ['Go', 'WebAssembly', 'Redis', 'PostgreSQL', 'Docker Compose']
   },
   {
     id: 'vulnapi',
-    title: 'VulnAPI',
-    subtitle: 'Python-native DAST scanner for REST APIs, built to automate OWASP security checks.',
-    description: 'VulnAPI automates the security audits I found myself doing manually over and over. It scans for OWASP API Top 10 vulnerabilities and gives you a clear report on what needs fixing.',
-    tags: ['Python', 'Security', 'OWASP'],
+    title: 'VulnAPI Engine',
+    subtitle: 'Distributed DAST & stateful fuzzer for GraphQL, gRPC, and REST API vulnerability discovery.',
+    description: 'VulnAPI is an automated testing platform that analyzes auth-sequences, maps endpoints, and fuzzes payloads. It executes taint-checking and token signature bypass logic to identify business-logic flaws and injection exploits with zero false positives.',
+    tags: ['Python', 'Security', 'Fuzzing'],
     variant: 'coral',
     github: 'https://github.com/siyadhkc',
     live: 'https://github.com/siyadhkc',
     features: [
-      'Automated scanning for API vulnerabilities',
-      'Interactive reports with fix recommendations',
-      'Payload injection testing',
-      'Active and passive scanning modes'
+      'Stateful auth-sequence tracking (OAuth2/JWT)',
+      'Automated protocol fuzzing (GraphQL, gRPC, REST)',
+      'Cryptographic signature bypass verification',
+      'Taint-analysis reporting for code vulnerability mapping'
     ],
-    tech: ['Python', 'Django', 'React', 'Celery', 'SQLite']
+    tech: ['Python', 'Django', 'Celery', 'Redis', 'PostgreSQL']
   },
   {
     id: 'django-secure',
-    title: 'django-secure',
-    subtitle: 'A drop-in package for hardening Django REST APIs with passive defense layers.',
-    description: 'Security shouldn\'t be an afterthought. I wrote this package to give DRF projects instant protection—secure headers, audit logging, and rate limiting—without rewriting the whole codebase.',
-    tags: ['Django', 'DRF', 'Security'],
+    title: 'py-ebpf-guard',
+    subtitle: 'Kernel-level security instrumentation for Python runtime environments using eBPF.',
+    description: 'A drop-in security layer for Python applications. By compiling and loading eBPF programs into the Linux kernel, it hooks file-system access and system calls (syscalls) at the container level, blocking RCE and shell injections before they touch the interpreter.',
+    tags: ['eBPF', 'C', 'Security'],
     variant: 'sand',
     github: 'https://github.com/siyadhkc',
     live: 'https://github.com/siyadhkc',
     features: [
-      'Instant security header configuration',
-      'Middleware for detailed audit logging',
-      'Configurable IP rate limiting',
-      'Minimal setup for existing projects'
+      'Kernel-level syscall hooking for Python containers',
+      'RCE detection and execution blocking via eBPF filters',
+      'Zero-overhead file and network access logging',
+      'Drop-in integration for containerized Django/FastAPI apps'
     ],
-    tech: ['Django', 'Django REST Framework', 'Python']
+    tech: ['eBPF', 'C', 'Python', 'Linux Kernel']
   },
   {
     id: 'sentinel-api',
-    title: 'Sentinel API',
-    subtitle: 'Real-time security gateway that monitors and blocks threats before they hit your backend.',
-    description: 'Sentinel acts as the first line of defense. It monitors traffic in real-time and automatically blocks malicious actors before they can even touch your application logic.',
-    tags: ['Go', 'Redis', 'Security'],
+    title: 'Sentinel API WAF',
+    subtitle: 'High-performance API WAF & reverse proxy built in Go with a WebAssembly plugin engine.',
+    description: 'Sentinel runs in front of backend clusters, handling 100k+ requests per second. It evaluates security filters compiled to WASM, automatically mitigating DDoS, credential stuffing, and injection attacks with under 1.2ms latency overhead.',
+    tags: ['Go', 'WASM', 'Proxy'],
     variant: 'blue',
     github: 'https://github.com/siyadhkc',
     live: 'https://github.com/siyadhkc',
     features: [
-      'Live threat detection and blocking',
-      'Automated IP blacklisting',
-      'Detailed audit logs for every event',
-      'Real-time alerts via Slack/Discord'
+      '100k+ req/sec routing with under 1.2ms latency overhead',
+      'WASM-based dynamic security filter execution',
+      'Real-time distributed rate-limiting via Redis cluster',
+      'gRPC-native telemetry and alert dispatching'
     ],
-    tech: ['Go', 'Redis', 'gRPC', 'Prometheus']
+    tech: ['Go', 'WebAssembly', 'Redis', 'gRPC', 'Prometheus']
   }
 ];
+

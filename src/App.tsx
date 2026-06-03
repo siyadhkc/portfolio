@@ -1,51 +1,18 @@
 import React, { Suspense, lazy, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { Navigation } from './components/Navigation'
 import PageTransition from './components/PageTransition'
-import { AnimatePresence, motion } from 'framer-motion'
-import { CustomCursor } from './components/CustomCursor'
-// import { getSection } from './lib/scrollState'
+import { AnimatePresence } from 'framer-motion'
 
 const Home = lazy(() => import('./pages/Home'))
-const AboutPage = lazy(() => import('./pages/AboutPage'))
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'))
 const ArticlesPage = lazy(() => import('./pages/ArticlesPage'))
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'))
 
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-space-black">
-    <div className="relative w-12 h-12">
-      <motion.svg
-        viewBox="0 0 48 48"
-        initial={{ rotate: 0 }}
-        animate={{ rotate: 360 }}
-        transition={{ 
-          duration: 2, 
-          repeat: Infinity, 
-          ease: "linear" 
-        }}
-        className="w-full h-full"
-      >
-        <motion.circle
-          cx="24"
-          cy="24"
-          r="18"
-          fill="none"
-          stroke="#00f2fe"
-          strokeWidth="4"
-          strokeLinecap="round"
-          animate={{ 
-            pathLength: [0.05, 0.75, 0.05],
-            rotate: [0, 270, 360]
-          }}
-          transition={{ 
-            duration: 1.5,
-            repeat: Infinity,
-            ease: [0.4, 0, 0.2, 1]
-          }}
-        />
-      </motion.svg>
-    </div>
+  <div className="min-h-screen flex items-center justify-center bg-zinc-950 font-mono text-[11px] tracking-[0.25em] text-zinc-500 uppercase font-semibold">
+    [ loading... ]
   </div>
 )
 
@@ -65,14 +32,12 @@ function ScrollToTop() {
 }
 
 import { GlobalBackground } from './components/GlobalBackground'
-import { SmoothScroll } from './components/SmoothScroll'
 
 function AppContent() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen font-sans bg-transparent text-white relative">
-      <CustomCursor />
+    <div className="min-h-screen font-sans bg-transparent text-zinc-100 relative">
       <GlobalBackground />
       <ScrollToTop />
       <Navigation />
@@ -88,18 +53,19 @@ function AppContent() {
               </Suspense>
             }
           />
+          <Route path="/about" element={<Navigate to="/" replace />} />
           <Route
-            path="/about"
+            path="/projects"
             element={
               <Suspense fallback={<PageLoader />}>
                 <PageTransition>
-                  <AboutPage />
+                  <ProjectsPage />
                 </PageTransition>
               </Suspense>
             }
           />
           <Route
-            path="/articles"
+            path="/blog"
             element={
               <Suspense fallback={<PageLoader />}>
                 <PageTransition>
@@ -108,6 +74,7 @@ function AppContent() {
               </Suspense>
             }
           />
+          <Route path="/articles" element={<Navigate to="/blog" replace />} />
           <Route
             path="/projects/:id"
             element={
@@ -128,9 +95,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <SmoothScroll>
-          <AppContent />
-        </SmoothScroll>
+        <AppContent />
       </Router>
     </HelmetProvider>
   )

@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
-import { Mail, Download, X, Github, Linkedin, Twitter, BookOpen, Briefcase, User } from 'lucide-react';
-import { motion, useScroll, AnimatePresence, useTransform } from 'framer-motion';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { Mail, Download, X, Github, Linkedin, Twitter, BookOpen, Briefcase, User, Menu } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 import resumeFile from '../assets/Siyadhkc_Resume.pdf';
-import { saveSection, clearAllScroll } from '../lib/scrollState';
+import { clearAllScroll } from '../lib/scrollState';
 
-// ── Static data ─────────────────────────────────────────────────────────────
 const CONTACT_LINKS = [
   { icon: <Mail className="w-4 h-4" />, label: 'Email', href: 'mailto:siyadhkc@gmail.com' },
   { icon: <Github className="w-4 h-4" />, label: 'GitHub', href: 'https://github.com/siyadhkc' },
@@ -15,429 +13,280 @@ const CONTACT_LINKS = [
 ];
 
 const MENU_ITEMS = [
-  { label: 'About', id: '/about', type: 'link', icon: <User className="w-[18px] h-[18px] sm:w-4 sm:h-4" /> },
-  { label: 'Projects', id: 'projects', type: 'scroll', icon: <Briefcase className="w-[18px] h-[18px] sm:w-4 sm:h-4" /> },
-  { label: 'Articles', id: '/articles', type: 'link', icon: <BookOpen className="w-[18px] h-[18px] sm:w-4 sm:h-4" /> },
+  { label: 'About', id: '/', type: 'link', icon: <User className="w-4 h-4" /> },
+  { label: 'Projects', id: '/projects', type: 'link', icon: <Briefcase className="w-4 h-4" /> },
+  { label: 'Blog', id: '/blog', type: 'link', icon: <BookOpen className="w-4 h-4" /> },
 ] as const;
 
-// ── Logo Component with gradient definition ──────────────────────────────────
-interface LogoProps {
-  spinCount: number;
-  onSpin: () => void;
-  pathname: string;
-}
-
-const Logo = memo(({ spinCount, onSpin, pathname }: LogoProps) => {
-  const [trigger, setTrigger] = useState(0);
-
-  return (
-    <Link
-      to="/"
-      onClick={(e) => {
-        onSpin();
-        setTrigger(t => t + 1);
-        clearAllScroll(); // Force clear any saved restoration state
-        
-        // If on Home page, just scroll up
-        if (pathname === '/') {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      }}
-      className="group relative flex items-center outline-none p-2"
-      onMouseEnter={() => setTrigger(t => t + 1)}
-      onTouchStart={() => setTrigger(t => t + 1)}
-    >
-      <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
-        <svg viewBox="0 0 40 40" className="w-full h-full overflow-visible" fill="none">
-          <defs>
-            <linearGradient id="logo-glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#141414" />
-              <stop offset="50%" stopColor= "#511ec0" />
-              <stop offset="100%" stopColor="#e19251" />
-            </linearGradient>
-          </defs>
-
-          <motion.path 
-            key={`${trigger}-top`}
-            d="M28 11 C28 4.5, 12 4.5, 12 13 C12 16.5, 15 18.5, 20 20"
-            stroke="url(#logo-glow-grad)" 
-            strokeWidth="5.5" 
-            strokeLinecap="round"
-            style={{ originX: "10px", originY: "10px" }}
-            initial={{ pathLength: 1, y: 0, x: 0, rotate: 0 }}
-            animate={{ 
-              y: [0, -4, 0],
-              x: [0, -4, 0],
-              rotate: [0, 0, -360]
-            }}
-            transition={{ 
-              duration: 0.8,
-              times: [0, 0.25, 1],
-              ease: "easeInOut"
-            }}
-          />
-
-          <motion.path 
-            key={`${trigger}-bottom`}
-            d="M20 20 C25 21.5, 28 23.5, 28 27 C28 35.5, 12 35.5, 12 29"
-            stroke="url(#logo-glow-grad)" 
-            strokeWidth="5.5" 
-            strokeLinecap="round"
-            style={{ originX: "10px", originY: "10px" }}
-            initial={{ pathLength: 1, y: 0, x: 0, rotate: 0 }}
-            animate={{ 
-              y: [0, 4, 0],
-              x: [0, 4, 0],
-              rotate: [0, 0, 360]
-            }}
-            transition={{ 
-              duration: 0.8,
-              times: [0, 0.25, 1],
-              ease: "easeInOut"
-            }}
-          />
-        </svg>
-
-        <AnimatePresence>
-          {spinCount > 0 && (
-            <motion.div
-              key={spinCount}
-              initial={{ scale: 0.8, opacity: 0.3 }}
-              animate={{ scale: 1.6, opacity: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="absolute inset-0 rounded-full bg-[#9F75E3]/10 pointer-events-none"
-            />
-          )}
-        </AnimatePresence>
-      </div>
-    </Link>
-  );
-});
-Logo.displayName = 'Logo';
-
-// ── Main Navigation component ─────────────────────────────────────────────────
 export const Navigation = () => {
-  const { scrollY } = useScroll();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [logoSpinCount, setLogoSpinCount] = useState(0);
-  const [isDownloadSpinning, setIsDownloadSpinning] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navRef = React.useRef<HTMLDivElement>(null);
+  const drawerRef = React.useRef<HTMLDivElement>(null);
 
-  const handleLogoSpin = useCallback(() => setLogoSpinCount((c) => c + 1), []);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
   const toggleMenu = useCallback(() => setIsMenuOpen((v) => !v), []);
-  const handleDownloadSpin = useCallback(() => setIsDownloadSpinning(true), []);
-
-  const handleNavClick = useCallback(
-    (id: string) => {
-      setIsMenuOpen(false);
-      if (location.pathname !== '/') {
-        saveSection(id);
-        navigate('/');
-        return;
-      }
-      const el = document.getElementById(id);
-      if (el) {
-        const top = el.getBoundingClientRect().top + window.scrollY - 120;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    },
-    [location.pathname, navigate],
-  );
+  
+  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
+  const toggleMobileMenu = useCallback(() => setIsMobileMenuOpen((v) => !v), []);
 
   // Outside-click handler
   useEffect(() => {
-    if (!isMenuOpen) return;
+    if (!isMenuOpen && !isMobileMenuOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const isInsideNav = navRef.current?.contains(target);
+      const isInsideDrawer = drawerRef.current?.contains(target);
+      
+      if (!isInsideNav && !isInsideDrawer) {
         setIsMenuOpen(false);
+        setIsMobileMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isMobileMenuOpen]);
 
-  // Scroll transforms for smooth premium off-white dock transition
-  const topBg = useTransform(scrollY, [0, 50], ['rgba(250,249,246,0)', 'rgba(255,255,255,0.72)']);
-  const blurValue = useTransform(scrollY, [0, 50], ['blur(0px)', 'blur(24px)']);
-  const borderOp = useTransform(scrollY, [0, 50], ['rgba(0,0,0,0)', 'rgba(0,0,0,0.05)']);
-  const shadowValue = useTransform(scrollY, [0, 50], ['none', '0 10px 30px -10px rgba(0,0,0,0.03)']);
-  const navWidth = useTransform(scrollY, [0, 100], ['100%', '98%']);
-  const navY = useTransform(scrollY, [0, 50], ['0px', '4px']);
 
-  // Section observer
-  useEffect(() => {
-    if (location.pathname !== '/') {
-      setActiveSection('');
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
-      },
-      { threshold: 0.3, rootMargin: '-10% 0px -70% 0px' },
-    );
-    const projectSection = document.getElementById('projects');
-    const aboutSection = document.getElementById('about');
-    if (projectSection) observer.observe(projectSection);
-    if (aboutSection) observer.observe(aboutSection);
-    return () => observer.disconnect();
-  }, [location.pathname]);
 
   const navItems = useMemo(
     () =>
-      MENU_ITEMS.map((item) => ({
-        ...item,
-        isActive: item.type === 'link' ? location.pathname === item.id : activeSection === item.id,
-      })),
-    [location.pathname, activeSection],
+      MENU_ITEMS.map((item) => {
+        let isActive = false;
+        if (item.id === '/') {
+          isActive = location.pathname === '/';
+        } else if (item.id === '/projects') {
+          isActive = location.pathname.startsWith('/projects');
+        } else {
+          isActive = location.pathname === item.id;
+        }
+        return {
+          ...item,
+          isActive,
+        };
+      }),
+    [location.pathname],
   );
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-1 sm:px-4 pt-4 md:pt-6 pointer-events-none">
-      <motion.nav
-        ref={navRef}
-        aria-label="Main navigation"
-        style={{
-          backgroundColor: topBg,
-          backdropFilter: blurValue,
-          borderColor: borderOp,
-          boxShadow: shadowValue,
-          width: navWidth,
-          y: navY,
-        }}
-        className="pointer-events-auto relative grid grid-cols-3 items-center px-3 sm:px-4 py-2.5 sm:py-2 w-full max-w-[1000px] rounded-full border border-transparent transition-all duration-300"
-      >
-        {/* Left: Logo */}
-        <div className="flex items-center justify-start overflow-hidden">
-          <Logo
-            spinCount={logoSpinCount}
-            onSpin={handleLogoSpin}
-            pathname={location.pathname}
-          />
-        </div>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#09090b]/90 backdrop-blur-md border-b border-zinc-800/80">
+        <div 
+          ref={navRef}
+          className="mx-auto flex items-center justify-between px-6 py-4 max-w-[1000px] w-full"
+        >
+          {/* Logo */}
+          <div className="flex items-center justify-start">
+            <Link
+              to="/"
+              onClick={() => {
+                clearAllScroll();
+                if (location.pathname === '/') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              className="font-mono text-[13px] tracking-[0.25em] text-zinc-100 hover:text-white uppercase font-bold transition-colors"
+            >
+              siyadhkc
+            </Link>
+          </div>
 
-        {/* Center: Soft Glass Nav Pill with sliding layout transition */}
-        <div className="flex items-center justify-center">
-          <div className="flex items-center gap-1 bg-black/[0.02] p-1.5 sm:p-1.5 rounded-full border border-black/[0.03] shadow-inner">
+          {/* Center Navigation links - hidden on mobile, visible on md and up */}
+          <nav className="hidden md:flex items-center gap-1 sm:gap-2">
             {navItems.map((item) => {
-              const LinkContent = (
-                <span className="relative z-10 flex items-center justify-center w-full h-full gap-2 font-medium tracking-wide">
-                  <span className="flex sm:hidden items-center justify-center">{item.icon}</span>
-                  <span className="hidden sm:inline">{item.label}</span>
-                  <span className="sm:hidden sr-only">{item.label}</span>
-                </span>
-              );
-
+              const baseClass = "px-3 py-1.5 rounded text-[12px] font-mono transition-colors relative duration-150";
+              const activeClass = "text-cyan-400 font-bold bg-zinc-900 border border-zinc-800";
+              const inactiveClass = "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/50";
+              
               return (
-                <div key={item.id} className="relative">
-                  {item.type === 'scroll' ? (
-                    <motion.button
-                      whileHover={{ y: -1 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleNavClick(item.id)}
-                      className={`relative flex items-center justify-center w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2.5 rounded-full text-[13px] transition-colors duration-300 ${
-                        item.isActive ? 'text-[#9F75E3] font-bold' : 'text-slate-500 hover:text-slate-900 font-semibold'
-                      }`}
-                    >
-                      {item.isActive && (
-                        <motion.div
-                          layoutId="activeNavPill"
-                          className="absolute inset-0 bg-white rounded-full border border-black/[0.04] shadow-[0_2px_12px_rgba(159,117,227,0.04)]"
-                          transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-                        />
-                      )}
-                      {LinkContent}
-                    </motion.button>
-                  ) : (
-                    <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.95 }}>
-                      <Link
-                        to={item.id}
-                        className={`relative flex items-center justify-center w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2.5 rounded-full text-[13px] transition-colors duration-300 ${
-                          item.isActive ? 'text-[#9F75E3] font-bold' : 'text-slate-500 hover:text-slate-900 font-semibold'
-                        }`}
-                      >
-                        {item.isActive && (
-                          <motion.div
-                            layoutId="activeNavPill"
-                            className="absolute inset-0 bg-white rounded-full border border-black/[0.04] shadow-[0_2px_12px_rgba(159,117,227,0.04)]"
-                            transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-                          />
-                        )}
-                        {LinkContent}
-                      </Link>
-                    </motion.div>
-                  )}
-                </div>
+                <Link
+                  key={item.id}
+                  to={item.id}
+                  className={`${baseClass} ${item.isActive ? activeClass : inactiveClass}`}
+                >
+                  {item.isActive ? `[ ${item.label} ]` : item.label}
+                </Link>
               );
             })}
-          </div>
-        </div>
+          </nav>
 
-        {/* Right: Actions */}
-        <div className="flex items-center justify-end gap-1.5 sm:gap-3 shrink-0">
-          <motion.button
-            whileHover={{ y: -2, scale: 1.02 }}
-            whileTap={{ scale: 0.96 }}
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center justify-center bg-black/[0.02] hover:bg-black/[0.05] text-slate-800 p-3 sm:px-5 sm:py-2.5 rounded-full font-sans text-[13px] font-semibold shadow-[0_4px_12px_rgba(0,0,0,0.01)] border border-black/[0.04] transition-all pointer-events-auto hover:border-[#9F75E3]/30"
-          >
-            <motion.div
-              animate={{ rotate: isDownloadSpinning ? 360 : 0 }}
-              transition={{ duration: 0.7, ease: 'easeInOut' }}
-              onAnimationComplete={() => setIsDownloadSpinning(false)}
-              className="flex items-center justify-center"
+          {/* Right Actions */}
+          <div className="flex items-center gap-3">
+            {/* Resume button - hidden on small mobile, visible on sm and up */}
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="hidden sm:flex items-center justify-center bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 px-4 py-1.5 rounded text-[11px] font-mono uppercase tracking-wider font-semibold transition-colors"
             >
-              <Download className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 text-[#9F75E3]" />
-            </motion.div>
-            <span className="hidden lg:inline text-[12px] tracking-wider uppercase font-semibold">RESUME</span>
-          </motion.button>
+              <Download className="w-3.5 h-3.5 mr-2 text-cyan-400" />
+              <span>Resume</span>
+            </button>
 
-          <div className="h-4 w-px bg-black/10 mx-0.5 hidden sm:block" />
+            {/* Desktop contact button - hidden on mobile, visible on sm and up */}
+            <button
+              onClick={toggleMenu}
+              className={`hidden sm:flex items-center justify-center p-2 rounded border transition-colors ${
+                isMenuOpen 
+                  ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400' 
+                  : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-zinc-200'
+              }`}
+              aria-label="Toggle contact menu"
+            >
+              {isMenuOpen ? <X className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
+            </button>
 
-          <motion.button
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.96 }}
-            onClick={toggleMenu}
-            className={`hidden sm:flex relative items-center justify-center p-3 sm:px-6 sm:py-3 rounded-full font-sans text-[13px] font-semibold transition-all duration-300 min-w-[48px] lg:min-w-[145px] overflow-hidden border ${
-              isMenuOpen 
-                ? 'bg-gradient-to-r from-[#F6B794] via-[#D4B8FC] to-[#8CD4F5] text-white border-transparent shadow-[0_4px_16px_rgba(159,117,227,0.18)]' 
-                : 'bg-slate-900 hover:bg-slate-800 text-white shadow-sm border-transparent'
-            }`}
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {isMenuOpen ? (
-                <motion.span
-                  key="close"
-                  initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  transition={{ duration: 0.15, ease: 'easeOut' }}
-                  className="flex items-center justify-center gap-2 w-full"
-                >
-                  <X className="w-4 h-4" />
-                  <span className="hidden lg:inline tracking-wide font-mono uppercase text-[11px]">Close</span>
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="contact"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.18, ease: 'easeOut' }}
-                  className="flex items-center justify-center gap-2 w-full"
-                >
-                  <Mail className="w-4 h-4 text-white" />
-                  <span className="hidden lg:inline tracking-wider font-mono uppercase text-[11px]">Contact</span>
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </motion.button>
-        </div>
+            {/* Mobile hamburger menu button - visible on mobile, hidden on md and up */}
+            <button
+              onClick={toggleMobileMenu}
+              className={`flex md:hidden items-center justify-center p-2 rounded border transition-colors ${
+                isMobileMenuOpen 
+                  ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400' 
+                  : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-zinc-200'
+              }`}
+              aria-label="Toggle navigation menu"
+            >
+              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
 
-        {/* Dropdown Menu (Premium off-white glass dropdown) */}
-        <AnimatePresence>
+          {/* Dropdown Menu (Clean layout matching dark technical theme) */}
           {isMenuOpen && (
             <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+              <div
                 onClick={closeMenu}
-                className="fixed inset-0 bg-transparent z-10 pointer-events-auto"
+                className="fixed inset-0 bg-black/40 z-40"
               />
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 10, rotateX: -10 }}
-                animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 10, rotateX: -10 }}
-                transition={{ duration: 0.25, ease: "circOut" }}
-                style={{ transformOrigin: 'top right', willChange: 'transform, opacity' }}
-                className="absolute right-0 top-full mt-4 w-64 bg-white/95 backdrop-blur-3xl border border-black/[0.05] rounded-[2rem] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] z-50 overflow-hidden perspective-[1000px] flex flex-col gap-4"
+              <div
+                className="absolute right-6 top-full mt-2 w-56 bg-zinc-950 border border-zinc-800 rounded-xl p-3 shadow-2xl z-50 flex flex-col gap-1"
               >
-                <div className="grid grid-cols-2 gap-2">
-                  {CONTACT_LINKS.map((link, i) => (
-                    <motion.a
-                      key={link.label}
-                      href={link.href}
-                      initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ delay: i * 0.04, ease: 'easeOut' }}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="flex flex-col items-center gap-2 p-3 rounded-2xl bg-black/[0.01] border border-transparent hover:border-[#9F75E3]/10 hover:bg-[#9F75E3]/[0.02] text-slate-500 hover:text-[#9F75E3] transition-all group"
-                      onClick={closeMenu}
-                    >
-                      <div className="p-2.5 rounded-xl bg-black/[0.02] border border-black/[0.03] shadow-sm transition-all group-hover:bg-[#9F75E3]/10">
-                        {link.icon}
-                      </div>
-                      <span className="text-[10px] font-semibold tracking-wide font-mono uppercase opacity-75 group-hover:opacity-100">
-                        {link.label}
-                      </span>
-                    </motion.a>
-                  ))}
-                </div>
-              </motion.div>
+                <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest px-2.5 py-1.5 border-b border-zinc-900 mb-1">Links / Contact</span>
+                {CONTACT_LINKS.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-cyan-400 hover:bg-zinc-900 transition-colors group"
+                    onClick={closeMenu}
+                  >
+                    <span className="text-zinc-500 group-hover:text-cyan-400 transition-colors">{link.icon}</span>
+                    <span className="text-[12px] font-mono">{link.label}</span>
+                  </a>
+                ))}
+              </div>
             </>
           )}
-        </AnimatePresence>
-      </motion.nav>
+        </div>
+      </header>
 
-      {/* Premium Download Modal (Light theme) */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-end justify-center p-6 pb-20 sm:pb-12 pointer-events-auto">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsModalOpen(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-[4px]"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 40 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-[340px] bg-white rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-black/[0.06] flex flex-col items-center"
-            >
-              <div className="text-center mb-8">
-                <h3 className="text-[1.35rem] font-bold text-slate-800 tracking-tight mb-1.5">Download Resume?</h3>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-slate-500 opacity-80">Last updated: May 2026</span>
-              </div>
-              
-              <div className="flex flex-col w-full gap-2">
+      {/* Mobile Menu Drawer */}
+      {isMobileMenuOpen && (
+        <>
+          <div
+            onClick={closeMobileMenu}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+          />
+          <div
+            ref={drawerRef}
+            className="fixed right-0 top-0 bottom-0 w-[280px] bg-zinc-950 border-l border-zinc-900 p-6 z-50 flex flex-col gap-6 shadow-2xl md:hidden animate-in slide-in-from-right duration-200"
+          >
+            {/* Header / Logo inside drawer */}
+            <div className="flex items-center justify-between border-b border-zinc-900 pb-4">
+              <span className="font-mono text-xs tracking-[0.2em] text-zinc-400 font-bold">MENU</span>
+              <button
+                onClick={closeMobileMenu}
+                className="p-1 text-zinc-500 hover:text-zinc-300 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Navigation links inside drawer */}
+            <nav className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.id}
+                  onClick={closeMobileMenu}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-mono transition-colors ${
+                    item.isActive
+                      ? 'text-cyan-400 font-bold bg-zinc-900 border border-zinc-850'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/50'
+                  }`}
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </Link>
+              ))}
+            </nav>
+
+            {/* Actions inside drawer */}
+            <div className="border-t border-zinc-900 pt-6 flex flex-col gap-4">
+              <button
+                onClick={() => {
+                  closeMobileMenu();
+                  setIsModalOpen(true);
+                }}
+                className="w-full flex items-center justify-center bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-850 py-2.5 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold transition-colors"
+              >
+                <Download className="w-4 h-4 mr-2 text-cyan-400" />
+                Resume
+              </button>
+            </div>
+
+            {/* Social / Contact Links inside drawer */}
+            <div className="mt-auto border-t border-zinc-900 pt-4 flex flex-col gap-1.5">
+              <span className="font-mono text-[9px] text-zinc-600 uppercase tracking-widest px-2 pb-1.5 border-b border-zinc-900/50 mb-1">Connect</span>
+              {CONTACT_LINKS.map((link) => (
                 <a
-                  href={resumeFile}
-                  download="SiyadhKc_CV.pdf"
-                  onClick={() => {
-                    handleDownloadSpin();
-                    setIsModalOpen(false);
-                  }}
-                  className="w-full bg-gradient-to-r from-[#F6B794] via-[#D4B8FC] to-[#8CD4F5] hover:shadow-[0_4px_16px_rgba(159,117,227,0.18)] text-white py-3.5 rounded-xl font-bold text-[13px] transition-all flex items-center justify-center"
+                  key={link.label}
+                  href={link.href}
+                  className="flex items-center gap-3 px-2 py-1.5 text-zinc-400 hover:text-cyan-400 transition-colors group"
+                  onClick={closeMobileMenu}
                 >
-                  Download
+                  <span className="text-zinc-500 group-hover:text-cyan-400 transition-colors">{link.icon}</span>
+                  <span className="text-[11px] font-mono">{link.label}</span>
                 </a>
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="w-full py-3.5 text-slate-500 font-semibold text-[13px] hover:text-slate-800 transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            </motion.div>
+              ))}
+            </div>
           </div>
-        )}
-      </AnimatePresence>
-    </div>
+        </>
+      )}
+
+      {/* Clean Technical Download Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div
+            onClick={() => setIsModalOpen(false)}
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+          />
+          <div className="relative w-full max-w-[340px] bg-zinc-950 border border-zinc-800 rounded-2xl p-6 shadow-2xl flex flex-col items-center">
+            <div className="text-center mb-6 w-full border-b border-zinc-900 pb-4">
+              <h3 className="text-[14px] font-mono font-bold text-zinc-100 tracking-wider mb-1">DOWNLOAD_CV.PDF</h3>
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-500">Last updated: May 2026</span>
+            </div>
+            
+            <div className="flex flex-col w-full gap-2">
+              <a
+                href={resumeFile}
+                download="SiyadhKc_CV.pdf"
+                onClick={() => setIsModalOpen(false)}
+                className="w-full bg-gradient-to-r from-violet-500 to-cyan-500 hover:from-violet-400 hover:to-cyan-400 text-zinc-950 font-bold py-2.5 rounded-lg text-[12px] font-mono uppercase tracking-wider text-center shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300 block"
+              >
+                Confirm Download
+              </a>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="w-full py-2.5 text-zinc-500 font-mono text-[11px] hover:text-zinc-300 transition-colors uppercase tracking-wider"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 export default Navigation;
