@@ -29,21 +29,21 @@ const ArticlesPage = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="w-full max-w-[860px] mx-auto px-6 md:px-8 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-black/[0.06]"
+          className="w-full max-w-[860px] mx-auto px-6 md:px-8 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-zinc-900"
         >
           <div className="flex items-center gap-5">
-            <span className="flex items-center gap-2.5 font-mono text-[9px] tracking-[0.35em] text-slate-500 uppercase font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#A88438]/40 inline-block animate-pulse"></span>
+            <span className="flex items-center gap-2.5 font-mono text-[9px] tracking-[0.35em] text-zinc-600 uppercase font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-500/40 inline-block animate-pulse"></span>
               © 2026 SIYADHKC
             </span>
-            <span className="hidden sm:block w-px h-3 bg-black/[0.06]"></span>
-            <span className="hidden sm:block font-mono text-[9px] tracking-[0.2em] text-slate-500 uppercase font-semibold">Developer / Researcher</span>
+            <span className="hidden sm:block w-px h-3 bg-zinc-800"></span>
+            <span className="hidden sm:block font-mono text-[9px] tracking-[0.2em] text-zinc-600 uppercase font-semibold">Developer / Researcher</span>
           </div>
 
           <div className="flex items-center gap-7">
             <Link
               to="/"
-              className="font-mono text-[9px] tracking-[0.2em] text-slate-500 hover:text-slate-800 uppercase transition-colors duration-200 font-semibold"
+              className="font-mono text-[9px] tracking-[0.2em] text-zinc-600 hover:text-cyan-400 uppercase transition-colors duration-200 font-semibold"
             >
               Home
             </Link>
@@ -56,7 +56,7 @@ const ArticlesPage = () => {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="font-mono text-[9px] tracking-[0.2em] text-slate-500 hover:text-slate-800 uppercase transition-colors duration-200 font-semibold"
+                className="font-mono text-[9px] tracking-[0.2em] text-zinc-600 hover:text-cyan-400 uppercase transition-colors duration-200 font-semibold"
               >
                 {link.label}
               </a>

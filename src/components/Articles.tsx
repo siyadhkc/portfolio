@@ -1,4 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface Article {
   title: string;
@@ -51,18 +52,18 @@ const staticArticles: Article[] = [
 ];
 
 const categoryColor: Record<Article['category'], string> = {
-  SECURITY: 'text-rose-400 font-semibold',
-  BACKEND: 'text-cyan-400 font-semibold',
-  DEVOPS: 'text-amber-400 font-semibold',
-  SYSTEMS: 'text-violet-400 font-semibold',
+  SECURITY: 'text-rose-400 bg-rose-500/10 border-rose-500/20',
+  BACKEND:  'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+  DEVOPS:   'text-amber-400 bg-amber-500/10 border-amber-500/20',
+  SYSTEMS:  'text-violet-400 bg-violet-500/10 border-violet-500/20',
 };
 
 // Helpers for processing feeds
 const getCategoryFromTags = (tags: string[] | string): Article['category'] => {
-  const normalizedTags = Array.isArray(tags) 
-    ? tags.map(t => t.toLowerCase()) 
+  const normalizedTags = Array.isArray(tags)
+    ? tags.map(t => t.toLowerCase())
     : (typeof tags === 'string' ? tags.toLowerCase().split(/[,\s]+/) : []);
-    
+
   if (normalizedTags.some(t => ['security', 'pentest', 'hacking', 'owasp', 'cybersecurity', 'defense', 'vulnerability', 'cve'].includes(t))) {
     return 'SECURITY';
   }
@@ -79,9 +80,7 @@ const formatDate = (dateStr: string) => {
   try {
     if (!dateStr) return 'OCT 5, 2023';
     const date = new Date(dateStr);
-    if (isNaN(date.getTime())) {
-      return 'OCT 5, 2023';
-    }
+    if (isNaN(date.getTime())) return 'OCT 5, 2023';
     return date.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -92,6 +91,7 @@ const formatDate = (dateStr: string) => {
   }
 };
 
+// ── Section header ────────────────────────────────────────────────────────────
 const SectionHeader = memo(({ label }: { label: string }) => (
   <div className="flex items-center gap-4 mb-6 mt-8">
     <span className="font-bold text-[11px] tracking-[0.25em] uppercase font-mono text-zinc-500">{label}</span>
@@ -100,41 +100,57 @@ const SectionHeader = memo(({ label }: { label: string }) => (
 ));
 SectionHeader.displayName = 'SectionHeader';
 
-const ArticleCard = memo(({
-  article,
-}: {
-  article: Article;
-}) => (
-  <a
-    href={article.url}
-    target="_blank"
-    rel="noreferrer"
-    className="group block border-b border-zinc-900 py-8 hover:bg-zinc-950/20 transition-colors duration-150 px-4 -mx-4 rounded-lg"
-  >
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-4 font-mono text-[10px]">
-        <span className={`${categoryColor[article.category]}`}>
-          [{article.category}]
-        </span>
-        <span className="text-zinc-650">{article.date}</span>
+// ── Article card ──────────────────────────────────────────────────────────────
+const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; isFeatured?: boolean }) => {
+  // Dynamic reading time calculation: approx. 200 WPM
+  const wordCount = article.title.split(/\s+/).length + article.excerpt.split(/\s+/).length;
+  const readTime = Math.max(2, Math.ceil(wordCount / 12) + 1);
+
+  return (
+    <a
+      href={article.url}
+      target="_blank"
+      rel="noreferrer"
+      className={`group flex items-start justify-between gap-5 border border-zinc-900 bg-zinc-950/10 hover:bg-zinc-950/40 hover:border-zinc-800 transition-all duration-300 rounded-xl ${
+        isFeatured ? 'p-6 sm:p-8 border-violet-950/20' : 'p-5 sm:p-6'
+      }`}
+    >
+      <div className="flex flex-col gap-3 flex-1 min-w-0">
+        <div className="flex flex-wrap items-center gap-2.5 font-mono text-[9px] sm:text-[10px]">
+          <span className={`px-2 py-0.5 rounded border font-bold tracking-wider ${categoryColor[article.category]}`}>
+            {article.category}
+          </span>
+          <span className="text-zinc-500 font-semibold">{article.date}</span>
+          <span className="text-zinc-700 hidden xs:inline">•</span>
+          <span className="text-zinc-500 font-semibold uppercase hidden xs:inline">{readTime} MIN READ</span>
+        </div>
+        <h3 className={`font-sans font-bold text-zinc-100 group-hover:text-cyan-400 transition-colors leading-tight ${
+          isFeatured ? 'text-xl sm:text-[1.35rem]' : 'text-lg sm:text-[1.15rem]'
+        }`}>
+          {article.title}
+        </h3>
+        <p className="text-zinc-500 text-[13px] leading-relaxed max-w-[700px] line-clamp-2 sm:line-clamp-3">
+          {article.excerpt}
+        </p>
       </div>
-      <h3 className="font-sans font-bold text-lg sm:text-[1.3rem] text-zinc-200 group-hover:text-cyan-400 transition-colors leading-tight">
-        {article.title}
-      </h3>
-      <p className="text-zinc-400 text-[13px] leading-relaxed max-w-[700px]">{article.excerpt}</p>
-    </div>
-  </a>
-));
+      <div className="w-8 h-8 rounded-lg bg-zinc-900/40 border border-zinc-900/60 flex items-center justify-center shrink-0 mt-1 transition-all duration-300 group-hover:border-zinc-800 group-hover:bg-zinc-900/80">
+        <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-cyan-400 transition-all duration-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </div>
+    </a>
+  );
+});
 ArticleCard.displayName = 'ArticleCard';
 
+// ── Skeleton ──────────────────────────────────────────────────────────────────
 const SkeletonCard = memo(() => (
-  <div className="border-b border-zinc-900 py-8 animate-pulse">
-    <div className="flex gap-4 mb-2">
-      <div className="w-16 h-3 bg-zinc-900 rounded" />
-      <div className="w-20 h-3 bg-zinc-900 rounded" />
+  <div className="border border-zinc-900 bg-zinc-950/10 p-5 sm:p-6 rounded-xl animate-pulse space-y-4">
+    <div className="flex gap-3 items-center">
+      <div className="w-16 h-4 bg-zinc-900 rounded" />
+      <div className="w-20 h-3 bg-zinc-900/60 rounded" />
+      <div className="w-16 h-3 bg-zinc-900/60 rounded" />
     </div>
-    <div className="h-6 w-3/4 bg-zinc-900 rounded mb-2" />
-    <div className="h-4 w-5/6 bg-zinc-900 rounded" />
+    <div className="h-6 w-3/4 bg-zinc-900 rounded" />
+    <div className="h-4 w-5/6 bg-zinc-900/60 rounded" />
   </div>
 ));
 SkeletonCard.displayName = 'SkeletonCard';
@@ -146,7 +162,6 @@ export const Articles = () => {
 
   useEffect(() => {
     let active = true;
-
     const fetchArticles = async () => {
       try {
         const devToData = await fetch('https://dev.to/api/articles?username=siyadhkc&per_page=30').then(r => {
@@ -156,7 +171,6 @@ export const Articles = () => {
 
         let itemsList: (Article & { timestamp: number })[] = [];
 
-        // Process Dev.to articles
         if (Array.isArray(devToData)) {
           const mapped = devToData.map((item) => {
             const val = item as Record<string, unknown>;
@@ -173,20 +187,11 @@ export const Articles = () => {
           itemsList = mapped;
         }
 
-        // Sort descending by timestamp
         itemsList.sort((a, b) => b.timestamp - a.timestamp);
-
-        // Mark the newest article as featured
-        if (itemsList.length > 0) {
-          itemsList[0].featured = true;
-        }
+        if (itemsList.length > 0) itemsList[0].featured = true;
 
         if (active) {
-          if (itemsList.length > 0) {
-            setArticlesList(itemsList);
-          } else {
-            setArticlesList(staticArticles);
-          }
+          setArticlesList(itemsList.length > 0 ? itemsList : staticArticles);
           setLoading(false);
         }
       } catch (err) {
@@ -199,43 +204,73 @@ export const Articles = () => {
     };
 
     fetchArticles();
-
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, []);
 
   const featuredArticles = articlesList.filter(a => a.featured);
-  const recentArticles = articlesList.filter(a => !a.featured);
+  const recentArticles   = articlesList.filter(a => !a.featured);
 
   return (
     <div className="w-full relative z-10">
-      <div id="articles" className="relative z-10 w-full max-w-[800px] mx-auto px-6">
-        
-        {/* Simple Technical Header */}
-        <div className="pt-28 mt-8 pb-12">
+      <div id="articles" className="relative z-10 w-full max-w-[860px] mx-auto px-6">
+
+        {/* ── HERO BANNER ───────────────────────────────────────────────────── */}
+        <div className="pt-28 pb-14 mt-4">
+
+          {/* Top label */}
           <div className="flex items-center gap-4 mb-8">
             <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 font-bold">
               [ Articles ]
             </span>
-            <div className="flex-1 h-px bg-zinc-900" />
+            <div className="flex-1 h-px bg-zinc-800/60" />
             <a
               href="https://dev.to/siyadhkc"
               target="_blank"
               rel="noreferrer"
-              className="font-mono text-[9px] tracking-[0.2em] text-zinc-600 hover:text-zinc-400 uppercase transition-colors shrink-0"
+              className="flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] text-zinc-600 hover:text-cyan-400 uppercase transition-colors shrink-0 group"
             >
-              dev.to ↗
+              dev.to
+              <ArrowUpRight className="w-3 h-3 group-hover:text-cyan-400" />
             </a>
           </div>
-          <p className="font-sans text-[15px] text-zinc-500 max-w-[560px] leading-relaxed">
-            Notes on Python, API security, and system internals.
-          </p>
+
+          {/* Banner content row */}
+          <div className="flex flex-col gap-5 max-w-[560px]">
+              <h1 className="font-bold text-[2.2rem] sm:text-[2.8rem] leading-[1.1] tracking-tight">
+                <span className="text-zinc-100">Writing on </span>
+                <span className="bg-gradient-to-r from-violet-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
+                  systems,
+                </span>
+                <br />
+                <span className="text-zinc-100">security </span>
+                <span className="text-zinc-500">&</span>
+                <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent"> the backend.</span>
+              </h1>
+
+              <p className="text-zinc-500 text-[14px] leading-relaxed">
+                Practical notes on Python internals, API hardening, distributed systems, and the dark corners of the network stack.
+              </p>
+
+              {/* Category tags */}
+              <div className="flex flex-wrap gap-2">
+                {(['SECURITY', 'BACKEND', 'DEVOPS', 'SYSTEMS'] as Article['category'][]).map((cat) => (
+                  <span
+                    key={cat}
+                    className={`font-mono text-[9px] tracking-wider font-bold px-2.5 py-1 rounded border uppercase ${categoryColor[cat]}`}
+                  >
+                    {cat}
+                  </span>
+                ))}
+              </div>
+          </div>
+
+          {/* Subtle divider */}
+          <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-zinc-800/60 to-transparent" />
         </div>
 
+        {/* ── ARTICLE LIST ──────────────────────────────────────────────────── */}
         {loading ? (
-          // Skeleton Loader
-          <div className="mb-20">
+          <div className="mb-20 flex flex-col gap-4">
             <SectionHeader label="FETCHING_ARTICLE_MANIFEST" />
             <SkeletonCard />
             <SkeletonCard />
@@ -243,23 +278,25 @@ export const Articles = () => {
           </div>
         ) : (
           <>
-            {/* Featured */}
             {featuredArticles.length > 0 && (
               <div className="mb-12">
                 <SectionHeader label="Featured Article" />
-                {featuredArticles.map((article) => (
-                  <ArticleCard key={article.title} article={article} />
-                ))}
+                <div className="flex flex-col gap-4">
+                  {featuredArticles.map((article) => (
+                    <ArticleCard key={article.title} article={article} isFeatured={true} />
+                  ))}
+                </div>
               </div>
             )}
 
-            {/* Recent */}
             {recentArticles.length > 0 && (
               <div className="mb-20">
                 <SectionHeader label="Recent Publications" />
-                {recentArticles.map((article) => (
-                  <ArticleCard key={article.title} article={article} />
-                ))}
+                <div className="flex flex-col gap-4">
+                  {recentArticles.map((article) => (
+                    <ArticleCard key={article.title} article={article} />
+                  ))}
+                </div>
               </div>
             )}
           </>
