@@ -91,12 +91,16 @@ function AppContent() {
   )
 }
 
+import { ThemeProvider } from './components/ThemeContext'
+
 function App() {
   return (
     <HelmetProvider>
-      <Router>
-        <AppContent />
-      </Router>
+      <ThemeProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </ThemeProvider>
     </HelmetProvider>
   )
 }

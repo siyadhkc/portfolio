@@ -16,11 +16,11 @@ const CopyButton = memo(({ email }: { email: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="absolute top-4 right-4 text-zinc-600 hover:text-zinc-300 p-1.5 bg-zinc-900 border border-zinc-800 rounded transition-colors flex items-center gap-1.5"
+      className="absolute top-4 right-4 text-zinc-500 dark:text-zinc-600 hover:text-zinc-800 dark:hover:text-zinc-305 p-1.5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded transition-colors flex items-center gap-1.5"
       title="Copy email"
     >
       {copied && (
-        <span className="absolute -top-9 left-1/2 -translate-x-1/2 bg-zinc-900 border border-zinc-800 text-cyan-400 text-[10px] px-2.5 py-1 rounded font-mono font-bold whitespace-nowrap shadow-lg">
+        <span className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-cyan-600 dark:text-cyan-400 text-[10px] px-2.5 py-1 rounded font-mono font-bold whitespace-nowrap shadow-lg">
           COPIED
         </span>
       )}
@@ -83,10 +83,10 @@ export const FooterCTA = () => {
       <div className="w-full max-w-[1000px] mx-auto">
         {/* Section label */}
         <div className="flex items-center gap-4 mb-8">
-          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 font-bold">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-500 dark:text-zinc-600 font-bold">
             [ Contact ]
           </span>
-          <div className="flex-1 h-px bg-zinc-900" />
+          <div className="flex-1 h-px bg-zinc-200 dark:bg-zinc-900" />
         </div>
 
         {/* Contact grid */}
@@ -95,25 +95,25 @@ export const FooterCTA = () => {
             const inner = (
               <>
                 <div className="flex items-start justify-between gap-3">
-                  <div className="w-8 h-8 rounded border border-zinc-800 bg-zinc-900 flex items-center justify-center text-cyan-400 shrink-0">
+                  <div className="w-8 h-8 rounded border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center text-cyan-600 dark:text-cyan-400 shrink-0">
                     {icon}
                   </div>
                   {copyEmail && <CopyButton email={copyEmail} />}
                 </div>
                 <div className="flex flex-col gap-0.5 mt-3">
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-zinc-600 uppercase font-bold">
+                  <span className="font-mono text-[9px] tracking-[0.2em] text-zinc-500 dark:text-zinc-600 uppercase font-bold">
                     {label}
                   </span>
-                  <span className="font-mono text-[13px] text-zinc-200 font-bold leading-snug group-hover:text-cyan-400 transition-colors">
+                  <span className="font-mono text-[13px] text-zinc-800 dark:text-zinc-200 font-bold leading-snug group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                     {value}
                   </span>
-                  <span className="text-[11px] text-zinc-600 font-sans mt-0.5">{sub}</span>
+                  <span className="text-[11px] text-zinc-500 dark:text-zinc-600 font-sans mt-0.5">{sub}</span>
                 </div>
               </>
             );
 
             const cls =
-              'relative group flex flex-col bg-zinc-950/30 border border-zinc-800/80 hover:border-zinc-700 rounded-xl p-5 transition-colors duration-150';
+              'relative group flex flex-col bg-white/40 dark:bg-zinc-950/30 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-350 dark:hover:border-zinc-700 rounded-xl p-5 transition-colors duration-150';
 
             return href.startsWith('mailto') ? (
               <a key={key} href={href} className={cls}>
@@ -129,13 +129,13 @@ export const FooterCTA = () => {
       </div>
 
       {/* Minimal footer bar */}
-      <footer className="w-full max-w-[1000px] mx-auto px-2 pt-10 pb-4 mt-10 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[9px] tracking-[0.2em] uppercase text-zinc-700">
+      <footer className="w-full max-w-[1000px] mx-auto px-2 pt-10 pb-4 mt-10 border-t border-zinc-200 dark:border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[9px] tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-700">
         <div className="flex items-center gap-3">
           <span>© 2026 SIYADHKC</span>
-          <span className="text-zinc-800">|</span>
+          <span className="text-zinc-350 dark:text-zinc-800">|</span>
           <span>BACKEND_DEVELOPER_PORTFOLIO</span>
         </div>
-        <button onClick={scrollToTop} className="hover:text-zinc-400 transition-colors">
+        <button onClick={scrollToTop} className="hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors">
           ↑ Back to top
         </button>
       </footer>

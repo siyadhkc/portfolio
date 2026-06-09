@@ -3,24 +3,34 @@
 @tailwind utilities;
 
 :root {
+  background-color: #fafafa;
+  color: #18181b;
+  color-scheme: light;
+}
+
+:root.dark {
   background-color: #08080e;
   color: #f4f4f5;
   color-scheme: dark;
 }
 
 html {
-  background-color: #08080e;
+  background-color: #fafafa;
   scroll-behavior: smooth;
+}
+
+html.dark {
+  background-color: #08080e;
 }
 
 @layer base {
   body {
-    @apply font-sans antialiased text-zinc-400 bg-[#08080e] selection:bg-zinc-800 selection:text-zinc-100 overflow-x-hidden;
+    @apply font-sans antialiased text-zinc-600 bg-zinc-50 dark:text-zinc-400 dark:bg-[#08080e] selection:bg-zinc-200 selection:text-zinc-900 dark:selection:bg-zinc-800 dark:selection:text-zinc-100 overflow-x-hidden transition-colors duration-200;
     scroll-padding-top: 100px;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply tracking-tight font-medium text-zinc-100;
+    @apply tracking-tight font-medium text-zinc-900 dark:text-zinc-100;
   }
 
   code, pre {
@@ -28,22 +38,37 @@ html {
   }
 }
 
-/* Custom minimal dark scrollbar */
+/* Custom minimal scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+
+.dark ::-webkit-scrollbar-track,
+.dark::-webkit-scrollbar-track {
   background: #08080e;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #d4d4d8;
   border-radius: 4px;
 }
 
+.dark ::-webkit-scrollbar-thumb,
+.dark::-webkit-scrollbar-thumb {
+  background: #27272a;
+}
+
 ::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover,
+.dark::-webkit-scrollbar-thumb:hover {
   background: #3f3f46;
 }
 

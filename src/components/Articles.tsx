@@ -58,10 +58,10 @@ const staticArticles: Article[] = [
 ];
 
 const categoryColor: Record<Article['category'], string> = {
-  SECURITY: 'text-rose-400 bg-rose-500/10 border-rose-500/20',
-  BACKEND:  'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
-  DEVOPS:   'text-amber-400 bg-amber-500/10 border-amber-500/20',
-  SYSTEMS:  'text-violet-400 bg-violet-500/10 border-violet-500/20',
+  SECURITY: 'text-rose-600 bg-rose-500/10 border-rose-500/25 dark:text-rose-400 dark:bg-rose-500/10 dark:border-rose-500/20',
+  BACKEND:  'text-cyan-600 bg-cyan-500/10 border-cyan-500/25 dark:text-cyan-400 dark:bg-cyan-500/10 dark:border-cyan-500/20',
+  DEVOPS:   'text-amber-600 bg-amber-500/10 border-amber-500/25 dark:text-amber-400 dark:bg-amber-500/10 dark:border-amber-500/20',
+  SYSTEMS:  'text-violet-600 bg-violet-500/10 border-violet-500/25 dark:text-violet-400 dark:bg-violet-500/10 dark:border-violet-500/20',
 };
 
 // Helpers for processing feeds
@@ -85,8 +85,8 @@ const getCategoryFromTags = (tags: string[] | string): Article['category'] => {
 // ── Section header ────────────────────────────────────────────────────────────
 const SectionHeader = memo(({ label }: { label: string }) => (
   <div className="flex items-center gap-4 mb-6 mt-8">
-    <span className="font-bold text-[11px] tracking-[0.25em] uppercase font-mono text-zinc-500">{label}</span>
-    <div className="flex-1 h-px bg-zinc-800" />
+    <span className="font-bold text-[11px] tracking-[0.25em] uppercase font-mono text-zinc-500 dark:text-zinc-500">{label}</span>
+    <div className="flex-1 h-px bg-zinc-200 dark:bg-zinc-800" />
   </div>
 ));
 SectionHeader.displayName = 'SectionHeader';
@@ -98,8 +98,8 @@ const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; i
       href={article.url}
       target="_blank"
       rel="noreferrer"
-      className={`group flex items-start justify-between gap-5 border border-zinc-900 bg-zinc-950/10 hover:bg-zinc-950/40 hover:border-zinc-800 transition-all duration-300 rounded-xl ${
-        isFeatured ? 'p-6 sm:p-8 border-violet-950/20' : 'p-5 sm:p-6'
+      className={`group flex items-start justify-between gap-5 border border-zinc-200 dark:border-zinc-900 bg-white/40 dark:bg-zinc-950/10 hover:bg-zinc-50 dark:hover:bg-zinc-950/40 hover:border-zinc-350 dark:hover:border-zinc-800 transition-all duration-300 rounded-xl ${
+        isFeatured ? 'p-6 sm:p-8 border-violet-200/50 dark:border-violet-950/20' : 'p-5 sm:p-6'
       }`}
     >
       <div className="flex flex-col gap-3 flex-1 min-w-0">
@@ -108,20 +108,20 @@ const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; i
             {article.category}
           </span>
           <span className="text-zinc-500 font-semibold">{article.date}</span>
-          <span className="text-zinc-700 hidden xs:inline">•</span>
+          <span className="text-zinc-350 dark:text-zinc-700 hidden xs:inline">•</span>
           <span className="text-zinc-500 font-semibold uppercase hidden xs:inline">{article.readingTime} MIN READ</span>
         </div>
-        <h3 className={`font-sans font-bold text-zinc-100 group-hover:text-cyan-400 transition-colors leading-tight ${
+        <h3 className={`font-sans font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors leading-tight ${
           isFeatured ? 'text-xl sm:text-[1.35rem]' : 'text-lg sm:text-[1.15rem]'
         }`}>
           {article.title}
         </h3>
-        <p className="text-zinc-500 text-[13px] leading-relaxed max-w-[700px] line-clamp-2 sm:line-clamp-3">
+        <p className="text-zinc-600 dark:text-zinc-500 text-[13px] leading-relaxed max-w-[700px] line-clamp-2 sm:line-clamp-3">
           {article.excerpt}
         </p>
       </div>
-      <div className="w-8 h-8 rounded-lg bg-zinc-900/40 border border-zinc-900/60 flex items-center justify-center shrink-0 mt-1 transition-all duration-300 group-hover:border-zinc-800 group-hover:bg-zinc-900/80">
-        <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-cyan-400 transition-all duration-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-900/60 flex items-center justify-center shrink-0 mt-1 transition-all duration-300 group-hover:border-zinc-400 dark:group-hover:border-zinc-800 group-hover:bg-zinc-100 dark:group-hover:bg-zinc-900/80">
+        <ArrowUpRight className="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-all duration-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
     </a>
   );
@@ -130,14 +130,14 @@ ArticleCard.displayName = 'ArticleCard';
 
 // ── Skeleton ──────────────────────────────────────────────────────────────────
 const SkeletonCard = memo(() => (
-  <div className="border border-zinc-900 bg-zinc-950/10 p-5 sm:p-6 rounded-xl animate-pulse space-y-4">
+  <div className="border border-zinc-200 dark:border-zinc-900 bg-zinc-100/30 dark:bg-zinc-950/10 p-5 sm:p-6 rounded-xl animate-pulse space-y-4">
     <div className="flex gap-3 items-center">
-      <div className="w-16 h-4 bg-zinc-900 rounded" />
-      <div className="w-20 h-3 bg-zinc-900/60 rounded" />
-      <div className="w-16 h-3 bg-zinc-900/60 rounded" />
+      <div className="w-16 h-4 bg-zinc-200 dark:bg-zinc-900 rounded" />
+      <div className="w-20 h-3 bg-zinc-150 dark:bg-zinc-900/60 rounded" />
+      <div className="w-16 h-3 bg-zinc-150 dark:bg-zinc-900/60 rounded" />
     </div>
-    <div className="h-6 w-3/4 bg-zinc-900 rounded" />
-    <div className="h-4 w-5/6 bg-zinc-900/60 rounded" />
+    <div className="h-6 w-3/4 bg-zinc-200 dark:bg-zinc-900 rounded" />
+    <div className="h-4 w-5/6 bg-zinc-150 dark:bg-zinc-900/60 rounded" />
   </div>
 ));
 SkeletonCard.displayName = 'SkeletonCard';
@@ -198,7 +198,6 @@ export const Articles = () => {
     return () => { active = false; };
   }, []);
 
-
   const featuredArticles = articlesList.filter(a => a.featured);
   const recentArticles   = articlesList.filter(a => !a.featured);
 
@@ -211,35 +210,35 @@ export const Articles = () => {
 
           {/* Top label */}
           <div className="flex items-center gap-4 mb-8">
-            <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-600 font-bold">
+            <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-500 dark:text-zinc-600 font-bold">
               [ Articles ]
             </span>
-            <div className="flex-1 h-px bg-zinc-800/60" />
+            <div className="flex-1 h-px bg-zinc-200 dark:bg-zinc-800/60" />
             <a
               href="https://dev.to/siyadhkc"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] text-zinc-600 hover:text-cyan-400 uppercase transition-colors shrink-0 group"
+              className="flex items-center gap-1.5 font-mono text-[9px] tracking-[0.2em] text-zinc-500 dark:text-zinc-600 hover:text-cyan-600 dark:hover:text-cyan-400 uppercase transition-colors shrink-0 group"
             >
               dev.to
-              <ArrowUpRight className="w-3 h-3 group-hover:text-cyan-400" />
+              <ArrowUpRight className="w-3 h-3 group-hover:text-cyan-600 dark:group-hover:text-cyan-400" />
             </a>
           </div>
 
           {/* Banner content row */}
           <div className="flex flex-col gap-5 max-w-[560px]">
               <h1 className="font-bold text-[2.2rem] sm:text-[2.8rem] leading-[1.1] tracking-tight">
-                <span className="text-zinc-100">Writing on </span>
-                <span className="bg-gradient-to-r from-violet-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
+                <span className="text-zinc-900 dark:text-zinc-100">Writing on </span>
+                <span className="bg-gradient-to-r from-violet-600 via-cyan-600 to-violet-600 dark:from-violet-400 dark:via-cyan-400 dark:to-violet-400 bg-clip-text text-transparent">
                   systems,
                 </span>
                 <br />
-                <span className="text-zinc-100">security </span>
-                <span className="text-zinc-500">&</span>
-                <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent"> the backend.</span>
+                <span className="text-zinc-900 dark:text-zinc-100">security </span>
+                <span className="text-zinc-400 dark:text-zinc-500">&</span>
+                <span className="bg-gradient-to-r from-cyan-600 to-violet-600 dark:from-cyan-400 dark:to-violet-400 bg-clip-text text-transparent"> the backend.</span>
               </h1>
 
-              <p className="text-zinc-500 text-[14px] leading-relaxed">
+              <p className="text-zinc-600 dark:text-zinc-500 text-[14px] leading-relaxed">
                 Practical notes on Python internals, API hardening, distributed systems, and the dark corners of the network stack.
               </p>
 
@@ -257,7 +256,7 @@ export const Articles = () => {
           </div>
 
           {/* Subtle divider */}
-          <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-zinc-800/60 to-transparent" />
+          <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-zinc-200 dark:via-zinc-800/60 to-transparent" />
         </div>
 
         {/* ── ARTICLE LIST ──────────────────────────────────────────────────── */}

@@ -21,21 +21,21 @@ export const Hero = () => {
       <div className="relative z-10 w-full max-w-[800px] mx-auto px-6 text-center flex flex-col items-center">
         
         {/* Role labels - Clean technical layout */}
-        <div className="flex items-center gap-3 mb-6 font-mono text-[11px] tracking-[0.2em] text-zinc-500 uppercase font-semibold">
+        <div className="flex items-center gap-3 mb-6 font-mono text-[11px] tracking-[0.2em] text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
           <span>[ Python Developer ]</span>
-          <span className="text-zinc-700">·</span>
+          <span className="text-zinc-350 dark:text-zinc-700">·</span>
           <span>[ Security Researcher ]</span>
         </div>
 
         {/* Clean, high-contrast headline with premium metallic gradient */}
-        <h1 className="font-sans font-extrabold uppercase text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[7rem] tracking-tight leading-[0.95] mb-6 bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent selection:bg-zinc-800">
+        <h1 className="font-sans font-extrabold uppercase text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[7rem] tracking-tight leading-[0.95] mb-6 bg-gradient-to-r from-zinc-950 via-zinc-850 to-zinc-600 dark:from-white dark:via-zinc-200 dark:to-zinc-500 bg-clip-text text-transparent selection:bg-zinc-200 dark:selection:bg-zinc-800">
           Siyadh kc
         </h1>
 
         {/* Technical descriptor */}
-        <p className="text-zinc-400 font-sans text-base sm:text-lg md:text-[19px] mb-10 max-w-[600px] leading-relaxed mx-auto">
+        <p className="text-zinc-600 dark:text-zinc-400 font-sans text-base sm:text-lg md:text-[19px] mb-10 max-w-[600px] leading-relaxed mx-auto">
           I build high-performance backend systems and research web vulnerabilities.
-          <span className="block mt-2 font-mono text-zinc-500 text-sm">Focusing on zero-trust architectures and API security.</span>
+          <span className="block mt-2 font-mono text-zinc-500 dark:text-zinc-500 text-sm">Focusing on zero-trust architectures and API security.</span>
         </p>
 
         {/* Action CTAs - Fast and minimal flat design */}
@@ -43,7 +43,7 @@ export const Hero = () => {
           {/* Primary Button */}
           <button
             onClick={() => scrollTo('projects')}
-            className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-gradient-to-r from-violet-500 to-cyan-500 hover:from-violet-400 hover:to-cyan-400 text-zinc-950 px-8 py-3.5 rounded-lg font-mono text-[12px] uppercase tracking-wider font-bold shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300"
+            className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-gradient-to-r from-violet-600 to-cyan-600 dark:from-violet-500 dark:to-cyan-500 hover:from-violet-500 hover:to-cyan-500 dark:hover:from-violet-400 dark:hover:to-cyan-400 text-white dark:text-zinc-950 px-8 py-3.5 rounded-lg font-mono text-[12px] uppercase tracking-wider font-bold shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300"
           >
             <span>View Work</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -54,9 +54,9 @@ export const Hero = () => {
             href="https://github.com/siyadhkc"
             target="_blank"
             rel="noreferrer"
-            className="w-full sm:w-auto flex items-center justify-center gap-3 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 px-8 py-3.5 rounded-lg font-mono text-[12px] uppercase tracking-wider font-bold transition-colors"
+            className="w-full sm:w-auto flex items-center justify-center gap-3 bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 px-8 py-3.5 rounded-lg font-mono text-[12px] uppercase tracking-wider font-bold transition-colors"
           >
-            <Github className="w-4 h-4 text-cyan-400" />
+            <Github className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             <span>GitHub</span>
           </a>
         </div>
@@ -64,8 +64,8 @@ export const Hero = () => {
 
       {/* Smooth Scroll Indicator (Quiet static layout) */}
       <div className="absolute bottom-8 flex flex-col items-center gap-2 select-none pointer-events-none opacity-40">
-        <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Scroll Down</span>
-        <div className="w-[1px] h-6 bg-zinc-800" />
+        <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400 font-bold">Scroll Down</span>
+        <div className="w-[1px] h-6 bg-zinc-300 dark:bg-zinc-800" />
       </div>
     </section>
   );
