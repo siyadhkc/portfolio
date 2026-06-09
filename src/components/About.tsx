@@ -125,27 +125,83 @@ export const About = memo(() => {
         </div>
       </div>
 
-      {/* ── Contact row ─────────────────────────────────────────────────── */}
-      <div className="border-t border-zinc-200 dark:border-zinc-900 pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <span className="font-mono text-[10px] tracking-[0.25em] text-zinc-500 dark:text-zinc-600 uppercase font-bold">
-          [ Open to work — Security audits, Backend architecture ]
-        </span>
-        <div className="flex items-center gap-3">
+      {/* ── Contact strip ────────────────────────────────────────────────── */}
+      <div className="border-t border-zinc-200 dark:border-zinc-900 pt-8 flex flex-col gap-5">
+
+        {/* Message */}
+        <div className="flex flex-col gap-2">
+          <p className="text-[13px] text-zinc-500 dark:text-zinc-500 max-w-[520px] leading-relaxed">
+            Available for security audits, backend architecture consulting, and freelance engineering.
+            Response within 24 hours.
+          </p>
+        </div>
+
+        {/* All platform links */}
+        <div className="flex flex-wrap items-center gap-2">
           {[
-            { href: 'mailto:siyadhkc@gmail.com',          icon: <Mail className="w-3.5 h-3.5" />,     label: 'Email' },
-            { href: 'https://github.com/siyadhkc',         icon: <Github className="w-3.5 h-3.5" />,   label: 'GitHub' },
-            { href: 'https://linkedin.com/in/siyadhkc',    icon: <Linkedin className="w-3.5 h-3.5" />, label: 'LinkedIn' },
-            { href: 'https://x.com/siyadhkc',              icon: <Twitter className="w-3.5 h-3.5" />,  label: 'X' },
+            {
+              href: 'mailto:siyadhkc@gmail.com',
+              label: 'Email',
+              icon: <Mail className="w-3.5 h-3.5" />,
+            },
+            {
+              href: 'https://github.com/siyadhkc',
+              label: 'GitHub',
+              icon: <Github className="w-3.5 h-3.5" />,
+            },
+            {
+              href: 'https://linkedin.com/in/siyadhkc',
+              label: 'LinkedIn',
+              icon: <Linkedin className="w-3.5 h-3.5" />,
+            },
+            {
+              href: 'https://x.com/siyadhkc',
+              label: 'X',
+              icon: (
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              ),
+            },
+            {
+              href: 'https://app.hackthebox.com/profile/siyadhkc',
+              label: 'HackTheBox',
+              icon: (
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M11.996 0L2 5.785v12.43L11.996 24 22 18.215V5.785L11.996 0zm-1.037 3.09l1.037-.6 1.037.6v1.2l-1.037.6-1.037-.6V3.09zM4.118 7.14l1.037-.6 1.037.6v1.2l-1.037.6-1.037-.6V7.14zm0 9.72l1.037-.6 1.037.6v1.2l-1.037.6-1.037-.6v-1.2zm7.878 3.95l-1.037.6-1.037-.6v-1.2l1.037-.6 1.037.6v1.2zm1.44-3.61v-5.6l-1.44-.83-1.44.83v5.6l1.44.83 1.44-.83zm4.446-.34l-1.037.6-1.037-.6v-1.2l1.037-.6 1.037.6v1.2zm0-9.72l-1.037.6-1.037-.6V7.14l1.037-.6 1.037.6v1.14zm-2.597-.99l-1.44.83v2.8l-3.845-2.22-3.845 2.22V12.6l3.845 2.22 3.845-2.22v-2.8l1.44-.83V6.14z" />
+                </svg>
+              ),
+            },
+            {
+              href: 'https://tryhackme.com/p/siyadhkc',
+              label: 'TryHackMe',
+              icon: (
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M10.705 0C7.54 0 4.932 2.306 4.51 5.354a4.583 4.583 0 0 0-.617-.042C1.742 5.312 0 7.054 0 9.197s1.742 3.885 3.893 3.885h6.812V10.82H3.893C2.87 10.82 2.04 9.99 2.04 8.966s.83-1.854 1.853-1.854c.211 0 .415.035.608.1l1.06.36.094-1.107C5.86 3.835 8.055 2.04 10.705 2.04c2.889 0 5.237 2.348 5.237 5.237 0 .05 0 .1-.003.148l-.05 1.174 1.17.083c1.364.097 2.43 1.24 2.43 2.612 0 1.44-1.172 2.612-2.612 2.612H14.38v2.261h2.498c2.603 0 4.72-2.117 4.72-4.72a4.724 4.724 0 0 0-3.97-4.659C17.08 2.834 14.176 0 10.705 0zm-.022 9.406L8.05 12.04h1.632v6.552h2.001V12.04h1.632l-2.632-2.634z" />
+                </svg>
+              ),
+            },
+            {
+              href: 'https://siyadhkc.substack.com',
+              label: 'Substack',
+              icon: (
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                </svg>
+              ),
+            },
           ].map(({ href, icon, label }) => (
             <a
               key={label}
               href={href}
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noreferrer"
-              aria-label={label}
-              className="flex items-center justify-center w-8 h-8 rounded border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500/30 transition-colors"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded border border-zinc-200 dark:border-zinc-800 bg-white/60 dark:bg-zinc-900/40 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-zinc-700 text-[12px] font-medium transition-all duration-150"
             >
-              {icon}
+              <span className="text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors duration-150">
+                {icon}
+              </span>
+              {label}
             </a>
           ))}
         </div>

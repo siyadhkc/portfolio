@@ -139,14 +139,36 @@ const ProjectDetails = () => {
             </section>
 
             {/* Contact */}
-            <section className="bg-white/40 dark:bg-zinc-950/40 p-5 sm:p-6 border border-zinc-200 dark:border-zinc-800/80 rounded-xl">
-              <span className="font-mono text-[9px] tracking-[0.2em] text-zinc-500 dark:text-zinc-600 uppercase font-bold block mb-3">Contact</span>
+            <section className="bg-white/40 dark:bg-zinc-950/40 p-5 sm:p-6 border border-zinc-200 dark:border-zinc-800/80 rounded-xl flex flex-col gap-4">
+              <div>
+                <p className="text-[13px] font-semibold text-zinc-800 dark:text-zinc-200 mb-0.5">Get in touch</p>
+                <p className="text-[12px] text-zinc-500 dark:text-zinc-500 leading-relaxed">
+                  Questions about this project? Happy to discuss.
+                </p>
+              </div>
               <a
                 href="mailto:siyadhkc@gmail.com"
-                className="w-full inline-flex items-center justify-center bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-cyan-600 dark:hover:text-cyan-400 py-2.5 rounded-lg font-mono text-[11px] font-bold uppercase tracking-wider transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 dark:from-violet-500 dark:to-cyan-500 text-white py-2.5 rounded-lg text-[12px] font-semibold transition-all duration-200 shadow-sm"
               >
-                siyadhkc@gmail.com
+                Send an email
               </a>
+              <div className="flex items-center justify-center gap-3 pt-1">
+                {[
+                  { href: 'https://github.com/siyadhkc',      label: 'GitHub' },
+                  { href: 'https://linkedin.com/in/siyadhkc', label: 'LinkedIn' },
+                  { href: 'https://x.com/siyadhkc',           label: 'X' },
+                ].map(({ href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[11px] text-zinc-400 dark:text-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors duration-150"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
             </section>
           </div>
         </div>

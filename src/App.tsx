@@ -11,7 +11,7 @@ const ArticlesPage = lazy(() => import('./pages/ArticlesPage'))
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'))
 
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-zinc-950 font-mono text-[11px] tracking-[0.25em] text-zinc-500 uppercase font-semibold">
+  <div className="min-h-screen flex items-center justify-center bg-transparent font-mono text-[11px] tracking-[0.25em] text-zinc-500 uppercase font-semibold">
     [ loading... ]
   </div>
 )
@@ -37,7 +37,7 @@ function AppContent() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen font-sans bg-transparent text-zinc-100 relative">
+    <div className="min-h-screen font-sans bg-transparent relative">
       <GlobalBackground />
       <ScrollToTop />
       <Navigation />

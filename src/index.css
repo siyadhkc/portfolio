@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 :root {
-  background-color: #fafafa;
   color: #18181b;
   color-scheme: light;
 }
@@ -15,7 +14,6 @@
 }
 
 html {
-  background-color: #fafafa;
   scroll-behavior: smooth;
 }
 
@@ -25,7 +23,8 @@ html.dark {
 
 @layer base {
   body {
-    @apply font-sans antialiased text-zinc-600 bg-zinc-50 dark:text-zinc-400 dark:bg-[#08080e] selection:bg-zinc-200 selection:text-zinc-900 dark:selection:bg-zinc-800 dark:selection:text-zinc-100 overflow-x-hidden transition-colors duration-200;
+    @apply font-sans antialiased text-zinc-800 dark:text-zinc-400 dark:bg-[#08080e] selection:bg-violet-100 selection:text-violet-900 dark:selection:bg-zinc-800 dark:selection:text-zinc-100 overflow-x-hidden transition-colors duration-200;
+    background-color: transparent;
     scroll-padding-top: 100px;
   }
 
@@ -75,4 +74,28 @@ html.dark {
 /* Base utility for clean monospaced layout */
 .mono-label {
   @apply font-mono text-[11px] tracking-[0.2em] text-zinc-500 uppercase font-semibold;
+}
+
+/* ── Performance: GPU layer hints ── */
+
+/* Fixed elements get their own compositor layer */
+header, nav {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Smooth scrolling without jank */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Contain layout/paint to each section */
+section {
+  contain: layout style;
+}
+
+/* Only animate opacity/transform — never layout properties */
+a, button {
+  -webkit-tap-highlight-color: transparent;
 }

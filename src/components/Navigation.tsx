@@ -76,7 +76,7 @@ export const Navigation = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#09090b]/90 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800/80 transition-colors duration-200">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#09090b]/90 backdrop-blur-md border-b border-zinc-200/60 dark:border-zinc-800/60 shadow-sm shadow-violet-100/20 dark:shadow-none transition-colors duration-200">
         <div 
           ref={navRef}
           className="mx-auto flex items-center justify-between px-6 py-4 max-w-[1000px] w-full"
@@ -91,7 +91,7 @@ export const Navigation = () => {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
               }}
-              className="font-mono text-[13px] tracking-[0.25em] text-zinc-900 dark:text-zinc-100 hover:text-black dark:hover:text-white uppercase font-bold transition-colors"
+              className="font-mono text-[13px] tracking-[0.25em] text-zinc-900 dark:text-zinc-100 hover:text-violet-700 dark:hover:text-violet-300 uppercase font-bold transition-colors"
             >
               siyadhkc
             </Link>
@@ -100,9 +100,9 @@ export const Navigation = () => {
           {/* Center Navigation links - hidden on mobile, visible on md and up */}
           <nav className="hidden md:flex items-center gap-1 sm:gap-2">
             {navItems.map((item) => {
-              const baseClass = "px-3 py-1.5 rounded text-[12px] font-mono transition-colors relative duration-150";
-              const activeClass = "text-cyan-600 dark:text-cyan-400 font-bold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800";
-              const inactiveClass = "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50";
+              const baseClass = "px-3 py-1.5 rounded-lg text-[12px] font-mono transition-colors duration-150";
+              const activeClass = "text-violet-700 dark:text-violet-300 font-bold bg-violet-50 dark:bg-violet-950/40 border border-violet-200/60 dark:border-violet-800/40";
+              const inactiveClass = "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100/60 dark:hover:bg-white/5";
               
               return (
                 <Link
@@ -110,7 +110,7 @@ export const Navigation = () => {
                   to={item.id}
                   className={`${baseClass} ${item.isActive ? activeClass : inactiveClass}`}
                 >
-                  {item.isActive ? `[ ${item.label} ]` : item.label}
+                  {item.label}
                 </Link>
               );
             })}
@@ -121,7 +121,7 @@ export const Navigation = () => {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center p-2 rounded border bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-200 transition-colors"
+              className="flex items-center justify-center p-2 rounded-lg border bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 border-zinc-200/60 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300 transition-colors duration-150"
               aria-label="Toggle dark/light mode"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
@@ -130,7 +130,7 @@ export const Navigation = () => {
             {/* Resume button - hidden on small mobile, visible on sm and up */}
             <button
               onClick={() => setIsModalOpen(true)}
-              className="hidden sm:flex items-center justify-center bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 px-4 py-1.5 rounded text-[11px] font-mono uppercase tracking-wider font-semibold transition-colors"
+              className="hidden sm:flex items-center justify-center bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-200 border border-zinc-200/60 dark:border-zinc-700/50 px-4 py-1.5 rounded-lg text-[11px] font-mono uppercase tracking-wider font-semibold transition-colors duration-150"
             >
               <Download className="w-3.5 h-3.5 mr-2 text-cyan-600 dark:text-cyan-400" />
               <span>Resume</span>
@@ -139,10 +139,10 @@ export const Navigation = () => {
             {/* Desktop contact button - hidden on mobile, visible on sm and up */}
             <button
               onClick={toggleMenu}
-              className={`hidden sm:flex items-center justify-center p-2 rounded border transition-colors ${
+              className={`hidden sm:flex items-center justify-center p-2 rounded-lg border transition-colors duration-150 ${
                 isMenuOpen 
-                  ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-600 dark:text-cyan-400' 
-                  : 'bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-200'
+                  ? 'bg-violet-50 dark:bg-violet-950/30 border-violet-300/60 dark:border-violet-700/40 text-violet-700 dark:text-violet-300' 
+                  : 'bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 border-zinc-200/60 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300'
               }`}
               aria-label="Toggle contact menu"
             >
@@ -152,10 +152,10 @@ export const Navigation = () => {
             {/* Mobile hamburger menu button - visible on mobile, hidden on md and up */}
             <button
               onClick={toggleMobileMenu}
-              className={`flex md:hidden items-center justify-center p-2 rounded border transition-colors ${
+              className={`flex md:hidden items-center justify-center p-2 rounded-lg border transition-colors duration-150 ${
                 isMobileMenuOpen 
-                  ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-600 dark:text-cyan-400' 
-                  : 'bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-200'
+                  ? 'bg-violet-50 dark:bg-violet-950/30 border-violet-300/60 dark:border-violet-700/40 text-violet-700 dark:text-violet-300' 
+                  : 'bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 border-zinc-200/60 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300'
               }`}
               aria-label="Toggle navigation menu"
             >
@@ -171,17 +171,17 @@ export const Navigation = () => {
                 className="fixed inset-0 bg-black/20 dark:bg-black/40 z-40"
               />
               <div
-                className="absolute right-6 top-full mt-2 w-56 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 shadow-xl dark:shadow-2xl z-50 flex flex-col gap-1"
+                className="absolute right-6 top-full mt-2 w-56 bg-white/95 dark:bg-[#09090b]/98 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-xl p-3 shadow-lg z-50 flex flex-col gap-1"
               >
                 <span className="font-mono text-[9px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest px-2.5 py-1.5 border-b border-zinc-100 dark:border-zinc-900 mb-1">Links / Contact</span>
                 {CONTACT_LINKS.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors group"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-violet-700 dark:hover:text-violet-300 hover:bg-violet-50/50 dark:hover:bg-violet-950/20 transition-colors duration-150 group"
                     onClick={closeMenu}
                   >
-                    <span className="text-zinc-400 dark:text-zinc-500 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{link.icon}</span>
+                    <span className="text-zinc-400 dark:text-zinc-500 group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors">{link.icon}</span>
                     <span className="text-[12px] font-mono">{link.label}</span>
                   </a>
                 ))}
@@ -191,84 +191,64 @@ export const Navigation = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu — simple compact dropdown */}
       {isMobileMenuOpen && (
         <>
+          {/* Backdrop */}
           <div
             onClick={closeMobileMenu}
-            className="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-40 md:hidden"
+            className="fixed inset-0 z-40 md:hidden"
           />
+
+          {/* Dropdown panel — sits just below the header */}
           <div
             ref={drawerRef}
-            className="fixed right-0 top-0 bottom-0 w-[280px] bg-white dark:bg-zinc-950 border-l border-zinc-200 dark:border-zinc-900 p-6 z-50 flex flex-col gap-6 shadow-2xl md:hidden animate-in slide-in-from-right duration-200"
+            className="fixed top-[61px] left-0 right-0 z-50 md:hidden bg-white/95 dark:bg-[#0a0a0f]/97 backdrop-blur-md border-b border-zinc-200/60 dark:border-zinc-800/50 shadow-sm"
           >
-            {/* Header / Logo inside drawer */}
-            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-900 pb-4">
-              <span className="font-mono text-xs tracking-[0.2em] text-zinc-500 dark:text-zinc-400 font-bold">MENU</span>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={toggleTheme}
-                  className="p-2 rounded border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-200 transition-colors"
-                  aria-label="Toggle theme"
-                >
-                  {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-indigo-600" />}
-                </button>
-                <button
-                  onClick={closeMobileMenu}
-                  className="p-1 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Navigation links inside drawer */}
-            <nav className="flex flex-col gap-2">
+            {/* Nav links */}
+            <nav className="flex flex-col px-4 py-2">
               {navItems.map((item) => (
                 <Link
                   key={item.id}
                   to={item.id}
                   onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-mono transition-colors ${
+                  className={`flex items-center gap-3 px-3 py-2.5 text-[13px] font-mono transition-colors duration-150 ${
                     item.isActive
-                      ? 'text-cyan-600 dark:text-cyan-400 font-bold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-850'
-                      : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50'
+                      ? 'text-zinc-900 dark:text-zinc-100 font-semibold'
+                      : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200'
                   }`}
                 >
-                  {item.icon}
-                  <span>{item.label}</span>
+                  <span className={item.isActive ? 'text-zinc-700 dark:text-zinc-300' : 'text-zinc-400 dark:text-zinc-600'}>
+                    {item.icon}
+                  </span>
+                  {item.label}
+                  {item.isActive && <span className="ml-auto w-1 h-1 rounded-full bg-zinc-400 dark:bg-zinc-500" />}
                 </Link>
               ))}
             </nav>
 
-            {/* Actions inside drawer */}
-            <div className="border-t border-zinc-100 dark:border-zinc-900 pt-6 flex flex-col gap-4">
-              <button
-                onClick={() => {
-                  closeMobileMenu();
-                  setIsModalOpen(true);
-                }}
-                className="w-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-850 py-2.5 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold transition-colors"
-              >
-                <Download className="w-4 h-4 mr-2 text-cyan-600 dark:text-cyan-400" />
-                Resume
-              </button>
-            </div>
-
-            {/* Social / Contact Links inside drawer */}
-            <div className="mt-auto border-t border-zinc-100 dark:border-zinc-900 pt-4 flex flex-col gap-1.5">
-              <span className="font-mono text-[9px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest px-2 pb-1.5 border-b border-zinc-100 dark:border-zinc-900/50 mb-1">Connect</span>
+            {/* Divider + actions */}
+            <div className="border-t border-zinc-100 dark:border-zinc-800/60 px-4 py-3 flex items-center gap-2">
               {CONTACT_LINKS.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="flex items-center gap-3 px-2 py-1.5 text-zinc-500 dark:text-zinc-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors group"
+                  target="_blank"
+                  rel="noreferrer"
                   onClick={closeMobileMenu}
+                  title={link.label}
+                  className="flex items-center justify-center w-8 h-8 rounded-lg text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors duration-150"
                 >
-                  <span className="text-zinc-400 dark:text-zinc-500 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{link.icon}</span>
-                  <span className="text-[11px] font-mono">{link.label}</span>
+                  {link.icon}
                 </a>
               ))}
+              <button
+                onClick={() => { closeMobileMenu(); setIsModalOpen(true); }}
+                className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200/70 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300 text-[11px] font-mono uppercase tracking-wider hover:bg-zinc-50 dark:hover:bg-white/5 transition-colors duration-150"
+              >
+                <Download className="w-3 h-3" />
+                Resume
+              </button>
             </div>
           </div>
         </>
@@ -281,7 +261,7 @@ export const Navigation = () => {
             onClick={() => setIsModalOpen(false)}
             className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
           />
-          <div className="relative w-full max-w-[340px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-2xl flex flex-col items-center">
+          <div className="relative w-full max-w-[340px] bg-white/95 dark:bg-[#09090b]/98 backdrop-blur-xl border border-white/80 dark:border-zinc-800/60 rounded-2xl p-6 shadow-2xl shadow-violet-200/20 dark:shadow-black/60 flex flex-col items-center">
             <div className="text-center mb-6 w-full border-b border-zinc-100 dark:border-zinc-900 pb-4">
               <h3 className="text-[14px] font-mono font-bold text-zinc-900 dark:text-zinc-100 tracking-wider mb-1">DOWNLOAD_CV.PDF</h3>
               <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">Last updated: May 2026</span>
