@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#09090b" />
+    <meta name="theme-color" content="#f8f8fb" />
     <title>siyadhkc — Backend Engineer</title>
     <meta
       name="description"
@@ -81,6 +81,23 @@
           "https://linkedin.com/in/siyadhkc"
         ]
       }
+    </script>
+    <!-- Theme init: light is always the hard default -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        // If no preference saved, or the saved value is 'dark' from a previous session,
+        // reset to light so new visitors always see light mode.
+        if (!saved) {
+          localStorage.setItem('theme', 'light');
+        }
+        // Apply saved preference (respects user's manual toggle)
+        if (localStorage.getItem('theme') === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
     </script>
   </head>
 
