@@ -61,17 +61,18 @@ export const Navigation = () => {
 
   // ── shared button base ──────────────────────────────────────────────
   const btnBase =
-    'flex items-center justify-center p-2 rounded-lg border transition-colors duration-150 ' +
-    'border-zinc-200 dark:border-zinc-700/60 ' +
-    'bg-white dark:bg-zinc-900 ' +
-    'text-zinc-600 dark:text-zinc-300 ' +
-    'hover:bg-zinc-100 dark:hover:bg-zinc-800 ' +
-    'hover:border-zinc-300 dark:hover:border-zinc-600';
+    'flex items-center justify-center p-2 rounded-lg border transition-all duration-200 ' +
+    'border-[#E6E7DC] dark:border-zinc-700/60 ' +
+    'bg-[#FBFBF7] dark:bg-zinc-900 ' +
+    'text-[#5F5F54] dark:text-zinc-300 ' +
+    'hover:bg-[#F2F4EA] dark:hover:bg-zinc-800 ' +
+    'hover:border-[#D6D8CB] dark:hover:border-zinc-600 ' +
+    'hover:-translate-y-0.5 hover:shadow-sm hover:shadow-[#E7E8DD]/70 dark:hover:shadow-black/30';
 
   return (
     <>
       {/* ── Header ──────────────────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#FBFBF7]/95 dark:bg-zinc-950/90 backdrop-blur-md border-b border-[#E6E7DC] dark:border-zinc-800 transition-colors duration-200">
         <div
           ref={navRef}
           className="mx-auto flex items-center justify-between px-6 py-4 max-w-[1000px] w-full"
@@ -83,7 +84,7 @@ export const Navigation = () => {
               clearAllScroll();
               if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="font-mono text-[13px] tracking-[0.25em] uppercase font-bold text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors"
+            className="font-mono text-[13px] tracking-[0.25em] uppercase font-bold text-[#25251F] dark:text-zinc-100 hover:text-[#1D91A1] dark:hover:text-[#7ED6E1] transition-colors duration-200"
           >
             siyadhkc
           </Link>
@@ -95,10 +96,10 @@ export const Navigation = () => {
                 key={item.id}
                 to={item.id}
                 className={
-                  'px-3 py-1.5 rounded-lg text-[12px] font-mono transition-colors duration-150 ' +
+                  'px-3 py-1.5 rounded-lg text-[12px] font-mono transition-all duration-200 ' +
                   (item.isActive
-                    ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-semibold'
-                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60')
+                    ? 'bg-[#F2F4EA] dark:bg-zinc-800 text-[#25251F] dark:text-zinc-100 font-semibold'
+                    : 'text-[#6F6F64] dark:text-zinc-400 hover:text-[#25251F] dark:hover:text-zinc-100 hover:bg-[#F2F4EA] dark:hover:bg-zinc-800/60 hover:-translate-y-0.5')
                 }
               >
                 {item.label}
@@ -117,15 +118,15 @@ export const Navigation = () => {
             >
               {theme === 'dark'
                 ? <Sun className="w-4 h-4 text-amber-400" />
-                : <Moon className="w-4 h-4 text-zinc-600" />}
+                : <Moon className="w-4 h-4 text-[#6F6F64]" />}
             </button>
 
             {/* Resume — hidden on xs */}
             <button
               onClick={() => setIsModalOpen(true)}
-              className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-lg border transition-colors duration-150 border-zinc-200 dark:border-zinc-700/60 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-200 text-[11px] font-mono uppercase tracking-wider font-semibold"
+              className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-lg border transition-all duration-200 border-[#E6E7DC] dark:border-zinc-700/60 bg-[#FBFBF7] dark:bg-zinc-900 hover:bg-[#F2F4EA] dark:hover:bg-zinc-800 text-[#4C4C42] dark:text-zinc-200 text-[11px] font-mono uppercase tracking-wider font-semibold hover:-translate-y-0.5 hover:border-[#D6D8CB] hover:shadow-sm hover:shadow-[#E7E8DD]/70 dark:hover:shadow-black/30"
             >
-              <Download className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
+              <Download className="w-3.5 h-3.5 text-[#77776B] dark:text-zinc-400" />
               Resume
             </button>
 
@@ -133,10 +134,10 @@ export const Navigation = () => {
             <button
               onClick={toggleMenu}
               className={
-                'hidden sm:flex items-center justify-center p-2 rounded-lg border transition-colors duration-150 ' +
+                'hidden sm:flex items-center justify-center p-2 rounded-lg border transition-all duration-200 ' +
                 (isMenuOpen
-                  ? 'bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-600 text-zinc-900 dark:text-zinc-100'
-                  : 'border-zinc-200 dark:border-zinc-700/60 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300')
+                  ? 'bg-[#F2F4EA] dark:bg-zinc-800 border-[#D6D8CB] dark:border-zinc-600 text-[#25251F] dark:text-zinc-100'
+                  : 'border-[#E6E7DC] dark:border-zinc-700/60 bg-[#FBFBF7] dark:bg-zinc-900 hover:bg-[#F2F4EA] dark:hover:bg-zinc-800 text-[#5F5F54] dark:text-zinc-300 hover:-translate-y-0.5 hover:border-[#D6D8CB] hover:shadow-sm hover:shadow-[#E7E8DD]/70 dark:hover:shadow-black/30')
               }
               aria-label="Toggle contact menu"
             >
@@ -147,10 +148,10 @@ export const Navigation = () => {
             <button
               onClick={toggleMobileMenu}
               className={
-                'flex md:hidden items-center justify-center p-2 rounded-lg border transition-colors duration-150 ' +
+                'flex md:hidden items-center justify-center p-2 rounded-lg border transition-all duration-200 ' +
                 (isMobileMenuOpen
-                  ? 'bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-600 text-zinc-900 dark:text-zinc-100'
-                  : 'border-zinc-200 dark:border-zinc-700/60 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300')
+                  ? 'bg-[#F2F4EA] dark:bg-zinc-800 border-[#D6D8CB] dark:border-zinc-600 text-[#25251F] dark:text-zinc-100'
+                  : 'border-[#E6E7DC] dark:border-zinc-700/60 bg-[#FBFBF7] dark:bg-zinc-900 hover:bg-[#F2F4EA] dark:hover:bg-zinc-800 text-[#5F5F54] dark:text-zinc-300 hover:-translate-y-0.5 hover:border-[#D6D8CB] hover:shadow-sm hover:shadow-[#E7E8DD]/70 dark:hover:shadow-black/30')
               }
               aria-label="Toggle navigation menu"
             >
@@ -162,8 +163,8 @@ export const Navigation = () => {
           {isMenuOpen && (
             <>
               <div onClick={closeMenu} className="fixed inset-0 z-40" />
-              <div className="absolute right-6 top-full mt-2 w-52 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-2 shadow-lg shadow-zinc-200/60 dark:shadow-black/40 z-50 flex flex-col gap-0.5">
-                <span className="font-mono text-[9px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest px-2.5 py-1.5 border-b border-zinc-100 dark:border-zinc-800 mb-1">
+              <div className="absolute right-6 top-full mt-2 w-52 bg-[#FBFBF7] dark:bg-zinc-900 border border-[#E6E7DC] dark:border-zinc-800 rounded-xl p-2 shadow-lg shadow-[#E7E8DD]/70 dark:shadow-black/40 z-50 flex flex-col gap-0.5">
+                <span className="font-mono text-[9px] text-[#8A897D] dark:text-zinc-500 uppercase tracking-widest px-2.5 py-1.5 border-b border-[#ECEDE3] dark:border-zinc-800 mb-1">
                   Links / Contact
                 </span>
                 {CONTACT_LINKS.map(link => (
@@ -171,10 +172,10 @@ export const Navigation = () => {
                     key={link.label}
                     href={link.href}
                     onClick={closeMenu}
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-150"
+                    className="group flex items-center gap-3 px-3 py-2 rounded-lg text-[#5F5F54] dark:text-zinc-400 hover:text-[#25251F] dark:hover:text-zinc-100 hover:bg-[#F2F4EA] dark:hover:bg-zinc-800 transition-all duration-200"
                   >
-                    <span className="text-zinc-400 dark:text-zinc-500">{link.icon}</span>
-                    <span className="text-[12px] font-mono">{link.label}</span>
+                    <span className="text-[#8A897D] dark:text-zinc-500">{link.icon}</span>
+                    <span className="text-[12px] font-mono transition-transform duration-200 group-hover:translate-x-0.5">{link.label}</span>
                   </a>
                 ))}
               </div>
@@ -189,7 +190,7 @@ export const Navigation = () => {
           <div onClick={closeMobileMenu} className="fixed inset-0 z-40 md:hidden" />
           <div
             ref={drawerRef}
-            className="fixed top-[61px] left-0 right-0 z-50 md:hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 shadow-sm shadow-zinc-100 dark:shadow-none"
+            className="fixed top-[61px] left-0 right-0 z-50 md:hidden bg-[#FBFBF7] dark:bg-zinc-950 border-b border-[#E6E7DC] dark:border-zinc-800 shadow-sm shadow-[#E7E8DD] dark:shadow-none"
           >
             {/* Nav links */}
             <nav className="flex flex-col px-4 py-2">
@@ -199,23 +200,23 @@ export const Navigation = () => {
                   to={item.id}
                   onClick={closeMobileMenu}
                   className={
-                    'flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-mono transition-colors duration-150 ' +
+                    'group flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-mono transition-all duration-200 ' +
                     (item.isActive
-                      ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-semibold'
-                      : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800/50')
+                      ? 'bg-[#F2F4EA] dark:bg-zinc-800 text-[#25251F] dark:text-zinc-100 font-semibold'
+                      : 'text-[#6F6F64] dark:text-zinc-400 hover:text-[#25251F] dark:hover:text-zinc-100 hover:bg-[#F2F4EA] dark:hover:bg-zinc-800/50')
                   }
                 >
-                  <span className={item.isActive ? 'text-zinc-700 dark:text-zinc-300' : 'text-zinc-400 dark:text-zinc-600'}>
+                  <span className={item.isActive ? 'text-[#5F5F54] dark:text-zinc-300' : 'text-[#8A897D] dark:text-zinc-600'}>
                     {item.icon}
                   </span>
-                  {item.label}
-                  {item.isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" />}
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">{item.label}</span>
+                  {item.isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#B0B1A3] dark:bg-zinc-500" />}
                 </Link>
               ))}
             </nav>
 
             {/* Bottom row — social + resume */}
-            <div className="border-t border-zinc-100 dark:border-zinc-800 px-4 py-3 flex items-center gap-2">
+            <div className="border-t border-[#ECEDE3] dark:border-zinc-800 px-4 py-3 flex items-center gap-2">
               {CONTACT_LINKS.map(link => (
                 <a
                   key={link.label}
@@ -224,14 +225,14 @@ export const Navigation = () => {
                   rel="noreferrer"
                   onClick={closeMobileMenu}
                   title={link.label}
-                  className="flex items-center justify-center w-8 h-8 rounded-lg text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-150"
+                  className="flex items-center justify-center w-8 h-8 rounded-lg text-[#8A897D] dark:text-zinc-500 hover:text-[#1D91A1] dark:hover:text-[#7ED6E1] hover:bg-[#F2F4EA] dark:hover:bg-zinc-800 transition-all duration-200 hover:-translate-y-0.5"
                 >
                   {link.icon}
                 </a>
               ))}
               <button
                 onClick={() => { closeMobileMenu(); setIsModalOpen(true); }}
-                className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-200 text-[11px] font-mono uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-150"
+                className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E6E7DC] dark:border-zinc-700 bg-[#FBFBF7] dark:bg-zinc-900 text-[#4C4C42] dark:text-zinc-200 text-[11px] font-mono uppercase tracking-wider hover:bg-[#F2F4EA] dark:hover:bg-zinc-800 hover:border-[#D6D8CB] transition-all duration-200 hover:-translate-y-0.5"
               >
                 <Download className="w-3 h-3" />
                 Resume
@@ -248,12 +249,12 @@ export const Navigation = () => {
             onClick={() => setIsModalOpen(false)}
             className="absolute inset-0 bg-black/40 dark:bg-black/70 backdrop-blur-sm"
           />
-          <div className="relative w-full max-w-[340px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-2xl shadow-zinc-200/50 dark:shadow-black/60 flex flex-col items-center">
-            <div className="text-center mb-6 w-full border-b border-zinc-100 dark:border-zinc-800 pb-4">
-              <h3 className="text-[14px] font-mono font-bold text-zinc-900 dark:text-zinc-100 tracking-wider mb-1">
+          <div className="relative w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-900 border border-[#E6E7DC] dark:border-zinc-800 rounded-2xl p-6 shadow-2xl shadow-[#E7E8DD]/70 dark:shadow-black/60 flex flex-col items-center">
+            <div className="text-center mb-6 w-full border-b border-[#ECEDE3] dark:border-zinc-800 pb-4">
+              <h3 className="text-[14px] font-mono font-bold text-[#25251F] dark:text-zinc-100 tracking-wider mb-1">
                 DOWNLOAD_CV.PDF
               </h3>
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#8A897D] dark:text-zinc-500">
                 Last updated: May 2026
               </span>
             </div>
@@ -262,13 +263,13 @@ export const Navigation = () => {
                 href={resumeFile}
                 download="SiyadhKc_CV.pdf"
                 onClick={() => setIsModalOpen(false)}
-                className="w-full bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-bold py-2.5 rounded-lg text-[12px] font-mono uppercase tracking-wider text-center transition-all duration-200 block"
+                className="w-full bg-gradient-to-r from-[#6F735D] to-[#1D91A1] hover:from-[#5F644E] hover:to-[#167A88] text-white font-bold py-2.5 rounded-lg text-[12px] font-mono uppercase tracking-wider text-center transition-all duration-200 block"
               >
                 Confirm Download
               </a>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="w-full py-2.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 font-mono text-[11px] transition-colors uppercase tracking-wider"
+                className="w-full py-2.5 text-[#6F6F64] dark:text-zinc-400 hover:text-[#25251F] dark:hover:text-zinc-200 font-mono text-[11px] transition-colors uppercase tracking-wider"
               >
                 Cancel
               </button>

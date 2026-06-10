@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  background-color: #FCFDF6;
   color: #18181b;
   color-scheme: light;
 }
@@ -44,7 +45,7 @@ html.dark {
 }
 
 ::-webkit-scrollbar-track {
-  background: #fafafa;
+  background: #FCFDF6;
 }
 
 .dark ::-webkit-scrollbar-track,

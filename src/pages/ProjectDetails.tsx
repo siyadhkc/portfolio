@@ -29,7 +29,7 @@ const ProjectDetails = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-50 dark:bg-[#09090b] px-6 text-center text-zinc-900 dark:text-zinc-100">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FCFDF6] dark:bg-[#09090b] px-6 text-center text-zinc-900 dark:text-zinc-100">
         <h1 className="text-2xl font-mono mb-4 text-zinc-700 dark:text-zinc-300">PROJECT_NOT_FOUND</h1>
         <button onClick={handleBackClick} className="text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-2 font-mono uppercase text-xs tracking-wider">
           <ArrowLeft className="w-4 h-4" /> Back to Home
@@ -47,7 +47,7 @@ const ProjectDetails = () => {
 
       <main className="min-h-screen pb-16 relative overflow-hidden bg-transparent">
         {/* Header Block with Clean border */}
-        <div className="w-full pt-24 pb-8 sm:pb-12 px-4 sm:px-6 border-b border-zinc-200 dark:border-zinc-900 bg-zinc-100/30 dark:bg-zinc-950/20 md:pt-28">
+        <div className="w-full pt-24 pb-8 sm:pb-12 px-4 sm:px-6 border-b border-zinc-200 dark:border-zinc-900 bg-[#FBFBF7]/80 dark:bg-zinc-950/20 md:pt-28">
           <div className="max-w-[1000px] mx-auto">
             {/* Back Button */}
             <button
@@ -77,7 +77,7 @@ const ProjectDetails = () => {
                   href={project.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-gradient-to-r from-violet-700 to-cyan-700 hover:from-violet-600 hover:to-cyan-600 dark:from-violet-500 dark:to-cyan-500 dark:hover:from-violet-400 dark:hover:to-cyan-400 text-white px-6 py-2.5 rounded-lg font-mono text-[12px] font-bold uppercase tracking-wider shadow-[0_2px_16px_rgba(109,40,217,0.25)] hover:shadow-[0_4px_24px_rgba(6,182,212,0.35)] transition-all duration-300"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#6F735D] to-[#1D91A1] hover:from-[#5F644E] hover:to-[#167A88] text-white px-6 py-2.5 rounded-lg font-mono text-[12px] font-bold uppercase tracking-wider shadow-[0_2px_16px_rgba(111,115,93,0.22)] hover:shadow-[0_4px_24px_rgba(29,145,161,0.3)] transition-all duration-300"
                 >
                   <Github className="w-4 h-4" /> GitHub
                 </a>
@@ -98,7 +98,7 @@ const ProjectDetails = () => {
         <div className="max-w-[1000px] mx-auto px-4 sm:px-6 mt-6 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
           <div className="md:col-span-2 space-y-6 md:space-y-10">
             {/* Overview */}
-            <section className="bg-white/40 dark:bg-zinc-950/40 p-5 sm:p-8 border border-zinc-200 dark:border-zinc-800/80 rounded-xl">
+            <section className="bg-[#FBFBF7]/55 dark:bg-zinc-950/40 p-5 sm:p-8 border border-zinc-200 dark:border-zinc-800/80 rounded-xl">
               <h2 className="font-sans font-bold text-lg mb-4 text-zinc-800 dark:text-zinc-200 flex items-center gap-2.5">
                 <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> Overview
               </h2>
@@ -106,7 +106,7 @@ const ProjectDetails = () => {
             </section>
 
             {/* Features */}
-            <section className="bg-white/40 dark:bg-zinc-950/40 p-5 sm:p-8 border border-zinc-200 dark:border-zinc-800/80 rounded-xl">
+            <section className="bg-[#FBFBF7]/55 dark:bg-zinc-950/40 p-5 sm:p-8 border border-zinc-200 dark:border-zinc-800/80 rounded-xl">
               <h2 className="font-sans font-bold text-lg mb-4 text-zinc-800 dark:text-zinc-200 flex items-center gap-2.5">
                 <Zap className="w-4 h-4 text-violet-600 dark:text-violet-400" /> Key Features
               </h2>
@@ -127,7 +127,7 @@ const ProjectDetails = () => {
           {/* Right Sidebar Details */}
           <div className="space-y-6">
             {/* Technologies */}
-            <section className="bg-white/40 dark:bg-zinc-950/40 p-5 sm:p-6 border border-zinc-200 dark:border-zinc-800/80 rounded-xl">
+            <section className="bg-[#FBFBF7]/55 dark:bg-zinc-950/40 p-5 sm:p-6 border border-zinc-200 dark:border-zinc-800/80 rounded-xl">
               <h3 className="font-sans font-bold text-base text-zinc-800 dark:text-zinc-200 mb-4">Technologies</h3>
               <div className="flex flex-wrap gap-1.5">
                 {project.tech.map((t) => (
@@ -139,7 +139,7 @@ const ProjectDetails = () => {
             </section>
 
             {/* Contact */}
-            <section className="bg-white/40 dark:bg-zinc-950/40 p-5 sm:p-6 border border-zinc-200 dark:border-zinc-800/80 rounded-xl flex flex-col gap-4">
+            <section className="bg-[#FBFBF7]/55 dark:bg-zinc-950/40 p-5 sm:p-6 border border-zinc-200 dark:border-zinc-800/80 rounded-xl flex flex-col gap-4">
               <div>
                 <p className="text-[13px] font-semibold text-zinc-800 dark:text-zinc-200 mb-0.5">Get in touch</p>
                 <p className="text-[12px] text-zinc-500 dark:text-zinc-500 leading-relaxed">
@@ -148,7 +148,7 @@ const ProjectDetails = () => {
               </div>
               <a
                 href="mailto:siyadhkc@gmail.com"
-                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 dark:from-violet-500 dark:to-cyan-500 text-white py-2.5 rounded-lg text-[12px] font-semibold transition-all duration-200 shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#6F735D] to-[#1D91A1] hover:from-[#5F644E] hover:to-[#167A88] text-white py-2.5 rounded-lg text-[12px] font-semibold shadow-[0_2px_14px_rgba(111,115,93,0.18)] hover:shadow-[0_4px_20px_rgba(29,145,161,0.28)] transition-all duration-200"
               >
                 Send an email
               </a>

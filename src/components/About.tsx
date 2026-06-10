@@ -26,7 +26,7 @@ export const About = memo(() => {
         <div className="flex flex-wrap items-center gap-3 mt-2">
           <Link
             to="/projects"
-            className="group flex items-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-600 dark:from-violet-500 dark:to-cyan-500 hover:from-violet-500 hover:to-cyan-500 dark:hover:from-violet-400 dark:hover:to-cyan-400 text-white dark:text-zinc-950 px-5 py-2 rounded font-mono text-[11px] uppercase tracking-wider font-bold shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300"
+            className="group flex items-center gap-2 bg-gradient-to-r from-[#6F735D] to-[#1D91A1] hover:from-[#5F644E] hover:to-[#167A88] text-white px-5 py-2 rounded font-mono text-[11px] uppercase tracking-wider font-bold shadow-[0_0_15px_rgba(111,115,93,0.18)] hover:shadow-[0_0_20px_rgba(29,145,161,0.28)] transition-all duration-300"
           >
             <span>View Projects</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -223,7 +223,7 @@ export const About = memo(() => {
               href={href}
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noreferrer"
-              className="group flex items-center gap-2 px-3 py-1.5 rounded border border-zinc-200 dark:border-zinc-800 bg-white/60 dark:bg-zinc-900/40 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-zinc-700 text-[12px] font-medium transition-all duration-150"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded border border-zinc-200 dark:border-zinc-800 bg-[#FBFBF7]/70 dark:bg-zinc-900/40 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-zinc-700 text-[12px] font-medium transition-all duration-150"
             >
               <span className="text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors duration-150">
                 {icon}

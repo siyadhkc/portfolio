@@ -37,7 +37,7 @@ const Stack = () => {
         </p>
       </header>
 
-      <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800/90 bg-white/40 dark:bg-zinc-950/40 shadow-xl dark:shadow-2xl">
+      <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800/90 bg-[#FBFBF7]/55 dark:bg-zinc-950/40 shadow-xl dark:shadow-2xl">
         <dl className="divide-y divide-zinc-200/50 dark:divide-zinc-900/50">
           {rows.map((row) => (
             <div

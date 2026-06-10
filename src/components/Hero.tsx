@@ -43,7 +43,7 @@ export const Hero = () => {
           {/* Primary Button */}
           <button
             onClick={() => scrollTo('projects')}
-            className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-gradient-to-r from-violet-600 to-cyan-600 dark:from-violet-500 dark:to-cyan-500 hover:from-violet-500 hover:to-cyan-500 dark:hover:from-violet-400 dark:hover:to-cyan-400 text-white dark:text-zinc-950 px-8 py-3.5 rounded-lg font-mono text-[12px] uppercase tracking-wider font-bold shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300"
+            className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-gradient-to-r from-[#6F735D] to-[#1D91A1] hover:from-[#5F644E] hover:to-[#167A88] text-white px-8 py-3.5 rounded-lg font-mono text-[12px] uppercase tracking-wider font-bold shadow-[0_0_15px_rgba(111,115,93,0.18)] hover:shadow-[0_0_20px_rgba(29,145,161,0.28)] transition-all duration-300"
           >
             <span>View Work</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

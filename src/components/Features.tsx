@@ -25,14 +25,14 @@ const FeatureCard = memo(({ id, title, subtitle, tags, children }: FeatureCardPr
       className="group block w-full h-full"
     >
       <div 
-        className="rounded-2xl p-6 sm:p-8 bg-white/40 dark:bg-zinc-950/40 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700/80 transition-colors duration-150 flex flex-col justify-between h-[420px] sm:h-[400px] md:h-[480px] relative overflow-hidden"
+        className="rounded-2xl p-6 sm:p-8 bg-[#FBFBF7]/55 dark:bg-zinc-950/40 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700/80 transition-colors duration-150 flex flex-col justify-between h-[420px] sm:h-[400px] md:h-[480px] relative overflow-hidden"
       >
         {/* Header elements */}
         <div className="flex justify-between items-start z-10 shrink-0">
           <div className="flex flex-col gap-1">
             <span className="font-mono text-[9px] uppercase tracking-wider text-zinc-500 dark:text-zinc-500 font-bold">PROJECT // {id.toUpperCase()}</span>
           </div>
-          <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center group-hover:border-zinc-400 dark:group-hover:border-zinc-600 transition-colors duration-150">
+          <div className="w-8 h-8 rounded-lg bg-[#FBFBF7] dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center group-hover:border-zinc-400 dark:group-hover:border-zinc-600 transition-colors duration-150">
             <ArrowUpRight className="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
           </div>
         </div>
@@ -80,9 +80,9 @@ export const Features = () => {
 
           {/* Card 1: MockAPI Pro */}
           <FeatureCard id="mockapi-pro" title={projects[0].title} subtitle={projects[0].subtitle} tags={projects[0].tags}>
-            <div className="relative w-full max-w-[340px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
+            <div className="relative w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
               {/* Minimal Terminal Header */}
-              <div className="h-6 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 gap-1.5 justify-between">
+              <div className="h-6 bg-[#FCFDF6] dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 gap-1.5 justify-between">
                 <div className="flex gap-1.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-800" />
                   <div className="w-1.5 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800" />
@@ -117,9 +117,9 @@ export const Features = () => {
 
           {/* Card 2: VulnAPI */}
           <FeatureCard id="vulnapi" title={projects[1].title} subtitle={projects[1].subtitle} tags={projects[1].tags}>
-            <div className="w-full max-w-[340px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
+            <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
               {/* Terminal Header */}
-              <div className="h-6 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
+              <div className="h-6 bg-[#FCFDF6] dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
                 <div className="flex gap-1.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-800" />
                   <div className="w-1.5 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800" />
@@ -157,9 +157,9 @@ export const Features = () => {
 
           {/* Card 3: django-secure */}
           <FeatureCard id="django-secure" title={projects[2].title} subtitle={projects[2].subtitle} tags={projects[2].tags}>
-            <div className="w-full max-w-[340px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center justify-between shadow-xl dark:shadow-2xl">
+            <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center justify-between shadow-xl dark:shadow-2xl">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-[#FCFDF6] dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center">
                   <Lock className="w-5 h-5 text-violet-600 dark:text-violet-400" />
                 </div>
                 <div className="flex flex-col">
@@ -175,7 +175,7 @@ export const Features = () => {
 
           {/* Card 4: Sentinel API */}
           <FeatureCard id="sentinel-api" title={projects[3].title} subtitle={projects[3].subtitle} tags={projects[3].tags}>
-            <div className="w-full max-w-[340px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex flex-col gap-4 shadow-xl dark:shadow-2xl">
+            <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex flex-col gap-4 shadow-xl dark:shadow-2xl">
               <div className="w-full flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-cyan-600 dark:bg-cyan-500 animate-pulse" />
@@ -211,8 +211,8 @@ export const Features = () => {
             <>
               {/* Card 5: WireGuard Kernel Mesh */}
               <FeatureCard id="packet-sentry" title={projects[4].title} subtitle={projects[4].subtitle} tags={projects[4].tags}>
-                <div className="w-full max-w-[340px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
-                  <div className="h-6 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
+                <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
+                  <div className="h-6 bg-[#FCFDF6] dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
                     <div className="flex gap-1.5">
                       <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-800" />
                       <div className="w-1.5 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800" />
@@ -250,8 +250,8 @@ export const Features = () => {
 
               {/* Card 6: Nebula KV Engine */}
               <FeatureCard id="nebula-db" title={projects[5].title} subtitle={projects[5].subtitle} tags={projects[5].tags}>
-                <div className="w-full max-w-[340px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
-                  <div className="h-6 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
+                <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
+                  <div className="h-6 bg-[#FCFDF6] dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
                     <div className="flex gap-1.5">
                       <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-800" />
                       <div className="w-1.5 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800" />

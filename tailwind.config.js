@@ -18,7 +18,8 @@ export default {
           muted: '#94a3b8'
         },
         comet: {
-          cream: '#FAF9F6',
+          cream: '#FCFDF6',
+          surface: '#FBFBF7',
           dark: '#020202',
           teal: '#1D91A1',
           text: '#131313',

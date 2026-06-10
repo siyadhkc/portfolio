@@ -8,7 +8,7 @@ export const GlobalBackground = () => {
   return (
     <div
       className="fixed inset-0 z-[-1] pointer-events-none select-none overflow-hidden"
-      style={{ backgroundColor: isDark ? '#0a0a0f' : '#f8f8fb' }}
+      style={{ backgroundColor: isDark ? '#0a0a0f' : '#FCFDF6' }}
       aria-hidden="true"
     >
       {isDark ? (
@@ -41,7 +41,7 @@ export const GlobalBackground = () => {
             position: 'absolute',
             top: '-20%', left: '-10%',
             width: '65%', height: '65%',
-            background: 'radial-gradient(ellipse at 35% 35%, rgba(180,180,210,0.18) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at 35% 35%, rgba(251,251,247,0.78) 0%, transparent 70%)',
             filter: 'blur(90px)',
             willChange: 'transform',
             transform: 'translateZ(0)',
@@ -51,7 +51,7 @@ export const GlobalBackground = () => {
             position: 'absolute',
             bottom: '-20%', right: '-10%',
             width: '60%', height: '60%',
-            background: 'radial-gradient(ellipse at 70% 70%, rgba(200,195,215,0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at 70% 70%, rgba(252,253,246,0.7) 0%, transparent 70%)',
             filter: 'blur(90px)',
             willChange: 'transform',
             transform: 'translateZ(0)',
