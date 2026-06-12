@@ -58,10 +58,10 @@ const staticArticles: Article[] = [
 ];
 
 const categoryColor: Record<Article['category'], string> = {
-  SECURITY: 'text-[#9E3F35] bg-[#F7E9E5] border-[#E4BDB4] dark:text-[#F0A092] dark:bg-[#9E3F35]/15 dark:border-[#F0A092]/25',
-  BACKEND:  'text-[#0F7280] bg-[#E5F3F1] border-[#AEDBD5] dark:text-[#7ED6E1] dark:bg-[#0F7280]/18 dark:border-[#7ED6E1]/25',
-  DEVOPS:   'text-[#7B651C] bg-[#F4EEDB] border-[#DCCB91] dark:text-[#E3CB7D] dark:bg-[#7B651C]/18 dark:border-[#E3CB7D]/25',
-  SYSTEMS:  'text-[#475569] bg-[#E9ECE6] border-[#C9D0C2] dark:text-[#CBD5E1] dark:bg-[#64748B]/16 dark:border-[#CBD5E1]/20',
+  SECURITY: 'text-[#9E3F35] bg-[#F7E9E5] border-[#E4BDB4] dark:text-[#F0A092] dark:bg-[#F0A092]/15 dark:border-[#F0A092]/25',
+  BACKEND:  'text-[#0F7280] bg-[#E5F3F1] border-[#AEDBD5] dark:text-[#7ED6E1] dark:bg-[#7ED6E1]/15 dark:border-[#7ED6E1]/25',
+  DEVOPS:   'text-[#7B651C] bg-[#F4EEDB] border-[#DCCB91] dark:text-[#E3CB7D] dark:bg-[#E3CB7D]/15 dark:border-[#E3CB7D]/25',
+  SYSTEMS:  'text-[#475569] bg-[#E9ECE6] border-[#C9D0C2] dark:text-[#CBD5E1] dark:bg-[#CBD5E1]/15 dark:border-[#CBD5E1]/25',
 };
 
 // Helpers for processing feeds
@@ -98,7 +98,7 @@ const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; i
       href={article.url}
       target="_blank"
       rel="noreferrer"
-      className={`group flex items-start justify-between gap-5 border border-[#E6E7DC] dark:border-zinc-900 bg-[#FBFBF7]/55 dark:bg-zinc-950/10 hover:bg-[#FBFBF7] dark:hover:bg-zinc-950/40 hover:border-[#D6D8CB] dark:hover:border-zinc-800 transition-all duration-300 rounded-xl ${
+      className={`group flex flex-col sm:flex-row items-start justify-between gap-5 border border-[#E6E7DC] dark:border-zinc-900 bg-[#FBFBF7]/55 dark:bg-zinc-950/10 hover:bg-[#FBFBF7] dark:hover:bg-zinc-950/40 hover:border-[#D6D8CB] dark:hover:border-zinc-800 transition-all duration-300 rounded-xl ${
         isFeatured ? 'p-6 sm:p-8 border-[#D6D8CB] dark:border-[#6F735D]/25' : 'p-5 sm:p-6'
       }`}
     >
@@ -120,6 +120,18 @@ const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; i
           {article.excerpt}
         </p>
       </div>
+      {article.image ? (
+        <div className={`hidden sm:block overflow-hidden rounded-3xl border border-[#E6E7DC] dark:border-zinc-800/70 shrink-0 bg-[#FBFBF7] dark:bg-zinc-950/20 ${
+          isFeatured ? 'w-full h-40 sm:w-36 sm:h-24' : 'w-full h-36 sm:w-28 sm:h-20'
+        }`}>
+          <img
+            src={article.image}
+            alt={article.title}
+            className="object-cover w-full h-full"
+            loading="lazy"
+          />
+        </div>
+      ) : null}
       <div className="w-8 h-8 rounded-lg bg-[#FBFBF7] dark:bg-zinc-900/40 border border-[#E6E7DC] dark:border-zinc-900/60 flex items-center justify-center shrink-0 mt-1 transition-all duration-300 group-hover:border-[#D6D8CB] dark:group-hover:border-zinc-800 group-hover:bg-[#F2F4EA] dark:group-hover:bg-zinc-900/80">
         <ArrowUpRight className="w-4 h-4 text-[#6F6F64] dark:text-zinc-400 group-hover:text-[#1D91A1] dark:group-hover:text-[#7ED6E1] transition-all duration-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
