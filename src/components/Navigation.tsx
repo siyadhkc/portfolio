@@ -255,7 +255,7 @@ export const Navigation = () => {
                 DOWNLOAD_CV.PDF
               </h3>
               <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#8A897D] dark:text-zinc-500">
-                Last updated: May 2026
+                Last updated: June 2026
               </span>
             </div>
             <div className="flex flex-col w-full gap-2">
