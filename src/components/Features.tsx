@@ -115,8 +115,8 @@ export const Features = () => {
             </div>
           </FeatureCard>
 
-          {/* Card 2: VulnAPI */}
-          <FeatureCard id="vulnapi" title={projects[1].title} subtitle={projects[1].subtitle} tags={projects[1].tags}>
+          {/* Card 2: Env-Guard */}
+          <FeatureCard id="env-guard" title={projects[1].title} subtitle={projects[1].subtitle} tags={projects[1].tags}>
             <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
               {/* Terminal Header */}
               <div className="h-6 bg-[#FCFDF6] dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
@@ -124,84 +124,72 @@ export const Features = () => {
                   <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-800" />
                   <div className="w-1.5 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800" />
                 </div>
-                <ShieldCheck className="w-3.5 h-3.5 text-rose-500 opacity-80" />
+                <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-500 opacity-80" />
               </div>
-              {/* Scanning UI */}
+              {/* Secret Scanning UI */}
               <div className="p-4 font-mono text-[9px] space-y-2 text-zinc-600 dark:text-zinc-400">
                 <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-900 pb-1.5">
-                  <span className="text-rose-600 dark:text-rose-500 font-bold tracking-wider">FUZZER: stateful_seq_generator</span>
-                  <span className="text-zinc-400 dark:text-zinc-400">v1.2</span>
+                  <span className="text-amber-600 dark:text-amber-500 font-bold tracking-wider">SECRET_SCAN: ACTIVE</span>
+                  <span className="text-zinc-400 dark:text-zinc-400">3 files</span>
                 </div>
                 <div className="space-y-1 text-zinc-600 dark:text-zinc-400">
                   <div className="flex gap-2">
-                    <span className="text-cyan-600 dark:text-cyan-400">[FUZZ]</span>
-                    <span className="text-zinc-500">testing alg=none bypass...</span>
+                    <span className="text-rose-600 dark:text-rose-500">[FOUND]</span>
+                    <span className="text-zinc-500">AWS_SECRET_ACCESS_KEY</span>
+                    <span className="text-rose-600 dark:text-rose-500 ml-auto">BLOCKED</span>
                   </div>
                   <div className="flex gap-2">
-                    <span className="text-amber-600 dark:text-amber-500">[TNT]</span>
-                    <span className="text-zinc-600 dark:text-zinc-400">{"tainted input -> param 'uuid'"}</span>
+                    <span className="text-rose-600 dark:text-rose-500">[FOUND]</span>
+                    <span className="text-zinc-500">DATABASE_PASSWORD</span>
+                    <span className="text-rose-600 dark:text-rose-500 ml-auto">BLOCKED</span>
                   </div>
                   <div className="flex gap-2">
-                    <span className="text-rose-600 dark:text-rose-500">[VULN]</span>
-                    <span className="text-zinc-800 dark:text-zinc-300">IDOR verified on /v1/billing/logs</span>
+                    <span className="text-amber-600 dark:text-amber-500">[WARN]</span>
+                    <span className="text-zinc-500">PRIVATE_API_KEY</span>
+                    <span className="text-amber-600 dark:text-amber-500 ml-auto">DETECTED</span>
                   </div>
                 </div>
                 <div className="pt-1.5 border-t border-zinc-200 dark:border-zinc-900">
                   <div className="w-full h-1.5 bg-zinc-200 dark:bg-zinc-900 rounded overflow-hidden">
-                    <div className="h-full bg-rose-500 w-[78%]" />
+                    <div className="h-full bg-rose-500 w-[33%]" />
                   </div>
                 </div>
               </div>
             </div>
           </FeatureCard>
 
-          {/* Card 3: django-secure */}
-          <FeatureCard id="django-secure" title={projects[2].title} subtitle={projects[2].subtitle} tags={projects[2].tags}>
-            <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center justify-between shadow-xl dark:shadow-2xl">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#FCFDF6] dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center">
-                  <Lock className="w-5 h-5 text-violet-600 dark:text-violet-400" />
+          {/* Card 3: Savor */}
+          <FeatureCard id="savor" title={projects[2].title} subtitle={projects[2].subtitle} tags={projects[2].tags}>
+            <div className="w-full max-w-[340px] bg-gradient-to-br from-amber-50 to-orange-50 dark:from-orange-950/30 dark:to-red-950/30 rounded-xl p-6 flex flex-col items-center justify-center shadow-xl dark:shadow-2xl">
+              <div className="text-center space-y-3">
+                <div className="text-4xl font-bold text-orange-600 dark:text-orange-400">12</div>
+                <span className="font-mono text-[10px] text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">Active Deliveries</span>
+                <div className="flex justify-center gap-2 pt-2">
+                  <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-xs">4</div>
+                  <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-xs">6</div>
+                  <div className="w-8 h-8 rounded-full bg-zinc-400 flex items-center justify-center text-white font-bold text-xs">2</div>
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-mono text-[10px] text-zinc-800 dark:text-zinc-300 font-bold tracking-wider">py-ebpf-guard</span>
-                  <span className="font-mono text-[8px] text-zinc-500">KERNEL_SYS_HOOK_ACTIVE</span>
-                </div>
-              </div>
-              <div className="font-mono text-[9px] text-violet-600 dark:text-violet-400 border border-violet-500/20 bg-violet-500/5 px-2 py-0.5 rounded">
-                SYSCALLS: FILTERED
+                <div className="text-[8px] text-zinc-600 dark:text-zinc-400 pt-1">On Route • In Prep • Scheduled</div>
               </div>
             </div>
           </FeatureCard>
 
-          {/* Card 4: Sentinel API */}
-          <FeatureCard id="sentinel-api" title={projects[3].title} subtitle={projects[3].subtitle} tags={projects[3].tags}>
-            <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex flex-col gap-4 shadow-xl dark:shadow-2xl">
-              <div className="w-full flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-cyan-600 dark:bg-cyan-500 animate-pulse" />
-                  <span className="font-mono text-[9px] text-zinc-800 dark:text-zinc-300 uppercase tracking-wider font-bold">WASM_GATEWAY_PROXY</span>
-                </div>
-                <Activity className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-              </div>
-              {/* Static metric chart */}
-              <div className="w-full h-12 flex items-end gap-1">
-                {[30, 60, 40, 80, 50, 70, 45, 90, 80, 85].map((h, i) => (
-                  <div 
-                    key={i}
-                    style={{ height: `${h}%` }}
-                    className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-t-sm"
-                  />
+          {/* Card 4: HireFlow */}
+          <FeatureCard id="hireflow" title={projects[3].title} subtitle={projects[3].subtitle} tags={projects[3].tags}>
+            <div className="w-full max-w-[340px] bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-950/30 dark:to-blue-950/30 rounded-xl p-6 flex flex-col justify-center shadow-xl dark:shadow-2xl">
+              <div className="flex justify-between items-end gap-2 h-32">
+                {[
+                  { label: 'Applied', value: 128, color: 'from-blue-500 to-cyan-500' },
+                  { label: 'Screen', value: 42, color: 'from-cyan-500 to-teal-500' },
+                  { label: 'Interview', value: 12, color: 'from-emerald-500 to-green-500' },
+                  { label: 'Offer', value: 3, color: 'from-green-500 to-lime-500' },
+                ].map(({ label, value, color }) => (
+                  <div key={label} className="flex-1 flex flex-col items-center gap-1">
+                    <div className={`w-full rounded-t-lg bg-gradient-to-t ${color}`} style={{ height: `${(value / 128) * 100}%` }} />
+                    <span className="font-mono text-[7px] text-zinc-600 dark:text-zinc-400 uppercase text-center">{label}</span>
+                    <span className="font-mono text-[9px] font-bold text-zinc-900 dark:text-zinc-100">{value}</span>
+                  </div>
                 ))}
-              </div>
-              <div className="w-full grid grid-cols-2 gap-2 border-t border-zinc-200 dark:border-zinc-900 pt-3">
-                <div className="flex flex-col">
-                  <span className="text-[8px] text-zinc-500 uppercase font-mono font-bold">LATENCY</span>
-                  <span className="text-[12px] font-mono font-bold text-zinc-800 dark:text-zinc-300">1.18ms</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[8px] text-zinc-500 uppercase font-mono font-bold">THROUGHPUT</span>
-                  <span className="text-[12px] font-mono font-bold text-zinc-800 dark:text-zinc-300">105k rps</span>
-                </div>
               </div>
             </div>
           </FeatureCard>
@@ -209,80 +197,53 @@ export const Features = () => {
           {/* ── Expanded cards — shown only when isExpanded is true ── */}
           {isExpanded && (
             <>
-              {/* Card 5: WireGuard Kernel Mesh */}
-              <FeatureCard id="packet-sentry" title={projects[4].title} subtitle={projects[4].subtitle} tags={projects[4].tags}>
-                <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
-                  <div className="h-6 bg-[#FCFDF6] dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
-                    <div className="flex gap-1.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-800" />
-                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800" />
-                    </div>
-                    <Network className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 opacity-80" />
+              {/* Card 5: JRay */}
+              <FeatureCard id="jray" title={projects[4].title} subtitle={projects[4].subtitle} tags={projects[4].tags}>
+                <div className="w-full max-w-[340px] bg-gradient-to-br from-slate-900 to-slate-950 rounded-xl p-4 flex flex-col gap-3 shadow-xl dark:shadow-2xl">
+                  <div className="space-y-2">
+                    <div className="text-cyan-400 font-mono text-[9px]">INPUT</div>
+                    <div className="bg-slate-800 rounded p-2 font-mono text-[8px] text-slate-300">{`[{"id": 1}, {"id": 2}, {"id": 3}]`}</div>
                   </div>
-                  <div className="p-4 font-mono text-[9px] space-y-2 text-zinc-600 dark:text-zinc-400">
-                    <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-900 pb-1.5">
-                      <span className="text-indigo-600 dark:text-indigo-400 font-bold tracking-wider">WG_MESH: ACTIVE</span>
-                      <span className="text-zinc-500 dark:text-zinc-400 font-semibold">3 peers</span>
-                    </div>
-                    <div className="space-y-1.5">
-                      {[
-                        { peer: 'peer-a1f3', ip: '10.0.0.2', lat: '0.8ms', status: 'text-cyan-600 dark:text-cyan-400' },
-                        { peer: 'peer-b7c2', ip: '10.0.0.5', lat: '1.2ms', status: 'text-cyan-600 dark:text-cyan-400' },
-                        { peer: 'peer-d4e9', ip: '10.0.0.9', lat: '2.4ms', status: 'text-amber-600 dark:text-amber-500' },
-                      ].map(({ peer, ip, lat, status }) => (
-                        <div key={peer} className="flex items-center justify-between">
-                           <div className="flex items-center gap-2">
-                            <div className={`w-1.5 h-1.5 rounded-full ${status.includes('cyan') ? 'bg-cyan-500' : 'bg-amber-500'} animate-pulse`} />
-                            <span className="text-zinc-700 dark:text-zinc-400">{peer}</span>
-                          </div>
-                           <span className="text-zinc-500 dark:text-zinc-400">{ip}</span>
-                          <span className={status}>{lat}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="pt-1.5 border-t border-zinc-200 dark:border-zinc-900 flex justify-between items-center">
-                      <span className="text-zinc-500 dark:text-zinc-600">KEY_ROTATION</span>
-                      <span className="text-indigo-600 dark:text-indigo-400 font-bold">SCHEDULED: 3600s</span>
-                    </div>
+                  <div className="border-t border-slate-700 pt-2">
+                    <div className="text-amber-400 font-mono text-[9px] mb-2">TRANSFORM</div>
+                    <div className="bg-slate-800 rounded p-2 font-mono text-[8px] text-slate-300">{`.[] | .id * 2`}</div>
+                  </div>
+                  <div className="border-t border-slate-700 pt-2">
+                    <div className="text-green-400 font-mono text-[9px] mb-2">OUTPUT</div>
+                    <div className="bg-slate-800 rounded p-2 font-mono text-[8px] text-slate-300">2, 4, 6</div>
                   </div>
                 </div>
               </FeatureCard>
 
-              {/* Card 6: Nebula KV Engine */}
-              <FeatureCard id="nebula-db" title={projects[5].title} subtitle={projects[5].subtitle} tags={projects[5].tags}>
-                <div className="w-full max-w-[340px] bg-[#FBFBF7] dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-xl dark:shadow-2xl">
-                  <div className="h-6 bg-[#FCFDF6] dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 justify-between">
-                    <div className="flex gap-1.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-800" />
-                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800" />
-                    </div>
-                    <Database className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400 opacity-80" />
-                  </div>
-                  <div className="p-4 font-mono text-[9px] space-y-2 text-zinc-600 dark:text-zinc-400">
-                    <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-900 pb-1.5">
-                      <span className="text-violet-600 dark:text-violet-400 font-bold tracking-wider">RAFT_CLUSTER: QUORUM</span>
-                      <span className="text-zinc-500 dark:text-zinc-400 font-semibold">3/3</span>
-                    </div>
-                    <div className="space-y-1.5">
-                      {[
-                        { node: 'node-0 [LEADER]', state: 'text-violet-600 dark:text-violet-400', writes: '42k/s' },
-                        { node: 'node-1', state: 'text-zinc-700 dark:text-zinc-400', writes: 'synced' },
-                        { node: 'node-2', state: 'text-zinc-700 dark:text-zinc-400', writes: 'synced' },
-                      ].map(({ node, state, writes }) => (
-                        <div key={node} className="flex items-center justify-between">
-                          <span className={state}>{node}</span>
-                          <span className="text-zinc-500 dark:text-zinc-600">{writes}</span>
+              {/* Card 6: DJForge */}
+              <FeatureCard id="djforge" title={projects[5].title} subtitle={projects[5].subtitle} tags={projects[5].tags}>
+                <div className="w-full max-w-[340px] bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-xl p-5 flex flex-col gap-3 shadow-xl dark:shadow-2xl">
+                  <div className="space-y-2.5">
+                    {[
+                      { step: 'Project Setup', done: true },
+                      { step: 'Models & DB', done: true },
+                      { step: 'API Routes', done: true },
+                      { step: 'Auth Config', done: false },
+                    ].map(({ step, done }) => (
+                      <div key={step} className="flex items-center gap-2">
+                        <div className={`w-5 h-5 rounded flex items-center justify-center text-xs font-bold ${
+                          done 
+                            ? 'bg-emerald-500 text-white' 
+                            : 'bg-zinc-300 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-400'
+                        }`}>
+                          {done ? '✓' : '○'}
                         </div>
-                      ))}
-                    </div>
-                    <div className="pt-1.5 border-t border-zinc-200 dark:border-zinc-900 space-y-1">
-                      <div className="flex justify-between">
-                        <span className="text-zinc-500 dark:text-zinc-600">LSM_COMPACTION</span>
-                        <span className="text-cyan-600 dark:text-cyan-400">RUNNING</span>
+                        <span className={`font-mono text-[9px] ${
+                          done 
+                            ? 'text-emerald-700 dark:text-emerald-400' 
+                            : 'text-zinc-700 dark:text-zinc-400'
+                        }`}>{step}</span>
                       </div>
-                      <div className="w-full h-1 bg-zinc-200 dark:bg-zinc-900 rounded overflow-hidden">
-                        <div className="h-full bg-violet-500/60 w-[62%]" />
-                      </div>
+                    ))}
+                  </div>
+                  <div className="pt-2 border-t border-emerald-200 dark:border-emerald-900/40">
+                    <div className="w-full h-1.5 bg-emerald-200 dark:bg-emerald-900/50 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 w-3/4" />
                     </div>
                   </div>
                 </div>

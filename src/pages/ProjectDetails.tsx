@@ -5,12 +5,12 @@ import { projects } from '../lib/projects';
 import { Helmet } from 'react-helmet-async';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
-  'mockapi-pro':   <Database className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />,
-  'vulnapi':       <ShieldCheck className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />,
-  'django-secure': <Lock className="w-5 h-5 text-violet-600 dark:text-violet-400" />,
-  'sentinel-api':  <Activity className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />,
-  'packet-sentry': <Network className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
-  'nebula-db':     <Database className="w-5 h-5 text-violet-600 dark:text-violet-400" />,
+  'mockapi-pro': <Database className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />,
+  'env-guard': <Lock className="w-5 h-5 text-violet-600 dark:text-violet-400" />,
+  'savor': <Code className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />,
+  'hireflow': <Layers className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
+  'jray': <Zap className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />,
+  'djforge': <Code className="w-5 h-5 text-violet-600 dark:text-violet-400" />,
 };
 
 const ProjectDetails = () => {

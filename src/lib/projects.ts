@@ -14,105 +14,120 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'mockapi-pro',
-    title: 'HyperMock Sandbox',
-    subtitle: 'High-fidelity sandbox API emulation and network virtualization engine for distributed meshes.',
-    description: 'HyperMock emulates complex multi-service microservice meshes. It compiles OpenAPI specifications into state-machine graphs, allowing simulation of extreme latency injection, packet loss, and contract drift verification in local sandboxed environments.',
-    tags: ['Go', 'Rust', 'Docker'],
+    title: 'MockAPI Pro',
+    subtitle: 'Self-Hosted API Mocking Platform for Developers',
+    description: 'MockAPI Pro is a multi-tenant API mocking platform that enables developers to create dynamic mock endpoints, simulate latency, configure custom responses, and inspect request logs without relying on third-party services. Built using Django, React, PostgreSQL, Redis, Docker, and Nginx.',
+    tags: ['Backend', 'SaaS', 'Open Source'],
     variant: 'teal',
-    github: 'https://github.com/siyadhkc',
-    live: 'https://github.com/siyadhkc',
+    github: 'https://github.com/siyadhkc/mockapi-pro',
+    live: 'https://mockapi.siyadhkc.app',
     features: [
-      'Stateful API emulation via OpenAPI compiled graphs',
-      'Network drift simulation (jitter, latency, packet loss)',
-      'Dynamic response computation using custom script runtimes',
-      'Virtual network isolation for sandbox testing'
+      'Multi-tenant workspace architecture',
+      'Dynamic endpoint generation',
+      'Request and response logging',
+      'Latency simulation',
+      'PostgreSQL tenant isolation',
+      'Docker-based deployment',
+      'Secure API design principles'
     ],
-    tech: ['Go', 'WebAssembly', 'Redis', 'PostgreSQL', 'Docker Compose']
+    tech: ['Django', 'React', 'PostgreSQL', 'Redis', 'Docker', 'Nginx']
   },
   {
-    id: 'vulnapi',
-    title: 'VulnAPI Engine',
-    subtitle: 'Distributed DAST & stateful fuzzer for GraphQL, gRPC, and REST API vulnerability discovery.',
-    description: 'VulnAPI is an automated testing platform that analyzes auth-sequences, maps endpoints, and fuzzes payloads. It executes taint-checking and token signature bypass logic to identify business-logic flaws and injection exploits with zero false positives.',
-    tags: ['Python', 'Security', 'Fuzzing'],
+    id: 'env-guard',
+    title: 'Env-Guard',
+    subtitle: 'Prevent Secret Leaks Before They Reach GitHub',
+    description: 'Env-Guard is an open-source security tool that scans source code repositories for exposed API keys, tokens, credentials, and sensitive configuration data before code reaches production or public repositories. Designed to improve secure development workflows and reduce credential leakage risks.',
+    tags: ['Security', 'Open Source', 'CLI'],
     variant: 'coral',
-    github: 'https://github.com/siyadhkc',
-    live: 'https://github.com/siyadhkc',
+    github: 'https://github.com/siyadhkc/env-guard',
+    live: 'https://github.com/siyadhkc/env-guard',
     features: [
-      'Stateful auth-sequence tracking (OAuth2/JWT)',
-      'Automated protocol fuzzing (GraphQL, gRPC, REST)',
-      'Cryptographic signature bypass verification',
-      'Taint-analysis reporting for code vulnerability mapping'
+      'Secret detection engine',
+      'Recursive filesystem scanning',
+      'API key discovery',
+      'Credential leak prevention',
+      'Secure development workflow integration',
+      'Developer-friendly CLI interface',
+      'Pattern-based detection'
     ],
-    tech: ['Python', 'Django', 'Celery', 'Redis', 'PostgreSQL']
+    tech: ['Python', 'Security Tooling', 'CLI']
   },
   {
-    id: 'django-secure',
-    title: 'py-ebpf-guard',
-    subtitle: 'Kernel-level security instrumentation for Python runtime environments using eBPF.',
-    description: 'A drop-in security layer for Python applications. By compiling and loading eBPF programs into the Linux kernel, it hooks file-system access and system calls (syscalls) at the container level, blocking RCE and shell injections before they touch the interpreter.',
-    tags: ['eBPF', 'C', 'Security'],
+    id: 'savor',
+    title: 'Savor',
+    subtitle: 'Multi-Tenant Food Delivery Platform',
+    description: 'Savor is a full-stack food delivery ecosystem built with Django REST Framework and React, supporting customers, restaurants, delivery agents, and administrators. Features secure JWT authentication, real-time order tracking, Razorpay integration, analytics dashboards, PDF invoice generation, and role-based access control.',
+    tags: ['Full Stack', 'SaaS', 'Platform'],
     variant: 'sand',
-    github: 'https://github.com/siyadhkc',
-    live: 'https://github.com/siyadhkc',
+    github: 'https://github.com/siyadhkc/savor',
+    live: 'https://savor.siyadhkc.app',
     features: [
-      'Kernel-level syscall hooking for Python containers',
-      'RCE detection and execution blocking via eBPF filters',
-      'Zero-overhead file and network access logging',
-      'Drop-in integration for containerized Django/FastAPI apps'
+      'JWT authentication and RBAC',
+      'Customer and restaurant dashboards',
+      'Delivery agent management',
+      'Real-time order workflow',
+      'Razorpay payment integration',
+      'PDF invoice generation',
+      'Order analytics dashboard'
     ],
-    tech: ['eBPF', 'C', 'Python', 'Linux Kernel']
+    tech: ['Django', 'Django REST Framework', 'React', 'PostgreSQL', 'Razorpay', 'ReportLab']
   },
   {
-    id: 'sentinel-api',
-    title: 'Sentinel API WAF',
-    subtitle: 'High-performance API WAF & reverse proxy built in Go with a WebAssembly plugin engine.',
-    description: 'Sentinel runs in front of backend clusters, handling 100k+ requests per second. It evaluates security filters compiled to WASM, automatically mitigating DDoS, credential stuffing, and injection attacks with under 1.2ms latency overhead.',
-    tags: ['Go', 'WASM', 'Proxy'],
-    variant: 'blue',
-    github: 'https://github.com/siyadhkc',
-    live: 'https://github.com/siyadhkc',
-    features: [
-      '100k+ req/sec routing with under 1.2ms latency overhead',
-      'WASM-based dynamic security filter execution',
-      'Real-time distributed rate-limiting via Redis cluster',
-      'gRPC-native telemetry and alert dispatching'
-    ],
-    tech: ['Go', 'WebAssembly', 'Redis', 'gRPC', 'Prometheus']
-  },
-  {
-    id: 'packet-sentry',
-    title: 'WireGuard Kernel Mesh',
-    subtitle: 'Decentralized kernel-space virtual private mesh network with automatic peer routing and key rotation.',
-    description: 'A user-space control plane linking Linux kernel WireGuard interfaces. It builds mesh networks with low-overhead routing paths, dynamically rotating cryptographic keys via a custom consensus algorithm.',
-    tags: ['Rust', 'Kernel', 'WireGuard'],
+    id: 'hireflow',
+    title: 'HireFlow',
+    subtitle: 'Modern Recruitment Management Platform',
+    description: 'HireFlow is a full-stack recruitment platform enabling employers to manage job postings and candidates to track applications through a structured hiring workflow. Implements JWT authentication, role-based access control, secure REST APIs, and dedicated employer and candidate dashboards.',
+    tags: ['Full Stack', 'Business Platform'],
     variant: 'indigo',
-    github: 'https://github.com/siyadhkc',
-    live: 'https://github.com/siyadhkc',
+    github: 'https://github.com/siyadhkc/hireflow',
+    live: 'https://hireflow.siyadhkc.app',
     features: [
-      'Kernel-space encryption via WireGuard driver hooks',
-      'Dynamic path optimization using latency triangulation',
-      'Automated key rotation via secure handshakes',
-      'Real-time mesh topology visualization and status'
+      'Employer and candidate dashboards',
+      'JWT authentication and RBAC',
+      'Job application workflow',
+      'REST API architecture',
+      'Secure backend design',
+      'Real-time application tracking'
     ],
-    tech: ['Rust', 'eBPF', 'WireGuard', 'Linux Kernel', 'gRPC']
+    tech: ['Django', 'Django REST Framework', 'React', 'PostgreSQL', 'JWT']
   },
   {
-    id: 'nebula-db',
-    title: 'Nebula KV Engine',
-    subtitle: 'Highly-available, LSM-tree structured key-value store with Raft consensus and zero-allocation parser.',
-    description: 'An embedded LSM-tree database engine designed for extreme write performance. It incorporates a custom Raft consensus driver for distributed replication, linearizable reads, and auto-sharding.',
-    tags: ['Go', 'Database', 'Distributed'],
+    id: 'jray',
+    title: 'JRay',
+    subtitle: 'JSON Query & Transformation CLI',
+    description: 'JRay is a lightweight command-line tool built with TypeScript and Bun for querying, filtering, flattening, and transforming JSON datasets. Designed to simplify JSON processing tasks commonly encountered in API development, automation, and data engineering workflows.',
+    tags: ['Developer Tools', 'Open Source'],
     variant: 'blue',
-    github: 'https://github.com/siyadhkc',
-    live: 'https://github.com/siyadhkc',
+    github: 'https://github.com/siyadhkc/jray',
+    live: 'https://github.com/siyadhkc/jray',
     features: [
-      'LSM-tree storage engine with active compaction threads',
-      'Raft consensus log replication for crash resiliency',
-      'Zero-allocation custom serialization parser',
-      'HTTP/gRPC interfaces for client integration'
+      'JSON querying and filtering',
+      'Data transformation pipelines',
+      'JSON flattening',
+      'Automation support',
+      'Fast CLI execution',
+      'Lightweight and portable'
     ],
-    tech: ['Go', 'Raft', 'Protobuf', 'gRPC', 'RocksDB']
+    tech: ['TypeScript', 'Bun', 'CLI']
+  },
+  {
+    id: 'djforge',
+    title: 'DJForge',
+    subtitle: 'Django Project Scaffolding & Productivity Toolkit',
+    description: 'DJForge is a Django productivity toolkit that automates project setup, application scaffolding, configuration management, and development workflows. Built to reduce boilerplate code and accelerate backend application development using Django best practices.',
+    tags: ['Backend', 'Developer Tools', 'Open Source'],
+    variant: 'blue',
+    github: 'https://github.com/siyadhkc/djforge',
+    live: 'https://github.com/siyadhkc/djforge',
+    features: [
+      'Project scaffolding automation',
+      'Django app generation',
+      'Boilerplate reduction',
+      'Configuration management',
+      'Django best practices',
+      'Productivity-focused workflow'
+    ],
+    tech: ['Python', 'Django']
   }
 ];
 

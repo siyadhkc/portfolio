@@ -17,9 +17,10 @@ export const About = memo(() => {
           Siyadh KC
         </h1>
         <p className="font-sans text-base sm:text-[17px] text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-[680px]">
-          I build high-performance backend systems and research web vulnerabilities.
-          Software development and cybersecurity are tightly bound — you cannot construct
-          resilient interfaces unless you understand how they break.
+          I build backend systems that feel reliable in everyday use, then harden them
+          against the ways people push them past their limits. My experience in network
+          and infrastructure work helps me keep APIs, data flows, and deployments practical
+          as well as secure.
         </p>
 
         {/* Action row */}
@@ -57,10 +58,9 @@ export const About = memo(() => {
           [ 01 // Core Philosophy ]
         </h2>
         <p className="font-sans text-[15px] text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-[720px]">
-          I approach system architecture from a defensive security-first perspective. Modern
-          distributed backends should not rely on perimeter security — zero-trust validation,
-          kernel-level execution filtering, and active traffic containment must be built
-          directly into the codebase.
+          I design systems with the assumption that every request is untrusted and every
+          dependency can fail. That means clear APIs, thoughtful validation, and small,
+          self-contained services that are easier to inspect and protect as they grow.
         </p>
       </div>
 
@@ -73,29 +73,29 @@ export const About = memo(() => {
           <div className="space-y-1.5">
             <h3 className="font-bold text-zinc-800 dark:text-zinc-200 text-[13px]">Runtime Security &amp; Kernels</h3>
             <p className="text-zinc-600 dark:text-zinc-500 leading-relaxed">
-              eBPF instrumentation injected into the Linux kernel to trace syscalls in
-              container runtimes. Mitigating RCE and code-injection vectors at the OS boundary.
+              I use eBPF to trace how container runtimes behave in the wild, spotting unsafe
+              syscall activity and hardening the boundary before issues reach production.
             </p>
           </div>
           <div className="space-y-1.5">
             <h3 className="font-bold text-zinc-800 dark:text-zinc-200 text-[13px]">Stateful Protocol Fuzzing</h3>
             <p className="text-zinc-600 dark:text-zinc-500 leading-relaxed">
-              State-machine fuzzer engines for analysing JWT signature bypasses and
-              parameter data-flows in GraphQL, gRPC, and RESTful APIs.
+              I build fuzzers that follow real API flows and catch logic gaps in JWT handling,
+              GraphQL, gRPC, and REST services.
             </p>
           </div>
           <div className="space-y-1.5">
             <h3 className="font-bold text-zinc-800 dark:text-zinc-200 text-[13px]">High-Performance Gateways</h3>
             <p className="text-zinc-600 dark:text-zinc-500 leading-relaxed">
-              Low-latency reverse proxies and rate-limiters in Go/Rust with WASM plugin hooks,
-              distributed session verification, and zero-overhead telemetry.
+              I write gateway code and request routing that stays fast under load while
+              keeping error paths visible and easy to debug.
             </p>
           </div>
           <div className="space-y-1.5">
             <h3 className="font-bold text-zinc-800 dark:text-zinc-200 text-[13px]">Application Sandboxing</h3>
             <p className="text-zinc-600 dark:text-zinc-500 leading-relaxed">
-              Runtime container isolation, namespace boundaries, and SELinux/AppArmor profiles
-              enforcing strict execution filters on microservices.
+              I rely on container isolation and policy-based controls so service boundaries are
+              clear and behaviour is easier to reason about.
             </p>
           </div>
         </div>
@@ -131,8 +131,8 @@ export const About = memo(() => {
         {/* Message */}
         <div className="flex flex-col gap-2">
           <p className="text-[13px] text-zinc-500 dark:text-zinc-500 max-w-[520px] leading-relaxed">
-            Available for security audits, backend architecture consulting, and freelance engineering.
-            Response within 24 hours.
+            I’m available for backend architecture work, security reviews, and practical
+            engineering collaborations. I usually respond within a day.
           </p>
         </div>
 
