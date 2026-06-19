@@ -40,8 +40,8 @@ html.dark {
 
 /* Custom minimal scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -54,22 +54,32 @@ html.dark {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
-  border-radius: 4px;
+  background: #ef4444;
+  border-radius: 50px;
 }
 
 .dark ::-webkit-scrollbar-thumb,
 .dark::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #ef4444;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa;
+  background: #dc2626;
 }
 
 .dark ::-webkit-scrollbar-thumb:hover,
 .dark::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #dc2626;
+}
+
+/* Firefox scrollbar styling */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #ef4444 transparent;
+}
+
+html.dark {
+  scrollbar-color: #86ef44 transparent;
 }
 
 /* Base utility for clean monospaced layout */

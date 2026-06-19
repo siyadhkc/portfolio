@@ -10,9 +10,9 @@ interface Article {
   readingTime: number;
   image?: string;
   featured?: boolean;
+  timestamp?: number; // FIX 3: declare on the type instead of casting via intersection
 }
 
-// ── Static fallback data ─────────────────────────────────────────────────────
 const staticArticles: Article[] = [
   {
     title: 'Hardening Django REST APIs: A Defensive Architecture Approach',
@@ -64,7 +64,6 @@ const categoryColor: Record<Article['category'], string> = {
   SYSTEMS:  'text-[#475569] bg-[#E9ECE6] border-[#C9D0C2] dark:text-[#CBD5E1] dark:bg-[#CBD5E1]/15 dark:border-[#CBD5E1]/25',
 };
 
-// Helpers for processing feeds
 const getCategoryFromTags = (tags: string[] | string): Article['category'] => {
   const normalizedTags = Array.isArray(tags)
     ? tags.map(t => t.toLowerCase())
@@ -82,7 +81,6 @@ const getCategoryFromTags = (tags: string[] | string): Article['category'] => {
   return 'BACKEND';
 };
 
-// ── Section header ────────────────────────────────────────────────────────────
 const SectionHeader = memo(({ label }: { label: string }) => (
   <div className="flex items-center gap-4 mb-6 mt-8">
     <span className="font-bold text-[11px] tracking-[0.25em] uppercase font-mono text-[#6F6F64] dark:text-zinc-500">{label}</span>
@@ -91,7 +89,6 @@ const SectionHeader = memo(({ label }: { label: string }) => (
 ));
 SectionHeader.displayName = 'SectionHeader';
 
-// ── Article card ──────────────────────────────────────────────────────────────
 const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; isFeatured?: boolean }) => {
   return (
     <a
@@ -140,7 +137,6 @@ const ArticleCard = memo(({ article, isFeatured = false }: { article: Article; i
 });
 ArticleCard.displayName = 'ArticleCard';
 
-// ── Skeleton ──────────────────────────────────────────────────────────────────
 const SkeletonCard = memo(() => (
   <div className="border border-[#E6E7DC] dark:border-zinc-900 bg-[#FBFBF7]/55 dark:bg-zinc-950/10 p-5 sm:p-6 rounded-xl animate-pulse space-y-4">
     <div className="flex gap-3 items-center">
@@ -154,50 +150,69 @@ const SkeletonCard = memo(() => (
 ));
 SkeletonCard.displayName = 'SkeletonCard';
 
-// ── Articles page component ───────────────────────────────────────────────────
 export const Articles = () => {
   const [articlesList, setArticlesList] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let active = true;
+    // FIX 4: use AbortController to cancel in-flight requests on cleanup
+    const controller = new AbortController();
+
     const fetchArticles = async () => {
       try {
-        const devToData = await fetch(`https://dev.to/api/articles?username=siyadhkc&per_page=30&nocache=${Date.now()}`).then(r => {
+        const devToData = await fetch(
+          `https://dev.to/api/articles?username=siyadhkc&per_page=30&t=${Date.now()}`,
+          {
+            signal: controller.signal,
+            cache: 'no-store', // FIX 1: bypass HTTP/browser cache entirely
+          }
+        ).then(r => {
           if (!r.ok) throw new Error('Dev.to failed');
           return r.json();
         });
 
-        let itemsList: (Article & { timestamp: number })[] = [];
+        let itemsList: Article[] = [];
 
         if (Array.isArray(devToData)) {
-          const mapped = devToData.map((item) => {
+          itemsList = devToData.map((item) => {
             const val = item as Record<string, unknown>;
             const pubDate = String(val.published_at || val.published_timestamp || '');
             const parsedTimestamp = pubDate ? new Date(pubDate).getTime() : Date.now();
-            
+            const safeTimestamp = isNaN(parsedTimestamp) ? Date.now() : parsedTimestamp;
+
             return {
               title: String(val.title || ''),
               excerpt: String(val.description || ''),
               category: getCategoryFromTags((val.tag_list as string[]) || []),
-              date: String(val.readable_publish_date || 'JUN 3').toUpperCase(),
+              // FIX 2: derive fallback date from actual timestamp, not hardcoded 'JUN 3'
+              date: String(
+                val.readable_publish_date ||
+                new Date(safeTimestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+              ).toUpperCase(),
               url: String(val.url || ''),
               readingTime: Number(val.reading_time_minutes || 3),
-              image: val.cover_image ? String(val.cover_image) : (val.social_image ? String(val.social_image) : undefined),
-              timestamp: isNaN(parsedTimestamp) ? Date.now() : parsedTimestamp
+              image: val.cover_image
+                ? String(val.cover_image)
+                : val.social_image
+                ? String(val.social_image)
+                : undefined,
+              timestamp: safeTimestamp,
             };
           });
-          itemsList = mapped;
         }
 
-        itemsList.sort((a, b) => b.timestamp - a.timestamp);
-        if (itemsList.length > 0) itemsList[0].featured = true;
+        // FIX 3: immutable sort + spread instead of mutating array element in place
+        const sorted = [...itemsList].sort((a, b) => (b.timestamp ?? 0) - (a.timestamp ?? 0));
+        const finalList = sorted.map((a, i) => ({ ...a, featured: i === 0 }));
 
         if (active) {
-          setArticlesList(itemsList.length > 0 ? itemsList : staticArticles);
+          setArticlesList(finalList.length > 0 ? finalList : staticArticles);
           setLoading(false);
         }
       } catch (err) {
+        // FIX 4: don't treat AbortError as a real error
+        if ((err as Error).name === 'AbortError') return;
         console.error('Error fetching dynamic articles:', err);
         if (active) {
           setArticlesList(staticArticles);
@@ -207,7 +222,23 @@ export const Articles = () => {
     };
 
     fetchArticles();
-    return () => { active = false; };
+
+    // FIX 5: poll every 60s so the list stays updated without user interaction
+    const intervalId = window.setInterval(fetchArticles, 60_000);
+
+    // FIX 5: also refetch on tab/window focus and visibility restore (handles mobile background tabs)
+    const onFocus = () => fetchArticles();
+    const onVisible = () => { if (document.visibilityState === 'visible') fetchArticles(); };
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      active = false;
+      controller.abort();
+      clearInterval(intervalId);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, []);
 
   const featuredArticles = articlesList.filter(a => a.featured);
@@ -216,11 +247,7 @@ export const Articles = () => {
   return (
     <div className="w-full relative z-10">
       <div id="articles" className="relative z-10 w-full max-w-[860px] mx-auto px-6">
-
-        {/* ── HERO BANNER ───────────────────────────────────────────────────── */}
         <div className="pt-28 pb-14 mt-4">
-
-          {/* Top label */}
           <div className="flex items-center gap-4 mb-8">
             <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#6F6F64] dark:text-zinc-600 font-bold">
               [ Articles ]
@@ -237,41 +264,35 @@ export const Articles = () => {
             </a>
           </div>
 
-          {/* Banner content row */}
           <div className="flex flex-col gap-5 max-w-[560px]">
-              <h1 className="font-bold text-[2.2rem] sm:text-[2.8rem] leading-[1.1] tracking-tight">
-                <span className="text-[#25251F] dark:text-zinc-100">Writing on </span>
-                <span className="bg-gradient-to-r from-[#6F735D] via-[#1D91A1] to-[#6F735D] bg-clip-text text-transparent">
-                  systems,
+            <h1 className="font-bold text-[2.2rem] sm:text-[2.8rem] leading-[1.1] tracking-tight">
+              <span className="text-[#25251F] dark:text-zinc-100">Writing on </span>
+              <span className="bg-gradient-to-r from-[#6F735D] via-[#1D91A1] to-[#6F735D] bg-clip-text text-transparent">
+                systems,
+              </span>
+              <br />
+              <span className="text-[#25251F] dark:text-zinc-100">security </span>
+              <span className="text-[#8A897D] dark:text-zinc-500">&</span>
+              <span className="bg-gradient-to-r from-[#1D91A1] to-[#6F735D] bg-clip-text text-transparent"> the backend.</span>
+            </h1>
+            <p className="text-[#5F5F54] dark:text-zinc-500 text-[14px] leading-relaxed">
+              Practical notes on Python internals, API hardening, distributed systems, and the dark corners of the network stack.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {(['SECURITY', 'BACKEND', 'DEVOPS', 'SYSTEMS'] as Article['category'][]).map((cat) => (
+                <span
+                  key={cat}
+                  className={`font-mono text-[9px] tracking-wider font-bold px-2.5 py-1 rounded border uppercase ${categoryColor[cat]}`}
+                >
+                  {cat}
                 </span>
-                <br />
-                <span className="text-[#25251F] dark:text-zinc-100">security </span>
-                <span className="text-[#8A897D] dark:text-zinc-500">&</span>
-                <span className="bg-gradient-to-r from-[#1D91A1] to-[#6F735D] bg-clip-text text-transparent"> the backend.</span>
-              </h1>
-
-              <p className="text-[#5F5F54] dark:text-zinc-500 text-[14px] leading-relaxed">
-                Practical notes on Python internals, API hardening, distributed systems, and the dark corners of the network stack.
-              </p>
-
-              {/* Category tags */}
-              <div className="flex flex-wrap gap-2">
-                {(['SECURITY', 'BACKEND', 'DEVOPS', 'SYSTEMS'] as Article['category'][]).map((cat) => (
-                  <span
-                    key={cat}
-                    className={`font-mono text-[9px] tracking-wider font-bold px-2.5 py-1 rounded border uppercase ${categoryColor[cat]}`}
-                  >
-                    {cat}
-                  </span>
-                ))}
-              </div>
+              ))}
+            </div>
           </div>
 
-          {/* Subtle divider */}
           <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-[#E6E7DC] dark:via-zinc-800/60 to-transparent" />
         </div>
 
-        {/* ── ARTICLE LIST ──────────────────────────────────────────────────── */}
         {loading ? (
           <div className="mb-20 flex flex-col gap-4">
             <SectionHeader label="FETCHING_ARTICLE_MANIFEST" />
@@ -291,7 +312,6 @@ export const Articles = () => {
                 </div>
               </div>
             )}
-
             {recentArticles.length > 0 && (
               <div className="mb-20">
                 <SectionHeader label="Recent Publications" />
